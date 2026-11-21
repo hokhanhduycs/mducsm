@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,345 +8,779 @@
   <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
   <style>
     :root {
-      --bg: #090a0c; --panel: #111317; --panel2: #15181d; --line: #282c33;
-      --gold: #d5ad62; --gold2: #f0d59a; --muted: #9a9fa8; --white: #f4f1e9;
+      --bg: #090a0c;
+      --panel: #111317;
+      --panel2: #15181d;
+      --line: #282c33;
+      --gold: #d5ad62;
+      --gold2: #f0d59a;
+      --muted: #9a9fa8;
+      --white: #f4f1e9;
       --green: #8fbd9b;
     }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { margin: 0; background: var(--bg); color: var(--white); font-family: Inter, Arial, sans-serif; line-height: 1.6; }
-    a { color: inherit; text-decoration: none; }
-    .wrap { width: min(1160px, calc(100% - 40px)); margin: auto; }
-    .nav { border-bottom: 1px solid var(--line); background: rgba(9,10,12,.92); position: sticky; top: 0; z-index: 10; backdrop-filter: blur(12px); }
-    .nav-inner { height: 72px; display: flex; align-items: center; justify-content: space-between; }
-    .brand { font-weight: 900; letter-spacing: 2px; color: var(--gold2); font-size: 18px; }
-    .brand span { color: #fff; font-weight: 400; }
-    .nav-links { display: flex; gap: 26px; color: var(--muted); font-size: 13px; }
-    .nav-links a:hover { color: var(--gold2); }
-    .hero { padding: 94px 0 76px; text-align: center; background: radial-gradient(ellipse at 50% 0%, rgba(213,173,98,.13), transparent 58%); }
-    .eyebrow { color: var(--gold); text-transform: uppercase; letter-spacing: 4px; font-size: 11px; font-weight: 700; }
-    h1 { font-size: clamp(38px, 6vw, 68px); line-height: 1.05; margin: 18px 0; letter-spacing: -2px; }
-    h1 span { color: var(--gold2); }
-    .hero p { max-width: 650px; margin: 0 auto; color: var(--muted); font-size: 16px; }
-    .hero-actions { margin-top: 30px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
-    .btn { display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--gold); padding: 12px 20px; border-radius: 5px; color: #101114; background: var(--gold); font-size: 13px; font-weight: 800; cursor: pointer; transition: .2s; }
-    .btn:hover { background: var(--gold2); transform: translateY(-2px); }
-    .btn.ghost { background: transparent; color: var(--gold2); }
-    section { padding: 68px 0; }
-    .section-head { margin-bottom: 30px; }
-    .section-head h2 { margin: 8px 0; font-size: clamp(26px, 4vw, 38px); letter-spacing: -1px; }
-    .section-head p { margin: 0; color: var(--muted); max-width: 700px; }
-    .course-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: stretch; }
-    .course { background: linear-gradient(160deg, #15181d, #0e1013); border: 1px solid var(--line); border-radius: 10px; padding: 25px; position: relative; display: flex; flex-direction: column; }
-    .course.featured { border-color: rgba(213,173,98,.8); box-shadow: 0 0 35px rgba(213,173,98,.08); }
-    .ribbon { position: absolute; right: 18px; top: 18px; font-size: 10px; letter-spacing: 1px; color: #16120a; background: var(--gold); padding: 5px 9px; border-radius: 20px; font-weight: 900; }
-    .course-code { color: var(--gold); font-size: 11px; font-weight: 800; letter-spacing: 2px; }
-    .course h3 { margin: 8px 0 0; font-size: 25px; }
-    .price { font-size: 42px; font-weight: 900; letter-spacing: -2px; margin: 12px 0 0; }
-    .price small { font-size: 14px; color: var(--muted); letter-spacing: 0; }
-    .course-desc { color: var(--muted); font-size: 13px; min-height: 42px; margin: 4px 0 18px; }
-    .course ul, .service ul { list-style: none; padding: 0; margin: 0; }
-    .course li, .service li { padding: 9px 0; border-top: 1px solid rgba(255,255,255,.06); color: #d5d7dc; font-size: 13px; }
-    .course li:before, .service li:before { content: "✓"; color: var(--gold); margin-right: 9px; font-weight: 900; }
-    .course .btn { margin-top: auto; width: 100%; }
-    .course .course-list { margin-bottom: 22px; }
-    .note { color: var(--muted); font-size: 12px; margin-top: 14px; }
-    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 9px; }
-    table { width: 100%; border-collapse: collapse; min-width: 680px; }
-    th, td { padding: 15px 17px; border-bottom: 1px solid var(--line); text-align: center; font-size: 13px; }
-    th { color: var(--gold2); background: #14171b; font-size: 12px; letter-spacing: .5px; }
-    th:first-child, td:first-child { text-align: left; }
-    tr:last-child td { border-bottom: 0; }
-    td:first-child { color: #d6d8dd; }
-    .yes { color: var(--green); font-weight: 900; }
-    .no { color: #666b74; }
-    .service-grid { display: grid; grid-template-columns:repeat(1, 1fr); gap: 18px; }
-    .service { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 25px; }
-    .service h3 { margin: 0; font-size: 22px; }
-    .service .sub { color: var(--muted); font-size: 11px; letter-spacing: 2px; margin: 3px 0 18px; }
-    .price-table { margin: 18px 0; }
-    .price-table th, .price-table td { padding: 12px 10px; }
-    .offer { margin-top: 16px; padding: 14px; border: 1px solid rgba(213,173,98,.35); background: rgba(213,173,98,.06); border-radius: 7px; font-size: 13px; color: #e6d5b3; }
-    .offer strong { color: var(--gold2); }
-    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-    .step { border: 1px solid var(--line); background: var(--panel); border-radius: 8px; padding: 20px; }
-    .step b { display: block; color: var(--gold2); font-size: 17px; margin-bottom: 7px; }
-    .step p { margin: 0; color: var(--muted); font-size: 13px; }
-    .cta { text-align: center; padding: 55px 25px; border: 1px solid rgba(213,173,98,.35); border-radius: 12px; background: radial-gradient(ellipse at center, rgba(213,173,98,.1), transparent 70%), var(--panel); }
-    .cta h2 { font-size: 32px; margin: 8px 0; }
-    .cta p { color: var(--muted); margin: 0 auto 22px; max-width: 600px; }
-    footer { border-top: 1px solid var(--line); padding: 25px 0; color: var(--muted); font-size: 12px; }
-    .footer-inner { display: flex; justify-content: space-between; gap: 15px; flex-wrap: wrap; }
-    @media (max-width: 850px) { .course-grid { grid-template-columns: 1fr 1fr; } .course:last-child { grid-column: 1 / -1; } }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--white);
+      font-family: Inter, Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrap {
+      width: min(1160px, calc(100% - 40px));
+      margin: auto;
+    }
+
+    .nav {
+      border-bottom: 1px solid var(--line);
+      background: rgba(9, 10, 12, .92);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-inner {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: var(--gold2);
+      font-size: 18px;
+    }
+
+    .brand span {
+      color: #fff;
+      font-weight: 400;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 26px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold2);
+    }
+
+    .hero {
+      padding: 94px 0 76px;
+      text-align: center;
+      background: radial-gradient(ellipse at 50% 0%, rgba(213, 173, 98, .13), transparent 58%);
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: clamp(38px, 6vw, 68px);
+      line-height: 1.05;
+      margin: 18px 0;
+      letter-spacing: -2px;
+    }
+
+    h1 span {
+      color: var(--gold2);
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .hero-actions {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--gold);
+      padding: 12px 20px;
+      border-radius: 5px;
+      color: #101114;
+      background: var(--gold);
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .btn:hover {
+      background: var(--gold2);
+      transform: translateY(-2px);
+    }
+
+    .btn.ghost {
+      background: transparent;
+      color: var(--gold2);
+    }
+
+    section {
+      padding: 68px 0;
+    }
+
+    .section-head {
+      margin-bottom: 30px;
+    }
+
+    .section-head h2 {
+      margin: 8px 0;
+      font-size: clamp(26px, 4vw, 38px);
+      letter-spacing: -1px;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 700px;
+    }
+
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .course {
+      background: linear-gradient(160deg, #15181d, #0e1013);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 25px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .course.featured {
+      border-color: rgba(213, 173, 98, .8);
+      box-shadow: 0 0 35px rgba(213, 173, 98, .08);
+    }
+
+    .ribbon {
+      position: absolute;
+      right: 18px;
+      top: 18px;
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: #16120a;
+      background: var(--gold);
+      padding: 5px 9px;
+      border-radius: 20px;
+      font-weight: 900;
+    }
+
+    .course-code {
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .course h3 {
+      margin: 8px 0 0;
+      font-size: 25px;
+    }
+
+    .price {
+      font-size: 42px;
+      font-weight: 900;
+      letter-spacing: -2px;
+      margin: 12px 0 0;
+    }
+
+    .price small {
+      font-size: 14px;
+      color: var(--muted);
+      letter-spacing: 0;
+    }
+
+    .course-desc {
+      color: var(--muted);
+      font-size: 13px;
+      min-height: 42px;
+      margin: 4px 0 18px;
+    }
+
+    .course ul,
+    .service ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .course li,
+    .service li {
+      padding: 9px 0;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+      color: #d5d7dc;
+      font-size: 13px;
+    }
+
+    .course li:before,
+    .service li:before {
+      content: "✓";
+      color: var(--gold);
+      margin-right: 9px;
+      font-weight: 900;
+    }
+
+    .course .btn {
+      margin-top: auto;
+      width: 100%;
+    }
+
+    .course .course-list {
+      margin-bottom: 22px;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 14px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      /* min-width: 680px; */
+    }
+
+    th,
+    td {
+      padding: 15px 17px;
+      border-bottom: 1px solid var(--line);
+      text-align: center;
+      font-size: 13px;
+    }
+
+    th {
+      color: var(--gold2);
+      background: #14171b;
+      font-size: 12px;
+      letter-spacing: .5px;
+    }
+
+    th:first-child,
+    td:first-child {
+      text-align: left;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    td:first-child {
+      color: #d6d8dd;
+    }
+
+    .yes {
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .no {
+      color: #666b74;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 18px;
+    }
+
+    .service {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 25px;
+    }
+
+    .service h3 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .service .sub {
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 2px;
+      margin: 3px 0 18px;
+    }
+
+    .price-table {
+      margin: 18px 0;
+    }
+
+    .price-table th,
+    .price-table td {
+      padding: 12px 10px;
+    }
+
+    .offer {
+      margin-top: 16px;
+      padding: 14px;
+      border: 1px solid rgba(213, 173, 98, .35);
+      background: rgba(213, 173, 98, .06);
+      border-radius: 7px;
+      font-size: 13px;
+      color: #e6d5b3;
+    }
+
+    .offer strong {
+      color: var(--gold2);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .step {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .step b {
+      display: block;
+      color: var(--gold2);
+      font-size: 17px;
+      margin-bottom: 7px;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .cta {
+      text-align: center;
+      padding: 55px 25px;
+      border: 1px solid rgba(213, 173, 98, .35);
+      border-radius: 12px;
+      background: radial-gradient(ellipse at center, rgba(213, 173, 98, .1), transparent 70%), var(--panel);
+    }
+
+    .cta h2 {
+      font-size: 32px;
+      margin: 8px 0;
+    }
+
+    .cta p {
+      color: var(--muted);
+      margin: 0 auto 22px;
+      max-width: 600px;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 25px 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 850px) {
+      .course-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .course:last-child {
+        grid-column: 1 / -1;
+      }
+    }
+
     @media (max-width: 620px) {
-      .wrap { width: min(100% - 28px, 1160px); }
-      .nav-inner { height: 62px; } .nav-links { gap: 12px; font-size: 11px; }
-      .nav-links a:nth-child(2) { display: none; }
-      .hero { padding: 70px 0 58px; } section { padding: 50px 0; }
-      .course-grid, .service-grid, .steps { grid-template-columns: 1fr; }
-      .course:last-child { grid-column: auto; }
-      .course { padding: 22px; }
+      .wrap {
+        width: min(100% - 28px, 1160px);
+      }
+
+      .nav-inner {
+        height: 62px;
+      }
+
+      .nav-links {
+        gap: 12px;
+        font-size: 11px;
+      }
+
+      .nav-links a:nth-child(2) {
+        display: none;
+      }
+
+      .hero {
+        padding: 70px 0 58px;
+      }
+
+      section {
+        padding: 50px 0;
+      }
+
+      .course-grid,
+      .service-grid,
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .course:last-child {
+        grid-column: auto;
+      }
+
+      .course {
+        padding: 22px;
+      }
     }
   </style>
 </head>
+
 <body>
-<div id="app">
-  <header class="nav">
-    <div class="wrap nav-inner">
-      <a class="brand" href="#">MDUCSM<span> / EDUCATION</span></a>
-      <nav class="nav-links">
-        <a href="#courses">Khóa học</a>
-        <a href="#privileges">Quyền lợi</a>
-        <a href="#services">Dịch vụ</a>
-        <a href="#contact">Đăng ký</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <section class="hero">
-      <div class="wrap">
-        <div class="eyebrow">Learn • Practice • Develop</div>
-        <h1>MASTER THE MARKET.<br><span>BUILD YOUR EDGE.</span></h1>
-        <p>Chương trình đào tạo Trading của MDUCSM — xây dựng nền tảng kiến thức, rèn luyện khả năng phân tích và phát triển tư duy giao dịch có hệ thống.</p>
-        <div class="hero-actions">
-          <a class="btn" href="#courses">KHÁM PHÁ KHÓA HỌC</a>
-          <a class="btn ghost" href="#services">DỊCH VỤ HỖ TRỢ</a>
-        </div>
+  <div id="app">
+    <header class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#">MDUCSM<span> / EDUCATION</span></a>
+        <nav class="nav-links">
+          <a href="#courses">Khóa học</a>
+          <a href="#privileges">Quyền lợi</a>
+          <a href="#services">Dịch vụ</a>
+          <a href="#contact">Đăng ký</a>
+        </nav>
       </div>
-    </section>
+    </header>
 
-    <section id="courses">
-      <div class="wrap">
-        <div class="section-head">
-          <div class="eyebrow">Training programs</div>
-          <h2>Chọn lộ trình phù hợp với bạn</h2>
-          <p>Ba cấp độ đào tạo tương ứng với ba nhu cầu: học kiến thức, thực hành có phản hồi và đồng hành chuyên sâu cùng Mentor.</p>
-        </div>
-        <div class="course-grid">
-          <article class="course" v-for="course in courses" :key="course.code" :class="{featured: course.featured}">
-            <div v-if="course.tag" class="ribbon">{{ course.tag }}</div>
-            <div class="course-code">{{ course.code }} — {{ course.level }}</div>
-            <h3>{{ course.name }}</h3>
-            <div class="price">${{ course.price }} <small>USD</small></div>
-            <div class="course-desc">{{ course.subtitle }}</div>
-            <ul class="course-list">
-              <li v-for="item in course.highlights" :key="item">{{ item }}</li>
-            </ul>
-            <a class="btn" :class="{ghost: !course.featured}" :href="registerUrl(course.code)">ĐĂNG KÝ {{ course.code }}</a>
-          </article>
-        </div>
-        <p class="note">* Lịch học, hình thức ghi hình và thời hạn truy cập tài liệu được thông báo cụ thể khi đăng ký.</p>
-      </div>
-    </section>
-
-    <section id="privileges" style="background:#0d0f12">
-      <div class="wrap">
-        <div class="section-head">
-          <div class="eyebrow">Student privileges</div>
-          <h2>Quyền lợi học viên</h2>
-          <p>Mỗi cấp độ có phạm vi đào tạo và hỗ trợ khác nhau. Các quyền lợi được thiết kế để học viên biết rõ mình nhận được gì.</p>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Quyền lợi</th><th>K1 · $139</th><th>K2 · $189</th><th>K3 · $379</th></tr></thead>
-            <tbody>
-              <tr v-for="row in privileges" :key="row.name">
-                <td>{{ row.name }}</td>
-                <td v-for="(value, i) in row.values" :key="i" :class="value === '—' ? 'no' : 'yes'">{{ value }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="note">* Quyền lợi “Mentor riêng” của K1/K2 là dịch vụ thuê thêm, không nằm trong học phí khóa học. Quyền lợi K3 thực hiện theo phạm vi chương trình 16 buổi.</p>
-      </div>
-    </section>
-
-    <section id="services">
-      <div class="wrap">
-        <div class="section-head">
-          <div class="eyebrow">Additional services</div>
-          <h2>Dịch vụ hỗ trợ bổ sung</h2>
-          <p>Dành cho học viên K1 và K2 có nhu cầu được hỗ trợ ngoài chương trình học chính.</p>
-        </div>
-        <div class="service-grid">
-          <div class="service">
-            <div class="course-code">01 / MENTOR SERVICE</div>
-            <h3>Thuê Mentor — MDucSM</h3>
-            <div class="sub">HỖ TRỢ CHUYÊN MÔN THEO GÓI</div>
-            <div class="table-wrap price-table">
-              <table>
-                <thead><tr><th>Thời hạn</th><th>Người hỗ trợ</th><th>Phí dịch vụ</th></tr></thead>
-                <tbody>
-                  <tr v-for="item in mentorPlans" :key="item.period">
-                    <td>{{ item.period }}</td><td>{{ item.person }}</td><td><strong>{{ item.price }}</strong></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <ul>
-              <li>Trao đổi và giải đáp vấn đề chuyên môn theo gói đã đăng ký.</li>
-              <li>Hướng dẫn phân tích và thực hành theo phạm vi dịch vụ.</li>
-              <li>Gói nhóm áp dụng cho nhóm 10 thành viên.</li>
-            </ul>
-            <div class="offer"><strong>Ưu đãi nâng cấp K3:</strong> Học viên sử dụng dịch vụ Mentor được áp dụng chương trình SALE 50% khi mua K3. Vui lòng xác nhận điều kiện và cách tính ưu đãi trước khi thanh toán.</div>
-          </div>
-
-          <div class="service">
-            <div class="course-code">02 / PERSONAL SUPPORT</div>
-            <h3>Thuê Support — Khánh Duy</h3>
-            <div class="sub">TIN NHẮN & STREAM 1-1</div>
-            <div class="table-wrap price-table">
-              <table>
-                <thead><tr><th>Thời hạn</th><th>Tin nhắn</th><th>Stream 1-1</th></tr></thead>
-                <tbody>
-                  <tr v-for="item in supportPlans" :key="item.period">
-                    <td>{{ item.period }}</td><td><strong>{{ item.message }}</strong></td><td><strong>{{ item.stream }}</strong></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <ul>
-              <li>Hỗ trợ trao đổi qua tin nhắn trong thời hạn đăng ký.</li>
-              <li>Đặt lịch stream 1-1 để trao đổi trực tiếp.</li>
-              <li>Hỗ trợ giải đáp và hướng dẫn trong quá trình học.</li>
-            </ul>
-            <div class="offer">Phí tin nhắn và phí stream được tính riêng theo gói. Thời lượng stream và cách đặt lịch cần được thống nhất trước.</div>
+    <main>
+      <section class="hero">
+        <div class="wrap">
+          <div class="eyebrow">Learn • Practice • Develop</div>
+          <h1>MASTER THE MARKET.<br><span>BUILD YOUR EDGE.</span></h1>
+          <p>Chương trình đào tạo Trading của MDUCSM — xây dựng nền tảng kiến thức, rèn luyện khả năng phân tích và phát
+            triển tư duy giao dịch có hệ thống.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#courses">KHÁM PHÁ KHÓA HỌC</a>
+            <a class="btn ghost" href="#services">DỊCH VỤ HỖ TRỢ</a>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section style="background:#0d0f12">
-      <div class="wrap">
-        <div class="section-head">
-          <div class="eyebrow">The learning path</div>
-          <h2>Khác biệt nằm ở cách bạn học</h2>
+      <section id="courses">
+        <div class="wrap">
+          <div class="section-head">
+            <div class="eyebrow">Training programs</div>
+            <h2>Chọn lộ trình phù hợp với bạn</h2>
+            <p>Ba cấp độ đào tạo tương ứng với ba nhu cầu: học kiến thức, thực hành có phản hồi và đồng hành chuyên sâu
+              cùng Mentor.</p>
+          </div>
+          <div class="course-grid">
+            <article class="course" v-for="course in courses" :key="course.code" :class="{featured: course.featured}">
+              <div v-if="course.tag" class="ribbon">{{ course.tag }}</div>
+              <div class="course-code">{{ course.code }} — {{ course.level }}</div>
+              <h3>{{ course.name }}</h3>
+              <div class="price">${{ course.price }} <small>USD</small></div>
+              <div class="course-desc">{{ course.subtitle }}</div>
+              <ul class="course-list">
+                <li v-for="item in course.highlights" :key="item">{{ item }}</li>
+              </ul>
+              <a class="btn" :class="{ghost: !course.featured}" :href="registerUrl(course.code)">ĐĂNG KÝ {{ course.code
+                }}</a>
+            </article>
+          </div>
+          <p class="note">* Lịch học, hình thức ghi hình và thời hạn truy cập tài liệu được thông báo cụ thể khi đăng
+            ký.</p>
         </div>
-        <div class="steps">
-          <div class="step"><b>K1 / Understand</b><p>Xây dựng nền tảng kiến thức và hiểu logic thị trường.</p></div>
-          <div class="step"><b>K2 / Apply</b><p>Thực hành, làm bài tập và nhận phản hồi để cải thiện khả năng phân tích.</p></div>
-          <div class="step"><b>K3 / Develop</b><p>Được Mentor đồng hành, đánh giá và định hướng phát triển tư duy giao dịch.</p></div>
+      </section>
+
+      <section id="privileges" style="background:#0d0f12">
+        <div class="wrap">
+          <div class="section-head">
+            <div class="eyebrow">Student privileges</div>
+            <h2>Quyền lợi học viên</h2>
+            <p>Mỗi cấp độ có phạm vi đào tạo và hỗ trợ khác nhau. Các quyền lợi được thiết kế để học viên biết rõ mình
+              nhận được gì.</p>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Quyền lợi</th>
+                  <th>K1 · $139</th>
+                  <th>K2 · $189</th>
+                  <th>K3 · $379</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="row in privileges" :key="row.name">
+                  <td>{{ row.name }}</td>
+                  <td v-for="(value, i) in row.values" :key="i" :class="value === '—' ? 'no' : 'yes'">{{ value }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note">* Quyền lợi “Mentor riêng” của K1/K2 là dịch vụ thuê thêm, không nằm trong học phí khóa học.
+            Quyền lợi K3 thực hiện theo phạm vi chương trình 16 buổi.</p>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="contact">
-      <div class="wrap">
-        <div class="cta">
-          <div class="eyebrow">Your next step starts here</div>
-          <h2>Sẵn sàng nâng cấp tư duy Trading?</h2>
-          <p>Chọn chương trình phù hợp và liên hệ MDUCSM để nhận thông tin lịch học, nội dung chi tiết và quy trình đăng ký.</p>
-          <a class="btn" :href="contactUrl" target="_blank" rel="noopener" >LIÊN HỆ ĐĂNG KÝ</a>
+      <section id="services">
+        <div class="wrap">
+          <div class="section-head">
+            <div class="eyebrow">Additional services</div>
+            <h2>Dịch vụ hỗ trợ bổ sung</h2>
+            <p>Dành cho học viên K1 và K2 có nhu cầu được hỗ trợ ngoài chương trình học chính.</p>
+          </div>
+          <div class="service-grid">
+            <div class="service">
+              <div class="course-code">01 / MENTOR SERVICE</div>
+              <h3>Thuê Mentor — MDucSM</h3>
+              <div class="sub">HỖ TRỢ CHUYÊN MÔN THEO GÓI</div>
+              <div class="table-wrap price-table">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Thời hạn</th>
+                      <th>Người hỗ trợ</th>
+                      <th>Phí dịch vụ</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="item in mentorPlans" :key="item.period">
+                      <td>{{ item.period }}</td>
+                      <td>{{ item.person }}</td>
+                      <td><strong>{{ item.price }}</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <ul>
+                <li>Trao đổi và giải đáp vấn đề chuyên môn theo gói đã đăng ký.</li>
+                <li>Hướng dẫn phân tích và thực hành theo phạm vi dịch vụ.</li>
+                <li>Gói nhóm áp dụng cho nhóm 10 thành viên.</li>
+              </ul>
+              <div class="offer"><strong>Ưu đãi nâng cấp K3:</strong> Học viên sử dụng dịch vụ Mentor được áp dụng
+                chương trình SALE 50% khi mua K3. Vui lòng xác nhận điều kiện và cách tính ưu đãi trước khi thanh toán.
+              </div>
+            </div>
+
+            <div class="service">
+              <div class="course-code">02 / PERSONAL SUPPORT</div>
+              <h3>Thuê Support — Khánh Duy</h3>
+              <div class="sub">TIN NHẮN & STREAM 1-1</div>
+              <div class="table-wrap price-table">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Thời hạn</th>
+                      <th>Tin nhắn</th>
+                      <th>Stream 1-1</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="item in supportPlans" :key="item.period">
+                      <td>{{ item.period }}</td>
+                      <td><strong>{{ item.message }}</strong></td>
+                      <td><strong>{{ item.stream }}</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <ul>
+                <li>Hỗ trợ trao đổi qua tin nhắn trong thời hạn đăng ký.</li>
+                <li>Đặt lịch stream 1-1 để trao đổi trực tiếp.</li>
+                <li>Hỗ trợ giải đáp và hướng dẫn trong quá trình học.</li>
+              </ul>
+              <div class="offer">Phí tin nhắn và phí stream được tính riêng theo gói. Thời lượng stream và cách đặt lịch
+                cần được thống nhất trước.</div>
+            </div>
+          </div>
         </div>
+      </section>
+
+      <section style="background:#0d0f12">
+        <div class="wrap">
+          <div class="section-head">
+            <div class="eyebrow">The learning path</div>
+            <h2>Khác biệt nằm ở cách bạn học</h2>
+          </div>
+          <div class="steps">
+            <div class="step"><b>K1 / Understand</b>
+              <p>Xây dựng nền tảng kiến thức và hiểu logic thị trường.</p>
+            </div>
+            <div class="step"><b>K2 / Apply</b>
+              <p>Thực hành, làm bài tập và nhận phản hồi để cải thiện khả năng phân tích.</p>
+            </div>
+            <div class="step"><b>K3 / Develop</b>
+              <p>Được Mentor đồng hành, đánh giá và định hướng phát triển tư duy giao dịch.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="wrap">
+          <div class="cta">
+            <div class="eyebrow">Your next step starts here</div>
+            <h2>Sẵn sàng nâng cấp tư duy Trading?</h2>
+            <p>Chọn chương trình phù hợp và liên hệ MDUCSM để nhận thông tin lịch học, nội dung chi tiết và quy trình
+              đăng ký.</p>
+            <a class="btn" :href="contactUrl" target="_blank" rel="noopener">LIÊN HỆ ĐĂNG KÝ</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap footer-inner">
+        <div><strong style="color:var(--gold2)">MDUCSM</strong> · Trading Education</div>
+        <div>Trading involves risk. Education does not guarantee trading results.</div>
+        <div>© {{ year }} MDUCSM. All rights reserved.</div>
       </div>
-    </section>
-  </main>
+    </footer>
+  </div>
 
-  <footer>
-    <div class="wrap footer-inner">
-      <div><strong style="color:var(--gold2)">MDUCSM</strong> · Trading Education</div>
-      <div>Trading involves risk. Education does not guarantee trading results.</div>
-      <div>© {{ year }} MDUCSM. All rights reserved.</div>
-    </div>
-  </footer>
-</div>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        year: new Date().getFullYear(),
+        // Thay link đăng ký/liên hệ tại đây
+        registrationBase: 'https://discord.com/users/686056041150021737',
+        contactUrl: 'https://discord.com/users/686056041150021737',
+        courses: [
+          {
+            code: 'K1', level: 'FOUNDATION', name: 'Nền tảng lý thuyết', price: 139,
+            subtitle: '09 buổi học lý thuyết — hoàn thành chương trình nền tảng.',
+            highlights: [
+              " Tham gia đầy đủ 09 buổi học lý thuyết.",
+              " Truy cập tài liệu học tập của khóa học.",
+              "Nhận slide và tài liệu tổng hợp kiến thức.",
+              "  Tham gia cộng đồng học viên MDUCSM.",
+              "  Truy cập các kênh trao đổi kiến thức Trading.",
+              "  Được đặt câu hỏi và trao đổi trong phạm vi khóa học.",
+              " Xem lại bản ghi buổi học (nếu có).",
+              " Nhận thông báo về các buổi học và chương trình đào tạo mới.",
+              "  Được đăng ký các dịch vụ Mentor và Support riêng."
 
-<script>
-new Vue({
-  el: '#app',
-  data: {
-    year: new Date().getFullYear(),
-    // Thay link đăng ký/liên hệ tại đây
-    registrationBase: 'https://discord.com/users/686056041150021737',
-    contactUrl: 'https://discord.com/users/686056041150021737',
-    courses: [
-      {
-        code: 'K1', level: 'FOUNDATION', name: 'Nền tảng lý thuyết', price: 139,
-        subtitle: '09 buổi học lý thuyết — hoàn thành chương trình nền tảng.',
-        highlights: [
-           " Tham gia đầy đủ 09 buổi học lý thuyết.",
-           " Truy cập tài liệu học tập của khóa học.",
-            "Nhận slide và tài liệu tổng hợp kiến thức.",
-          "  Tham gia cộng đồng học viên MDUCSM.",
-          "  Truy cập các kênh trao đổi kiến thức Trading.",
-          "  Được đặt câu hỏi và trao đổi trong phạm vi khóa học.",
-           " Xem lại bản ghi buổi học (nếu có).",
-           " Nhận thông báo về các buổi học và chương trình đào tạo mới.",
-          "  Được đăng ký các dịch vụ Mentor và Support riêng."
 
-         
-         ],
-        featured: false
-      },
-      {
-        code: 'K2', level: 'PRACTICE', name: 'Lý thuyết & thực hành', price: 189,
-        subtitle: '18 buổi học — kết hợp kiến thức, bài tập và sửa bài.',
-        highlights: [
+            ],
+            featured: false
+          },
+          {
+            code: 'K2', level: 'PRACTICE', name: 'Lý thuyết & thực hành', price: 189,
+            subtitle: '18 buổi học — kết hợp kiến thức, bài tập và sửa bài.',
+            highlights: [
 
-        "Tham gia 09 buổi học lý thuyết.",
-       " Tham gia 09 buổi thực hành.",
-      "  Nhận bài tập sau từng nội dung học.",
-      "  Được Mentor kiểm tra và sửa bài tập.",
-      "  Nhận phản hồi về những lỗi sai trong quá trình phân tích.",
-       " Được trao đổi và thảo luận các tình huống thực tế trên biểu đồ.",
-      "  Tiếp cận các ví dụ phân tích thị trường thực tế.",
-       " Được tham gia các buổi Q&A dành cho học viên K2.",
-      "  Được lưu trữ và xem lại tài liệu học tập.",
-       " Được đăng ký dịch vụ Mentor và Support riêng với mức phí dịch vụ tương ứng."
+              "Tham gia 09 buổi học lý thuyết.",
+              " Tham gia 09 buổi thực hành.",
+              "  Nhận bài tập sau từng nội dung học.",
+              "  Được Mentor kiểm tra và sửa bài tập.",
+              "  Nhận phản hồi về những lỗi sai trong quá trình phân tích.",
+              " Được trao đổi và thảo luận các tình huống thực tế trên biểu đồ.",
+              "  Tiếp cận các ví dụ phân tích thị trường thực tế.",
+              " Được tham gia các buổi Q&A dành cho học viên K2.",
+              "  Được lưu trữ và xem lại tài liệu học tập.",
+              " Được đăng ký dịch vụ Mentor và Support riêng với mức phí dịch vụ tương ứng."
+            ],
+            featured: true, tag: 'ĐƯỢC QUAN TÂM'
+          },
+          {
+            code: 'K3', level: 'MENTORSHIP', name: 'Đào tạo chuyên sâu', price: 379,
+            subtitle: '16 buổi đào tạo — Mentor đồng hành và hướng dẫn riêng.',
+            highlights: [
+              " Tham gia chương trình đào tạo chuyên sâu 16 buổi.",
+              "  Được Mentor hướng dẫn và đồng hành riêng.",
+              "  Được định hướng lộ trình học tập cá nhân.",
+              "   Được trao đổi trực tiếp với Mentor trong phạm vi chương trình.",
+              "   Được phân tích và đánh giá bài tập chuyên sâu.",
+              "  Được phản hồi những điểm yếu trong tư duy phân tích thị trường.",
+              "   Được hướng dẫn xây dựng Trading Plan cá nhân.",
+              "   Được hướng dẫn xây dựng hệ thống giao dịch phù hợp.",
+              " Được trao đổi các tình huống giao dịch thực tế.",
+              " Được hỗ trợ định hướng quản lý vốn và quản trị rủi ro.",
+              "  Được tham gia các buổi trao đổi chuyên môn riêng.",
+              "  Được ưu tiên hỗ trợ trong cộng đồng học viên.",
+              "  Được tiếp cận các tài liệu bổ sung dành riêng cho chương trình K3."
+            ],
+            featured: false, tag: 'PREMIUM'
+          }
         ],
-        featured: true, tag: 'ĐƯỢC QUAN TÂM'
-      },
-      {
-        code: 'K3', level: 'MENTORSHIP', name: 'Đào tạo chuyên sâu', price: 379,
-        subtitle: '16 buổi đào tạo — Mentor đồng hành và hướng dẫn riêng.',
-        highlights: [
-         " Tham gia chương trình đào tạo chuyên sâu 16 buổi.",
-        "  Được Mentor hướng dẫn và đồng hành riêng.",
-        "  Được định hướng lộ trình học tập cá nhân.",
-       "   Được trao đổi trực tiếp với Mentor trong phạm vi chương trình.",
-       "   Được phân tích và đánh giá bài tập chuyên sâu.",
-        "  Được phản hồi những điểm yếu trong tư duy phân tích thị trường.",
-       "   Được hướng dẫn xây dựng Trading Plan cá nhân.",
-       "   Được hướng dẫn xây dựng hệ thống giao dịch phù hợp.",
-         " Được trao đổi các tình huống giao dịch thực tế.",
-         " Được hỗ trợ định hướng quản lý vốn và quản trị rủi ro.",
-        "  Được tham gia các buổi trao đổi chuyên môn riêng.",
-        "  Được ưu tiên hỗ trợ trong cộng đồng học viên.",
-        "  Được tiếp cận các tài liệu bổ sung dành riêng cho chương trình K3."
+        privileges: [
+          {name: 'Tài liệu học tập', values: ['Có', 'Có', 'Có']},
+          {name: 'Cộng đồng học viên', values: ['Có', 'Có', 'Có']},
+          {name: 'Buổi học lý thuyết', values: ['9 buổi', '9 buổi', 'Theo lộ trình']},
+          {name: 'Buổi thực hành', values: ['—', '9 buổi', 'Có']},
+          {name: 'Bài tập & sửa bài', values: ['—', 'Có', 'Theo chương trình']},
+          {name: 'Q&A chuyên môn', values: ['Cơ bản', 'Có', 'Riêng']},
+          {name: 'Mentor hướng dẫn riêng', values: ['Thuê thêm', 'Thuê thêm', 'Có']},
+          {name: 'Lộ trình cá nhân', values: ['—', '—', 'Có']},
+          {name: 'Định hướng Trading Plan', values: ['—', '—', 'Có']},
+          {name: 'Đánh giá tư duy giao dịch', values: ['—', 'Theo bài tập', 'Chuyên sâu']}
         ],
-        featured: false, tag: 'PREMIUM'
+        mentorPlans: [
+          {period: '1 tháng', person: 'MDucSM', price: '$100 / 2 buổi'},
+          {period: '3 tháng', person: 'MDucSM', price: '$222 / 6 buổi'},
+          {period: 'Nhóm 10 người', person: 'MDucSM', price: '$5 / người'}
+        ],
+        supportPlans: [
+          {period: '1 tháng', message: '$19', stream: '$4 / 2 giờ'},
+          {period: '3 tháng', message: '$45', stream: '$7 / 4 giờ'},
+          {period: '6 tháng', message: '$80', stream: '$10 / 6 giờ'}
+        ]
+      },
+      methods: {
+        registerUrl: function (code) {
+          return this.registrationBase + '?course=' + encodeURIComponent(code);
+        }
       }
-    ],
-    privileges: [
-      { name: 'Tài liệu học tập', values: ['Có', 'Có', 'Có'] },
-      { name: 'Cộng đồng học viên', values: ['Có', 'Có', 'Có'] },
-      { name: 'Buổi học lý thuyết', values: ['9 buổi', '9 buổi', 'Theo lộ trình'] },
-      { name: 'Buổi thực hành', values: ['—', '9 buổi', 'Có'] },
-      { name: 'Bài tập & sửa bài', values: ['—', 'Có', 'Theo chương trình'] },
-      { name: 'Q&A chuyên môn', values: ['Cơ bản', 'Có', 'Riêng'] },
-      { name: 'Mentor hướng dẫn riêng', values: ['Thuê thêm', 'Thuê thêm', 'Có'] },
-      { name: 'Lộ trình cá nhân', values: ['—', '—', 'Có'] },
-      { name: 'Định hướng Trading Plan', values: ['—', '—', 'Có'] },
-      { name: 'Đánh giá tư duy giao dịch', values: ['—', 'Theo bài tập', 'Chuyên sâu'] }
-    ],
-    mentorPlans: [
-      { period: '1 tháng', person: 'MDucSM', price: '$100 / 2 buổi' },
-      { period: '3 tháng', person: 'MDucSM', price: '$222 / 6 buổi' },
-      { period: 'Nhóm 10 người', person: 'MDucSM', price: '$5 / người' }
-    ],
-    supportPlans: [
-      { period: '1 tháng', message: '$19', stream: '$4 / 2 giờ' },
-      { period: '3 tháng', message: '$45', stream: '$7 / 4 giờ' },
-      { period: '6 tháng', message: '$80', stream: '$10 / 6 giờ' }
-    ]
-  },
-  methods: {
-    registerUrl: function(code) {
-      return this.registrationBase + '?course=' + encodeURIComponent(code);
-    }
-  }
-});
-</script>
+    });
+  </script>
 </body>
+
 </html>
