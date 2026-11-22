@@ -246,7 +246,7 @@
     .course li,
     .service li {
       padding: 9px 0;
-      border-top: 1px solid rgba(255, 255, 255, .06);
+      border-top: 1px solid rgba(255, 255, 255, .09);
       color: #d5d7dc;
       font-size: 13px;
     }
@@ -257,6 +257,19 @@
       color: var(--gold);
       margin-right: 9px;
       font-weight: 900;
+    }
+
+    .course li.unavailable,
+    .service li.unavailable {
+      color: #666b74;
+    }
+
+    .course li.unavailable:before,
+    .service li.unavailable:before {
+      content: "×";
+      color: #666b74;
+      margin-right: 9px;
+      font-weight: 400;
     }
 
     .course .btn {
@@ -620,7 +633,10 @@
               <div class="price">${{ course.price }} <small>USD</small></div>
               <div class="course-desc">{{ course.subtitle }}</div>
               <ul class="course-list">
-                <li v-for="item in course.highlights" :key="item">{{ item }}</li>
+                <li v-for="item in course.highlights" :key="typeof item === 'string' ? item : item.text"
+                    :class="{unavailable: typeof item === 'object' && item.unavailable}">
+                  {{ typeof item === 'object' ? item.text : item }}
+                </li>
               </ul>
               <!-- <a class="btn" :class="{ghost: !course.featured}" :href="registerUrl(course.code)">ĐĂNG KÝ {{ course.code
                 }}</a> -->
@@ -884,61 +900,101 @@
         courses: [
           {
             code: 'K2', level: 'FOUNDATION', name: 'Kiến thức', price: 139,
-            subtitle: '09 buổi học kiến thức — hoàn thành toàn bộ chương trình .',
+            subtitle: '09 buổi học kiến thức — hoàn thành toàn bộ chương trình.',
             highlights: [
-              " Tham gia tổng cộng 09 buổi học kiến thức thực chiến.",
-              " Truy cập tài liệu học tập của toàn bộ học viên.",
-              " Nhận slide và tài liệu tổng hợp đầy đủ kiến thức.",
-              " Tham gia cộng đồng học viên MDUCSM.",
-              " Truy cập các kênh trao đổi kiến thức Trading.",
-              " Được đặt câu hỏi và trao đổi trong quá trình học.",
-              " Xem và giải thích lại bản ghi các buổi học.",
-              " Nhận thông báo và nhắc nhỏ riêng về các buổi học.",
-              " Hỗ trợ miễn phí các chương trình đào tạo mới.",
-              " Hỗ trợ đăng ký các dịch vụ Mentor và Support riêng."
+              "Có 9 buổi bài học.",
+              // {text: "Truy cập tài liệu riêng và được cập nhật thường xuyên.", unavailable: true},
 
-
+              {text: "Có 9 buổi thực hành & sửa bài.", unavailable: true},
+              "Hơn 3 buổi hổ trợ bổ sung.",
+              {text:"Truy cập toàn bộ tài liệu của học viên.", unavailable: false},
+              "Nhận slide và tài liệu tổng hợp đầy đủ kiến thức.",
+              "Tham gia cộng đồng học viên và các kênh trao đổi kiến thức MDUCSM.",
+              "Được đặt câu hỏi và trao đổi trong quá trình học.",
+              "Xem và giải thích lại bản ghi các buổi học.",
+              "Nhận thông báo và nhắc nhỏ riêng về các buổi học.",
+              "Hỗ trợ update kiến thức mới miễn phí.",
+              "Hỗ trợ đăng ký các dịch vụ Mentor và Support riêng.",
+              {text:"Mentor là người hướng dẫn đồng hành với bạn suốt quá trình đào tạo.", unavailable: true},
+              {text:"Hướng dẫn xây dựng giao dịch phù hợp.", unavailable: true},
+              {text:"Trao đổi trực tiếp với Mentor trong quá trình học tập và giao dịch.",unavailable: true},
+              {text:"Đồng hành phân tích và đánh giá bài tập chuyên sâu.",unavailable: true},
+              {text:"Nhận phản hồi những điểm yếu trong tư duy phân tích thị trường.", unavailable: true},
+              {text:"Hướng dẫn xây dựng Trading Plan cá nhân.", unavailable: true},
+              {text:"Hướng dẫn xây dựng hệ thống giao dịch phù hợp.", unavailable: true},
+              {text:"Được trao đổi các tình huống giao dịch thực tế.", unavailable: true},
+              {text:"Hỗ trợ định hướng quản lý vốn và quản trị rủi ro.", unavailable: true},
+              {text:"Tham gia các buổi trao đổi chuyên môn riêng.", unavailable: true},
+              {text:"Ưu tiên hỗ trợ trong cộng đồng học viên.", unavailable: true},
+              {text:"Hướng dẫn giải quyết vấn đề tâm lý khi vào lệnh",unavailable: true},
+              {text:"Được tiếp cận các tài liệu bổ sung dành riêng cho chương trình M1.", unavailable: true},
             ],
             featured: false
           },
           {
             code: 'K3', level: 'PRACTICE', name: 'Kiến thức & Thực hành', price: 189,
-            subtitle: '18 buổi học — kết hợp kiến thức, bài tập và sửa bài.',
+            subtitle: '(Giá gốc + 20%) 18 buổi học — kết hợp kiến thức, bài tập và sửa bài.',
             highlights: [
-
-              " Tham gia toàn bộ 09 buổi học lý thuyết.",
-              " Tham gia toàn bộ 09 buổi thực hành & sửa bài.",
-              " Truy cập tài liệu học tập của toàn bộ học viên.",
-              " Nhận slide và tài liệu tổng hợp đầy đủ kiến thức.",
-              " Tham gia cộng đồng học viên MDUCSM.",
-              " Truy cập các kênh trao đổi kiến thức Trading.",
-              " Được đặt câu hỏi và trao đổi trong quá trình học.",
-              " Xem và giải thích lại bản ghi các buổi học.",
-              " Nhận thông báo và nhắc nhỏ riêng về các buổi học.",
-              " Hỗ trợ miễn phí các chương trình đào tạo mới.",
-              " Hỗ trợ đăng ký các dịch vụ Mentor và Support riêng."
+              "Có 9 buổi bài học.",
+              "Có 9 buổi thực hành & sửa bài.",
+              "Hơn 3 buổi hổ trợ bổ sung.",
+              "Truy cập toàn bộ tài liệu của học viên.",
+              "Nhận slide và tài liệu tổng hợp đầy đủ kiến thức.",
+              "Tham gia cộng đồng học viên và các kênh trao đổi kiến thức MDUCSM.",
+              "Được đặt câu hỏi và trao đổi trong quá trình học.",
+              "Xem và giải thích lại bản ghi các buổi học.",
+              "Nhận thông báo và nhắc nhỏ riêng về các buổi học.",
+              "Hỗ trợ update kiến thức mới miễn phí.",
+              "Hỗ trợ đăng ký các dịch vụ Mentor và Support riêng.",
+              {text:"Mentor là người hướng dẫn đồng hành với bạn suốt quá trình đào tạo.", unavailable: true},
+              {text:"Hướng dẫn xây dựng giao dịch phù hợp.", unavailable: true},
+              {text:"Trao đổi trực tiếp với Mentor trong quá trình học tập và giao dịch.", unavailable: true},
+              {text:"Đồng hành phân tích và đánh giá bài tập chuyên sâu.", unavailable: true},
+              {text:"Nhận phản hồi những điểm yếu trong tư duy phân tích thị trường.", unavailable: true},
+              {text:"Hướng dẫn xây dựng Trading Plan cá nhân.", unavailable: true},
+              {text:"Hướng dẫn xây dựng hệ thống giao dịch phù hợp.", unavailable: true},
+              {text:"Được trao đổi các tình huống giao dịch thực tế.", unavailable: true},
+              {text:"Hỗ trợ định hướng quản lý vốn và quản trị rủi ro.", unavailable: true},
+              {text:"Tham gia các buổi trao đổi chuyên môn riêng.", unavailable: true},
+              {text:"Ưu tiên hỗ trợ trong cộng đồng học viên.", unavailable: true},
+              {text:"Hướng dẫn giải quyết vấn đề tâm lý khi vào lệnh", unavailable: true},
+              {text:"Được tiếp cận các tài liệu bổ sung dành riêng cho chương trình M1.", unavailable: true},
+              // {text: "Truy cập tài liệu riêng và được cập nhật thường xuyên.", unavailable: true},
             ],
             featured: false, tag: 'ĐƯỢC QUAN TÂM'
           },
           {
             code: 'M1', level: 'MENTORSHIP', name: 'Đào tạo chuyên sâu', price: 379,
-            subtitle: '> 18 buổi đào tạo — Mentor đồng hành và hướng dẫn riêng.',
+            subtitle: '(Giá gốc + 20%) Dành cho người đã giao dịch và muốn sửa những lỗi mình hay lặp lại.',
             highlights: [
-              " Được nhận toàn bộ các quyền lời khóa học K1 và K2",
-              " Tham gia chương trình đào tạo chuyên sâu 18 buổi.",
-              " Mentor hướng dẫn và đồng hành suốt quá trình đào tạo.",
-              " Được định hướng lộ trình học tập.",
-              " Trao đổi trực tiếp với Mentor trong quá trình học tập.",
-              " Đồng hành phân tích và đánh giá bài tập chuyên sâu.",
-              " Nhận phản hồi những điểm yếu trong tư duy phân tích thị trường.",
-              " Hướng dẫn xây dựng Trading Plan cá nhân.",
-              " Hướng dẫn xây dựng hệ thống giao dịch phù hợp.",
-              " Được trao đổi các tình huống giao dịch thực tế.",
-              " Hỗ trợ định hướng quản lý vốn và quản trị rủi ro.",
-              " Tham gia các buổi trao đổi chuyên môn riêng.",
-              " Ưu tiên hỗ trợ trong cộng đồng học viên.",
-              " Hướng dẫn giải quyết vấn đề tâm lý khi vào lệnh",
-              " Được tiếp cận các tài liệu bổ sung dành riêng cho chương trình M1."
+              // chương trình đạo tạo
+              "Có 9 buổi bài học.",
+              "Có 9 buổi thực hành & sửa bài.",
+              "Hơn 3 buổi hổ trợ bổ sung.",
+              "Được đặt câu hỏi và trao đổi trong quá trình học.",
+              "Xem và giải thích lại bản ghi các buổi học.",
+              // cộng đồng học viên
+              "Truy cập toàn bộ tài liệu của học viên.",
+              "Nhận slide và tài liệu tổng hợp đầy đủ kiến thức.",
+              "Tham gia cộng đồng học viên và các kênh trao đổi kiến thức MDUCSM.",
+              "Nhận thông báo và nhắc nhỏ riêng về các buổi học.",
+              "Hỗ trợ update kiến thức mới miễn phí.",
+              // mentor đồng hành
+              "Mentor là người hướng dẫn đồng hành với bạn suốt quá trình đào tạo.",
+              "Hướng dẫn xây dựng giao dịch phù hợp.",
+              "Trao đổi trực tiếp với Mentor trong quá trình học tập và giao dịch.",
+              "Hướng dẫn giải quyết vấn đề tâm lý khi vào lệnh",
+              "Ưu tiên hỗ trợ trong cộng đồng học viên.",
+              "Đồng hành phân tích và đánh giá bài tập chuyên sâu.",
+              "Nhận phản hồi những điểm yếu trong tư duy phân tích thị trường.",
+              "Hướng dẫn xây dựng Trading Plan cá nhân.",
+              "Hướng dẫn xây dựng hệ thống giao dịch phù hợp.",
+              "Được trao đổi các tình huống giao dịch thực tế.",
+              "Hỗ trợ định hướng quản lý vốn và quản trị rủi ro.",
+              "Được tiếp cận các tài liệu bổ sung dành riêng cho chương trình M1.",
+              // "dịch vụ thêm",
+              "Tham gia các buổi trao đổi chuyên môn riêng (dịch vụ).",
+              "Đã có trong khóa học.",
             ],
             featured: true, tag: 'PREMIUM'
           }
