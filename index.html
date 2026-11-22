@@ -480,7 +480,8 @@
         padding: 22px;
       }
     }
-    .hero-white{
+
+    .hero-white {
       color: white !important;
     }
   </style>
@@ -507,13 +508,14 @@
           <h1>Inter. Candle Profile<br><span>KDcs • MDucSM</span></h1>
           <p class="hero-white">Founder: MDucSM • Co-Founder: KDcs • Co- Founder: buu</p>
           <p>
-          MDucSM - Đúc kết từ kinh nghiệm thực chiến, tập trung phát triển tư duy đọc hiểu thị trường, 
-          khả năng phân tích hành vi giá và xây dựng phương pháp giao dịch có hệ thống và tính ứng dụng cao.
-                    
+            MDucSM - Đúc kết từ kinh nghiệm thực chiến, tập trung phát triển tư duy đọc hiểu thị trường,
+            khả năng phân tích hành vi giá và xây dựng phương pháp giao dịch có hệ thống và tính ứng dụng cao.
+
           </p>
           <div class="hero-actions">
             <a class="btn" href="#courses">KHÁM PHÁ KHÓA HỌC</a>
             <a class="btn ghost" href="#services">DỊCH VỤ HỖ TRỢ</a>
+            <a class="btn ghost" :href="contactUrl" target="_blank" rel="noopener">ĐĂNG KÝ NGAY</a>
           </div>
         </div>
       </section>
@@ -536,8 +538,9 @@
               <ul class="course-list">
                 <li v-for="item in course.highlights" :key="item">{{ item }}</li>
               </ul>
-              <a class="btn" :class="{ghost: !course.featured}" :href="registerUrl(course.code)">ĐĂNG KÝ {{ course.code
-                }}</a>
+              <!-- <a class="btn" :class="{ghost: !course.featured}" :href="registerUrl(course.code)">ĐĂNG KÝ {{ course.code
+                }}</a> -->
+                  <a class="btn" :class="{ghost: !course.featured}" :href="registerUrl(course.code)">ĐĂNG KÝ NGAY</a>
             </article>
           </div>
           <p class="note">* Lịch học, hình thức ghi hình và thời hạn truy cập tài liệu được thông báo cụ thể khi đăng
@@ -558,9 +561,9 @@
               <thead>
                 <tr>
                   <th>Quyền lợi</th>
-                  <th>K1 · $139</th>
-                  <th>K2 · $189</th>
-                  <th>K3 · $379</th>
+                  <th>K2 </th>
+                  <th>K3</th>
+                  <th>M1</th>
                 </tr>
               </thead>
               <tbody>
@@ -571,8 +574,8 @@
               </tbody>
             </table>
           </div>
-          <p class="note">* Quyền lợi “Mentor riêng” của K1/K2 là dịch vụ thuê thêm, không nằm trong học phí khóa học.
-            Quyền lợi K3 thực hiện theo phạm vi chương trình 16 buổi.</p>
+          <p class="note">* Quyền lợi “Mentor riêng” của K2/K3 là dịch vụ thuê thêm, không nằm trong học phí khóa học.
+            Quyền lợi M1 thực hiện theo chương trình 16 buổi.</p>
         </div>
       </section>
 
@@ -581,43 +584,11 @@
           <div class="section-head">
             <div class="eyebrow">Additional services</div>
             <h2>Dịch vụ hỗ trợ bổ sung</h2>
-            <p>Dành cho học viên K1 và K2 có nhu cầu được hỗ trợ ngoài chương trình học chính.</p>
+            <p>Dành cho học viên K2 và K3 có nhu cầu được hỗ trợ ngoài chương trình học chính.</p>
           </div>
           <div class="service-grid">
             <div class="service">
-              <div class="course-code">01 / MENTOR SERVICE</div>
-              <h3>Thuê Mentor — MDucSM</h3>
-              <div class="sub">HỖ TRỢ CHUYÊN MÔN THEO GÓI</div>
-              <div class="table-wrap price-table">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Thời hạn</th>
-                      <th>Người hỗ trợ</th>
-                      <th>Phí dịch vụ</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="item in mentorPlans" :key="item.period">
-                      <td>{{ item.period }}</td>
-                      <td>{{ item.person }}</td>
-                      <td><strong>{{ item.price }}</strong></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <ul>
-                <li>Trao đổi và giải đáp vấn đề chuyên môn theo gói đã đăng ký.</li>
-                <li>Hướng dẫn phân tích và thực hành theo phạm vi dịch vụ.</li>
-                <li>Gói nhóm áp dụng cho nhóm 10 thành viên.</li>
-              </ul>
-              <div class="offer"><strong>Ưu đãi nâng cấp K3:</strong> Học viên sử dụng dịch vụ Mentor được áp dụng
-                chương trình SALE 50% khi mua K3. Vui lòng xác nhận điều kiện và cách tính ưu đãi trước khi thanh toán.
-              </div>
-            </div>
-
-            <div class="service">
-              <div class="course-code">02 / PERSONAL SUPPORT</div>
+              <div class="course-code">01 / PERSONAL SUPPORT</div>
               <h3>Thuê Support — Khánh Duy</h3>
               <div class="sub">TIN NHẮN & STREAM 1-1</div>
               <div class="table-wrap price-table">
@@ -643,9 +614,47 @@
                 <li>Đặt lịch stream 1-1 để trao đổi trực tiếp.</li>
                 <li>Hỗ trợ giải đáp và hướng dẫn trong quá trình học.</li>
               </ul>
-              <div class="offer">Phí tin nhắn và phí stream được tính riêng theo gói. Thời lượng stream và cách đặt lịch
-                cần được thống nhất trước.</div>
+              <div class="offer">
+                Phí tin nhắn và phí stream được tính riêng theo gói. Thời lượng stream và cách đặt lịch
+                cần được thống nhất trước.
+                <p><strong>Ưu đãi nâng cấp K3 & M1:</strong> Học viên sử dụng dịch vụ Mentor được áp dụng chương trình
+                  SALE 30% khi mua K3 & M1.</p>
+
+              </div>
             </div>
+            <div class="service">
+              <div class="course-code">02 / MENTOR SERVICE</div>
+              <h3>Thuê Mentor — MDucSM</h3>
+              <div class="sub">HỖ TRỢ CHUYÊN MÔN THEO GÓI</div>
+              <div class="table-wrap price-table">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Thời hạn</th>
+                      <!-- <th>Người hỗ trợ</th> -->
+                      <th>Stream 1-1 (giá)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="item in mentorPlans" :key="item.period">
+                      <td>{{ item.period }}</td>
+                      <!-- <td>{{ item.person }}</td> -->
+                      <td><strong>{{ item.price }}</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <ul>
+                <li>Trao đổi và giải đáp vấn đề chuyên môn theo gói đã đăng ký.</li>
+                <li>Hướng dẫn phân tích và thực hành theo phạm vi dịch vụ.</li>
+                <li>Gói nhóm áp dụng cho nhóm 10 thành viên.</li>
+              </ul>
+              <div class="offer"><strong>Ưu đãi nâng cấp M1:</strong> Học viên sử dụng dịch vụ Mentor được áp dụng
+                chương trình SALE 50% khi mua M1. Vui lòng xác nhận điều kiện và cách tính ưu đãi trước khi thanh toán.
+              </div>
+            </div>
+
+
           </div>
         </div>
       </section>
@@ -657,16 +666,47 @@
             <h2>Khác biệt nằm ở cách bạn học</h2>
           </div>
           <div class="steps">
-            <div class="step"><b>K1 / Understand</b>
-              <p>Xây dựng nền tảng kiến thức và hiểu logic thị trường.</p>
+            <div class="step"><b>Học</b>
+              <p>
+                Bạn chỉ tham gia các buổi học,
+                nghe kiến thức nhưng không ghi chép,
+                không thực hành và không ứng dụng vào giao dịch thực tế.
+                Khi đó, kiến thức chỉ dừng lại ở lý thuyết và rất khó giúp bạn tạo ra lợi nhuận từ thị trường.
+              </p>
             </div>
-            <div class="step"><b>K2 / Apply</b>
-              <p>Thực hành, làm bài tập và nhận phản hồi để cải thiện khả năng phân tích.</p>
+            <div class="step"><b>Học & Áp dụng</b>
+              <p>
+                Bạn đã biết cách đưa kiến thức vào giao dịch,
+                nhưng lại thiếu sự phản hồi và đánh giá từ Mentor.
+                Khi mắc lỗi, bạn thường cho rằng đó chỉ là xác suất trong trading mà không thực sự tìm hiểu nguyên nhân.
+                Điều này khiến những sai lầm cũ dễ dàng lặp lại và hạn chế khả năng phát triển của bản thân.
+              </p>
             </div>
-            <div class="step"><b>K3 / Develop</b>
-              <p>Được Mentor đồng hành, đánh giá và định hướng phát triển tư duy giao dịch.</p>
+            <div class="step"><b> Học – Dùng – Hỏi – Sửa – Phát triển</b>
+              <p>
+                Đây là quá trình mà một người thực sự nghiêm túc với việc phát triển bản thân cần hướng đến.
+              </p>
+              <p></p>
+              <p><strong>• Học: </strong>Ghi chép, hệ thống hóa và hiểu bản chất kiến thức.</p>
+              <p><strong>• Dùng: </strong>Chủ động ứng dụng kiến thức vào việc phân tích và giao dịch.</p>
+              <p><strong>• Hỏi: </strong>Đặt câu hỏi khi gặp vấn đề, tìm kiếm góc nhìn và phản hồi từ Mentor.</p>
+              <p><strong>• Sửa: </strong>Nhìn nhận sai lầm, tìm ra nguyên nhân và điều chỉnh bản thân.</p>
+              <p><strong>• Phát triển: </strong>Tích lũy kinh nghiệm, cải thiện tư duy và hoàn thiện hệ thống giao dịch
+                theo thời gian.
+              </p>
+
+
             </div>
           </div>
+          <div class="offer">
+              Trading không chỉ là quá trình học thêm kiến thức, mà còn là quá trình liên tục nhận ra những gì mình chưa
+              biết,
+              sửa chữa những gì mình làm chưa tốt và hoàn thiện chính mình qua từng giao dịch. Đừng chỉ cố gắng trở thành
+              người biết nhiều kiến thức hơn. Hãy trở thành người biết cách sử dụng, đặt câu hỏi và sửa sai từ những
+              kiến thức mình đã học.
+            
+          </div>
+
         </div>
       </section>
 
@@ -677,7 +717,7 @@
             <h2>Sẵn sàng nâng cấp tư duy Trading?</h2>
             <p>Chọn chương trình phù hợp và liên hệ MDUCSM để nhận thông tin lịch học, nội dung chi tiết và quy trình
               đăng ký.</p>
-            <a class="btn" :href="contactUrl" target="_blank" rel="noopener">LIÊN HỆ ĐĂNG KÝ</a>
+            <a class="btn" :href="contactUrl" target="_blank" rel="noopener">ĐĂNG KÝ NGAY</a>
           </div>
         </div>
       </section>
@@ -685,7 +725,7 @@
 
     <footer>
       <div class="wrap footer-inner">
-        <div><strong style="color:var(--gold2)">MDUCSM</strong> · Trading Education</div>
+        <div><strong style="color:var(--gold2)">MDUCSM</strong> · KDcs</div>
         <div>Trading involves risk. Education does not guarantee trading results.</div>
         <div>© {{ year }} MDUCSM. All rights reserved.</div>
       </div>
@@ -698,8 +738,8 @@
       data: {
         year: new Date().getFullYear(),
         // Thay link đăng ký/liên hệ tại đây
-        registrationBase: 'https://discord.com/users/686056041150021737',
-        contactUrl: 'https://discord.com/users/686056041150021737',
+        registrationBase: 'https://discord.com/users/1453787779929608422',
+        contactUrl: 'https://discord.com/users/1453787779929608422',
         courses: [
           {
             code: 'K2', level: 'FOUNDATION', name: 'Kiến thức', price: 139,
@@ -768,7 +808,7 @@
           {name: 'Buổi học lý thuyết', values: ['9 buổi', '9 buổi', 'Theo lộ trình']},
           {name: 'Buổi thực hành', values: ['—', '9 buổi', 'Có']},
           {name: 'Bài tập & sửa bài', values: ['—', 'Có', 'Theo chương trình']},
-          {name: 'Q&A chuyên môn', values: ['Cơ bản', 'Có', 'Riêng']},
+          {name: 'Q&A chuyên môn', values: ['Có', 'Có', 'Riêng']},
           {name: 'Mentor hướng dẫn riêng', values: ['Thuê thêm', 'Thuê thêm', 'Có']},
           {name: 'Lộ trình cá nhân', values: ['—', '—', 'Có']},
           {name: 'Định hướng Trading Plan', values: ['—', '—', 'Có']},
