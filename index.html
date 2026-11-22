@@ -171,7 +171,7 @@
 
     .course-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 18px;
       align-items: stretch;
     }
@@ -181,7 +181,6 @@
       border: 1px solid var(--line);
       border-radius: 10px;
       padding: 25px;
-      position: relative;
       display: flex;
       flex-direction: column;
     }
@@ -192,9 +191,6 @@
     }
 
     .ribbon {
-      position: absolute;
-      right: 18px;
-      top: 18px;
       font-size: 10px;
       letter-spacing: 1px;
       color: #16120a;
@@ -232,18 +228,104 @@
     .course-desc {
       color: var(--muted);
       font-size: 13px;
-      min-height: 42px;
       margin: 4px 0 18px;
     }
 
-    .course ul,
+    .course-header {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 18px;
+    }
+
+    .course-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px 8px;
+      min-height: 26px;
+    }
+
+    .course-header .btn {
+      margin-top: auto;
+    }
+
+    .course-group {
+      padding: 14px 0;
+    }
+
+    .course-group + .course-group {
+      border-top: 1px solid var(--line);
+    }
+
+    .course-group:last-child {
+      padding-bottom: 0;
+    }
+
+    .course-group h4 {
+      margin: 0 0 7px;
+      font-size: 14px;
+    }
+
+    .course-list,
     .service ul {
       list-style: none;
       padding: 0;
       margin: 0;
     }
 
-    .course li,
+    .course-list li {
+      position: relative;
+      padding: 4px 0 4px 20px;
+      color: #d5d7dc;
+      font-size: 13px;
+    }
+
+    .course-status {
+      position: absolute;
+      left: 0;
+    }
+
+    .course-status::before {
+      content: "✓";
+      color: var(--gold);
+      font-weight: 900;
+    }
+
+    .course-list li.unavailable {
+      color: #858b95;
+    }
+
+    .course-list .unavailable .course-status::before {
+      content: "×";
+      color: inherit;
+      font-weight: 400;
+    }
+
+    .course-status-label {
+      display: none;
+    }
+
+    .course-list .unavailable .course-status-label {
+      display: inline;
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+    }
+
+    @media (min-width: 621px) {
+      @supports (grid-template-rows: subgrid) {
+        .course {
+          display: grid;
+          grid-row: span var(--course-rows);
+          grid-template-rows: subgrid;
+          row-gap: 0;
+        }
+      }
+    }
+
     .service li {
       padding: 9px 0;
       border-top: 1px solid rgba(255, 255, 255, .09);
@@ -251,34 +333,21 @@
       font-size: 13px;
     }
 
-    .course li:before,
-    .service li:before {
+    .service li::before {
       content: "✓";
       color: var(--gold);
       margin-right: 9px;
       font-weight: 900;
     }
 
-    .course li.unavailable,
     .service li.unavailable {
       color: #666b74;
     }
 
-    .course li.unavailable:before,
-    .service li.unavailable:before {
+    .service li.unavailable::before {
       content: "×";
-      color: #666b74;
-      margin-right: 9px;
+      color: inherit;
       font-weight: 400;
-    }
-
-    .course .btn {
-      margin-top: auto;
-      width: 100%;
-    }
-
-    .course .course-list {
-      margin-bottom: 22px;
     }
 
     .note {
@@ -445,7 +514,7 @@
 
     @media (max-width: 850px) {
       .course-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .course:last-child {
@@ -625,22 +694,30 @@
             <p>Ba cấp độ đào tạo tương ứng với ba nhu cầu: học kiến thức, thực hành có phản hồi và đồng hành chuyên sâu
               cùng Mentor.</p>
           </div>
-          <div class="course-grid">
+          <div class="course-grid" :style="{'--course-rows': courseGroups.length + 1}">
             <article class="course" v-for="course in courses" :key="course.code" :class="{featured: course.featured}">
-              <div v-if="course.tag" class="ribbon">{{ course.tag }}</div>
-              <div class="course-code">{{ course.code }} — {{ course.level }}</div>
-              <h3>{{ course.name }}</h3>
-              <div class="price">${{ course.price }} <small>USD</small></div>
-              <div class="course-desc">{{ course.subtitle }}</div>
-              <ul class="course-list">
-                <li v-for="item in course.highlights" :key="typeof item === 'string' ? item : item.text"
-                    :class="{unavailable: typeof item === 'object' && item.unavailable}">
-                  {{ typeof item === 'object' ? item.text : item }}
-                </li>
-              </ul>
-              <!-- <a class="btn" :class="{ghost: !course.featured}" :href="registerUrl(course.code)">ĐĂNG KÝ {{ course.code
-                }}</a> -->
-                  <a class="btn" :class="{ghost: !course.featured}" :href="registerUrl(course.code)">ĐĂNG KÝ NGAY</a>
+              <header class="course-header">
+                <div class="course-meta">
+                  <div class="course-code">{{ course.code }} — {{ course.level }}</div>
+                  <div v-if="course.tag" class="ribbon">{{ course.tag }}</div>
+                </div>
+                <h3>{{ course.name }}</h3>
+                <div class="price">${{ course.price }} <small>USD</small></div>
+                <div class="course-desc">{{ course.subtitle }}</div>
+                <a class="btn" :class="{ghost: !course.featured}" :href="registerUrl(course.code)">ĐĂNG KÝ NGAY</a>
+              </header>
+              <div class="course-group" v-for="group in courseGroups" :key="group.title">
+                <h4>{{ group.title }}</h4>
+                <ul class="course-list" role="list">
+                  <li v-for="item in group.items" :key="item.text"
+                      :class="{unavailable: (group.unavailableFor || []).includes(course.code) ||
+                                            (item.unavailableFor || []).includes(course.code)}">
+                    <span class="course-status" aria-hidden="true"></span>
+                    <span class="course-status-label">Không bao gồm.</span>
+                    {{ (item.textByCourse && item.textByCourse[course.code]) || item.text }}
+                  </li>
+                </ul>
+              </div>
             </article>
           </div>
           <p class="note">* Lịch học, hình thức ghi hình và thời hạn truy cập tài liệu được thông báo cụ thể khi đăng
@@ -901,102 +978,72 @@
           {
             code: 'K2', level: 'FOUNDATION', name: 'Kiến thức', price: 139,
             subtitle: '09 buổi học kiến thức — hoàn thành toàn bộ chương trình.',
-            highlights: [
-              "Có 9 buổi bài học.",
-              // {text: "Truy cập tài liệu riêng và được cập nhật thường xuyên.", unavailable: true},
-
-              {text: "Có 9 buổi thực hành & sửa bài.", unavailable: true},
-              "Hơn 3 buổi hổ trợ bổ sung.",
-              {text:"Truy cập toàn bộ tài liệu của học viên.", unavailable: false},
-              "Nhận slide và tài liệu tổng hợp đầy đủ kiến thức.",
-              "Tham gia cộng đồng học viên và các kênh trao đổi kiến thức MDUCSM.",
-              "Được đặt câu hỏi và trao đổi trong quá trình học.",
-              "Xem và giải thích lại bản ghi các buổi học.",
-              "Nhận thông báo và nhắc nhỏ riêng về các buổi học.",
-              "Hỗ trợ update kiến thức mới miễn phí.",
-              "Hỗ trợ đăng ký các dịch vụ Mentor và Support riêng.",
-              {text:"Mentor là người hướng dẫn đồng hành với bạn suốt quá trình đào tạo.", unavailable: true},
-              {text:"Hướng dẫn xây dựng giao dịch phù hợp.", unavailable: true},
-              {text:"Trao đổi trực tiếp với Mentor trong quá trình học tập và giao dịch.",unavailable: true},
-              {text:"Đồng hành phân tích và đánh giá bài tập chuyên sâu.",unavailable: true},
-              {text:"Nhận phản hồi những điểm yếu trong tư duy phân tích thị trường.", unavailable: true},
-              {text:"Hướng dẫn xây dựng Trading Plan cá nhân.", unavailable: true},
-              {text:"Hướng dẫn xây dựng hệ thống giao dịch phù hợp.", unavailable: true},
-              {text:"Được trao đổi các tình huống giao dịch thực tế.", unavailable: true},
-              {text:"Hỗ trợ định hướng quản lý vốn và quản trị rủi ro.", unavailable: true},
-              {text:"Tham gia các buổi trao đổi chuyên môn riêng.", unavailable: true},
-              {text:"Ưu tiên hỗ trợ trong cộng đồng học viên.", unavailable: true},
-              {text:"Hướng dẫn giải quyết vấn đề tâm lý khi vào lệnh",unavailable: true},
-              {text:"Được tiếp cận các tài liệu bổ sung dành riêng cho chương trình M1.", unavailable: true},
-            ],
             featured: false
           },
           {
             code: 'K3', level: 'PRACTICE', name: 'Kiến thức & Thực hành', price: 189,
             subtitle: '(Giá gốc + 20%) 18 buổi học — kết hợp kiến thức, bài tập và sửa bài.',
-            highlights: [
-              "Có 9 buổi bài học.",
-              "Có 9 buổi thực hành & sửa bài.",
-              "Hơn 3 buổi hổ trợ bổ sung.",
-              "Truy cập toàn bộ tài liệu của học viên.",
-              "Nhận slide và tài liệu tổng hợp đầy đủ kiến thức.",
-              "Tham gia cộng đồng học viên và các kênh trao đổi kiến thức MDUCSM.",
-              "Được đặt câu hỏi và trao đổi trong quá trình học.",
-              "Xem và giải thích lại bản ghi các buổi học.",
-              "Nhận thông báo và nhắc nhỏ riêng về các buổi học.",
-              "Hỗ trợ update kiến thức mới miễn phí.",
-              "Hỗ trợ đăng ký các dịch vụ Mentor và Support riêng.",
-              {text:"Mentor là người hướng dẫn đồng hành với bạn suốt quá trình đào tạo.", unavailable: true},
-              {text:"Hướng dẫn xây dựng giao dịch phù hợp.", unavailable: true},
-              {text:"Trao đổi trực tiếp với Mentor trong quá trình học tập và giao dịch.", unavailable: true},
-              {text:"Đồng hành phân tích và đánh giá bài tập chuyên sâu.", unavailable: true},
-              {text:"Nhận phản hồi những điểm yếu trong tư duy phân tích thị trường.", unavailable: true},
-              {text:"Hướng dẫn xây dựng Trading Plan cá nhân.", unavailable: true},
-              {text:"Hướng dẫn xây dựng hệ thống giao dịch phù hợp.", unavailable: true},
-              {text:"Được trao đổi các tình huống giao dịch thực tế.", unavailable: true},
-              {text:"Hỗ trợ định hướng quản lý vốn và quản trị rủi ro.", unavailable: true},
-              {text:"Tham gia các buổi trao đổi chuyên môn riêng.", unavailable: true},
-              {text:"Ưu tiên hỗ trợ trong cộng đồng học viên.", unavailable: true},
-              {text:"Hướng dẫn giải quyết vấn đề tâm lý khi vào lệnh", unavailable: true},
-              {text:"Được tiếp cận các tài liệu bổ sung dành riêng cho chương trình M1.", unavailable: true},
-              // {text: "Truy cập tài liệu riêng và được cập nhật thường xuyên.", unavailable: true},
-            ],
             featured: false, tag: 'ĐƯỢC QUAN TÂM'
           },
           {
             code: 'M1', level: 'MENTORSHIP', name: 'Đào tạo chuyên sâu', price: 379,
             subtitle: '(Giá gốc + 20%) Dành cho người đã giao dịch và muốn sửa những lỗi mình hay lặp lại.',
-            highlights: [
-              // chương trình đạo tạo
-              "Có 9 buổi bài học.",
-              "Có 9 buổi thực hành & sửa bài.",
-              "Hơn 3 buổi hổ trợ bổ sung.",
-              "Được đặt câu hỏi và trao đổi trong quá trình học.",
-              "Xem và giải thích lại bản ghi các buổi học.",
-              // cộng đồng học viên
-              "Truy cập toàn bộ tài liệu của học viên.",
-              "Nhận slide và tài liệu tổng hợp đầy đủ kiến thức.",
-              "Tham gia cộng đồng học viên và các kênh trao đổi kiến thức MDUCSM.",
-              "Nhận thông báo và nhắc nhỏ riêng về các buổi học.",
-              "Hỗ trợ update kiến thức mới miễn phí.",
-              // mentor đồng hành
-              "Mentor là người hướng dẫn đồng hành với bạn suốt quá trình đào tạo.",
-              "Hướng dẫn xây dựng giao dịch phù hợp.",
-              "Trao đổi trực tiếp với Mentor trong quá trình học tập và giao dịch.",
-              "Hướng dẫn giải quyết vấn đề tâm lý khi vào lệnh",
-              "Ưu tiên hỗ trợ trong cộng đồng học viên.",
-              "Đồng hành phân tích và đánh giá bài tập chuyên sâu.",
-              "Nhận phản hồi những điểm yếu trong tư duy phân tích thị trường.",
-              "Hướng dẫn xây dựng Trading Plan cá nhân.",
-              "Hướng dẫn xây dựng hệ thống giao dịch phù hợp.",
-              "Được trao đổi các tình huống giao dịch thực tế.",
-              "Hỗ trợ định hướng quản lý vốn và quản trị rủi ro.",
-              "Được tiếp cận các tài liệu bổ sung dành riêng cho chương trình M1.",
-              // "dịch vụ thêm",
-              "Tham gia các buổi trao đổi chuyên môn riêng (dịch vụ).",
-              "Đã có trong khóa học.",
-            ],
             featured: true, tag: 'PREMIUM'
+          }
+        ],
+        courseGroups: [
+          {
+            title: 'Chương trình đào tạo',
+            items: [
+              {text: 'Có 9 buổi bài học.'},
+              {text: 'Có 9 buổi thực hành & sửa bài.', unavailableFor: ['K2']},
+              {text: 'Hơn 3 buổi hổ trợ bổ sung.'},
+              {text: 'Được đặt câu hỏi và trao đổi trong quá trình học.'},
+              {text: 'Xem và giải thích lại bản ghi các buổi học.'}
+            ]
+          },
+          {
+            title: 'Cộng đồng học viên',
+            items: [
+              {text: 'Truy cập toàn bộ tài liệu của học viên.'},
+              {text: 'Nhận slide và tài liệu tổng hợp đầy đủ kiến thức.'},
+              {text: 'Tham gia cộng đồng học viên và các kênh trao đổi kiến thức MDUCSM.'},
+              {text: 'Nhận thông báo và nhắc nhỏ riêng về các buổi học.'},
+              {text: 'Hỗ trợ update kiến thức mới miễn phí.'}
+              // Tạm ẩn ở K2 và K3: Truy cập tài liệu riêng và được cập nhật thường xuyên.
+            ]
+          },
+          {
+            title: 'Mentor đồng hành',
+            unavailableFor: ['K2', 'K3'],
+            items: [
+              {text: 'Mentor là người hướng dẫn đồng hành với bạn suốt quá trình đào tạo.'},
+              {text: 'Hướng dẫn xây dựng giao dịch phù hợp.'},
+              {text: 'Trao đổi trực tiếp với Mentor trong quá trình học tập và giao dịch.'},
+              {text: 'Hướng dẫn giải quyết vấn đề tâm lý khi vào lệnh'},
+              {text: 'Ưu tiên hỗ trợ trong cộng đồng học viên.'},
+              {text: 'Đồng hành phân tích và đánh giá bài tập chuyên sâu.'},
+              {text: 'Nhận phản hồi những điểm yếu trong tư duy phân tích thị trường.'},
+              {text: 'Hướng dẫn xây dựng Trading Plan cá nhân.'},
+              {text: 'Hướng dẫn xây dựng hệ thống giao dịch phù hợp.'},
+              {text: 'Được trao đổi các tình huống giao dịch thực tế.'},
+              {text: 'Hỗ trợ định hướng quản lý vốn và quản trị rủi ro.'},
+              {text: 'Được tiếp cận các tài liệu bổ sung dành riêng cho chương trình M1.'}
+            ]
+          },
+          {
+            title: 'Dịch vụ thêm',
+            items: [
+              {
+                text: 'Tham gia các buổi trao đổi chuyên môn riêng.',
+                unavailableFor: ['K2', 'K3'],
+                textByCourse: {M1: 'Tham gia các buổi trao đổi chuyên môn riêng.'}
+              },
+              {
+                text: 'Hỗ trợ đăng ký các dịch vụ Mentor và Support riêng.',
+                textByCourse: {M1: 'Đã có trong khóa học.'}
+              }
+            ]
           }
         ],
         privileges: [
