@@ -661,6 +661,52 @@
   color: white;
 }
 
+.notice-container {
+    max-width: 720px;
+    margin: 24px auto;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+
+  .notice-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 18px 20px;
+  }
+
+  .notice-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .notice-title {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #94a3b8;
+  }
+
+  .notice-status {
+    font-size: 11px;
+    font-weight: 500;
+    color: #94a3b8;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 2px 8px;
+    border-radius: 99px;
+  }
+
+  .notice-desc {
+    margin: 0 0 14px 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #cbd5e1;
+  }
+
 @media(max-width:600px) {
   .floating-contact {
     right: 14px;
@@ -671,10 +717,17 @@
     width: 43px;
     height: 43px;
   }
+  
 }
 
     /* //======================= */
-
+.bottrading{
+  margin-bottom: 12px;
+}
+/* .bottrading .notice-top{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+} */
   </style>
 </head>
 
@@ -931,6 +984,17 @@
           </div>
         </div>
       </section>
+
+    <div class="wrap bottrading">
+      <div class="notice-card">
+        <div class="notice-top">
+          <h2 class="notice-title">BOT TRADING SẮP RA MẮT</h2>
+        </div>
+        <span class="notice-status">Coming Soon</span>
+
+        <p class="notice-desc">S|InterCandle Bot lệnh đơn hướng tới winrate 70% - 80%, tỷ lệ lợi nhuận trên rủi ro trên 2R (R/R>1/2).</p>
+        </div>
+    </div>
     </main>
 
     <footer>
