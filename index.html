@@ -212,11 +212,36 @@
       font-size: 25px;
     }
 
+    .course-pricing {
+      margin-top: 12px;
+    }
+
+    .course-price-comparison {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0 6px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 20px;
+    }
+
+    .course-discount {
+      color: #ff686e;
+      font-weight: 700;
+    }
+
+    @media (min-width: 621px) {
+      .course-price-comparison {
+        min-height: 20px;
+      }
+    }
+
     .price {
       font-size: 42px;
       font-weight: 900;
       letter-spacing: -2px;
-      margin: 12px 0 0;
+      line-height: 1.15;
     }
 
     .price small {
@@ -702,7 +727,15 @@
                   <div v-if="course.tag" class="ribbon">{{ course.tag }}</div>
                 </div>
                 <h3>{{ course.name }}</h3>
-                <div class="price">${{ course.price }} <small>USD</small></div>
+                <div class="course-pricing">
+                  <div class="course-price-comparison">
+                    <template v-if="course.originalPrice > course.price">
+                      <del>${{ course.originalPrice.toFixed(2) }}</del>
+                      <span class="course-discount">-{{ courseDiscount(course) }}%</span>
+                    </template>
+                  </div>
+                  <div class="price">${{ course.price }} <small>USD</small></div>
+                </div>
                 <div class="course-desc">{{ course.subtitle }}</div>
                 <a class="btn" :class="{ghost: !course.featured}" :href="registerUrl(course.code)">ĐĂNG KÝ NGAY</a>
               </header>
@@ -981,13 +1014,13 @@
             featured: false
           },
           {
-            code: 'K3', level: 'PRACTICE', name: 'Kiến thức & Thực hành', price: 189,
-            subtitle: '(Giá gốc + 20%) 18 buổi học — kết hợp kiến thức, bài tập và sửa bài.',
+            code: 'K3', level: 'PRACTICE', name: 'Kiến thức & Thực hành', price: 189, originalPrice: 226.80,
+            subtitle: '18 buổi học — kết hợp kiến thức, bài tập và sửa bài.',
             featured: false, tag: 'ĐƯỢC QUAN TÂM'
           },
           {
-            code: 'M1', level: 'MENTORSHIP', name: 'Đào tạo chuyên sâu', price: 379,
-            subtitle: '(Giá gốc + 20%) Dành cho người đã giao dịch và muốn sửa những lỗi mình hay lặp lại.',
+            code: 'M1', level: 'MENTORSHIP', name: 'Đào tạo chuyên sâu', price: 379, originalPrice: 454.80,
+            subtitle: '> 18 buổi đào tạo — Mentor đồng hành và hướng dẫn riêng..',
             featured: true, tag: 'PREMIUM'
           }
         ],
@@ -1070,6 +1103,9 @@
         ]
       },
       methods: {
+        courseDiscount: function (course) {
+          return Math.round((1 - course.price / course.originalPrice) * 100);
+        },
         registerUrl: function (code) {
           return this.registrationBase + '?course=' + encodeURIComponent(code);
         }
