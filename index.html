@@ -3,11 +3,11 @@
 
 <head>
   <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-WPXKXKDZ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-</script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MDUCSM | KDcs</title>
@@ -285,7 +285,7 @@
       padding: 14px 0;
     }
 
-    .course-group + .course-group {
+    .course-group+.course-group {
       border-top: 1px solid var(--line);
     }
 
@@ -597,44 +597,45 @@
     .hero-white {
       color: white !important;
     }
+
     /* //======================= */
 
-.floating-contact {
-  position: fixed;
-  right: 22px;
-  bottom: 25px;
-  z-index: 99999;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+    .floating-contact {
+      position: fixed;
+      right: 22px;
+      bottom: 25px;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
 
-.float-btn {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 15px rgba(0,0,0,.25);
-  transition: .25s ease;
-}
+    .float-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, .25);
+      transition: .25s ease;
+    }
 
-.float-btn svg {
-  width: 25px;
-  height: 25px;
-}
+    .float-btn svg {
+      width: 25px;
+      height: 25px;
+    }
 
-.float-btn:hover {
-  transform: translateY(-4px) scale(1.08);
-}
+    .float-btn:hover {
+      transform: translateY(-4px) scale(1.08);
+    }
 
-.facebook {
-  background: #1877F2;
-  color: white;
-}
+    .facebook {
+      background: #1877F2;
+      color: white;
+    }
 
-/* 
+    /* 
 .zalo {
   background: #0068FF;
   color: #fff;
@@ -647,93 +648,553 @@
 } */
 
 
-.zalo {
-  background: #0068FF;
-  color: #fff;
-  text-decoration: none;
-}
+    .zalo {
+      background: #0068FF;
+      color: #fff;
+      text-decoration: none;
+    }
 
-.zalo-logo {
-  font-family: Arial, sans-serif;
-  font-size: 17px;
-  font-weight: 900;
-  letter-spacing: -1px;
-  line-height: 1;
-}
+    .zalo-logo {
+      font-family: Arial, sans-serif;
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1;
+    }
 
 
-.discord {
-  background: #5865F2;
-  color: white;
-}
+    .discord {
+      background: #5865F2;
+      color: white;
+    }
 
-.notice-container {
-    max-width: 720px;
-    margin: 24px auto;
-    font-family: system-ui, -apple-system, sans-serif;
-  }
+    .notice-container {
+      max-width: 720px;
+      margin: 24px auto;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
 
-  .notice-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    padding: 18px 20px;
-  }
+    .notice-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 18px 20px;
+    }
 
-  .notice-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 8px;
-  }
+    .notice-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
 
-  .notice-title {
-    margin: 0;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    color: #94a3b8;
-  }
+    .notice-title {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: #94a3b8;
+    }
 
-  .notice-status {
-    font-size: 11px;
-    font-weight: 500;
-    color: #94a3b8;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 2px 8px;
-    border-radius: 99px;
-  }
+    .notice-status {
+      font-size: 11px;
+      font-weight: 500;
+      color: #94a3b8;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 2px 8px;
+      border-radius: 99px;
+    }
 
-  .notice-desc {
-    margin: 0 0 14px 0;
-    font-size: 14px;
-    line-height: 1.6;
-    color: #cbd5e1;
-  }
+    .notice-desc {
+      margin: 0 0 14px 0;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #cbd5e1;
+    }
 
-@media(max-width:600px) {
-  .floating-contact {
-    right: 14px;
-    bottom: 18px;
-  }
+    @media(max-width:600px) {
+      .floating-contact {
+        right: 14px;
+        bottom: 18px;
+      }
 
-  .float-btn {
-    width: 43px;
-    height: 43px;
-  }
-  
-}
+      .float-btn {
+        width: 43px;
+        height: 43px;
+      }
+
+    }
 
     /* //======================= */
-.bottrading{
-  margin-bottom: 12px;
-}
-/* .bottrading .notice-top{
+    .bottrading {
+      margin-bottom: 12px;
+    }
+
+    /* .bottrading .notice-top{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 } */
+
+
+    /* ========================= */
+    /* ================= FEEDBACK SECTION ================= */
+
+    .feedback-section {
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(213, 173, 98, .08), transparent 60%),
+        var(--bg);
+    }
+
+    .feedback-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .feedback-head .section-head {
+      margin-bottom: 0;
+    }
+
+    .feedback-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .feedback-arrow {
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(213, 173, 98, .35);
+      border-radius: 50%;
+      background: var(--panel2);
+      color: var(--gold2);
+      font-size: 18px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+    }
+
+    .feedback-arrow:hover:not(:disabled) {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--bg);
+      transform: translateY(-1px);
+    }
+
+    .feedback-arrow:focus-visible,
+    .feedback-tab:focus-visible,
+    .feedback-item:focus-visible,
+    .feedback-modal-close:focus-visible,
+    .feedback-modal-nav:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+    }
+
+    .feedback-arrow:disabled {
+      opacity: .3;
+      cursor: not-allowed;
+    }
+
+    .feedback-gallery {
+      position: relative;
+      border: 1px solid rgba(213, 173, 98, .25);
+      border-radius: 12px;
+      padding: 20px;
+      background: linear-gradient(145deg, var(--panel), var(--bg));
+      overflow: hidden;
+    }
+
+    .feedback-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: rgba(255, 255, 255, .05);
+      pointer-events: none;
+    }
+
+    .feedback-progress-bar {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(213, 173, 98, .45), var(--gold2));
+      transform-origin: left center;
+      animation: feedbackProgress 6s linear forwards;
+    }
+
+    .feedback-progress-bar.is-paused {
+      animation-play-state: paused;
+    }
+
+    @keyframes feedbackProgress {
+      from {
+        transform: scaleX(0);
+      }
+
+      to {
+        transform: scaleX(1);
+      }
+    }
+
+    .feedback-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-rows: repeat(2, 220px);
+      gap: 14px;
+    }
+
+    .feedback-fade-enter-active,
+    .feedback-fade-leave-active {
+      transition: opacity .24s ease, transform .24s ease;
+    }
+
+    .feedback-fade-enter {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+
+    .feedback-fade-leave-to {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+
+    .feedback-item {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--panel2);
+      cursor: zoom-in;
+      transition: border-color .25s ease;
+    }
+
+    .feedback-item:hover {
+      border-color: rgba(213, 173, 98, .55);
+    }
+
+    .feedback-item img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform .4s ease, opacity .25s ease;
+    }
+
+    .feedback-item:hover img {
+      transform: scale(1.05);
+      opacity: .84;
+    }
+
+    .feedback-item::after {
+      content: "VIEW";
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(9, 10, 12, .34);
+      color: var(--gold2);
+      letter-spacing: 3px;
+      font-size: 11px;
+      font-weight: 800;
+      opacity: 0;
+      transition: opacity .22s ease;
+    }
+
+    .feedback-item:hover::after {
+      opacity: 1;
+    }
+
+    .feedback-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, .07);
+    }
+
+    .feedback-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .feedback-page {
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .feedback-page strong {
+      color: var(--gold2);
+    }
+
+    .feedback-auto {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: .5px;
+    }
+
+    .feedback-auto-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      transition: background .2s ease, opacity .2s ease;
+    }
+
+    .feedback-auto.is-paused .feedback-auto-dot {
+      background: var(--muted);
+      opacity: .55;
+    }
+
+    .feedback-tabs {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .feedback-tab {
+      min-width: 34px;
+      height: 28px;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: var(--panel2);
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      font-variant-numeric: tabular-nums;
+      cursor: pointer;
+      transition: border-color .2s ease, background .2s ease, color .2s ease;
+    }
+
+    .feedback-tab:hover {
+      border-color: rgba(213, 173, 98, .45);
+      color: var(--white);
+    }
+
+    .feedback-tab.active {
+      border-color: rgba(213, 173, 98, .65);
+      background: rgba(213, 173, 98, .14);
+      color: var(--gold2);
+    }
+
+    .feedback-empty {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 250px;
+      color: var(--muted);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* Feedback image popup */
+
+    .feedback-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 25px;
+      background: rgba(6, 7, 9, .93);
+      backdrop-filter: blur(8px);
+    }
+
+    .feedback-modal-fade-enter-active,
+    .feedback-modal-fade-leave-active {
+      transition: opacity .2s ease;
+    }
+
+    .feedback-modal-fade-enter,
+    .feedback-modal-fade-leave-to {
+      opacity: 0;
+    }
+
+    .feedback-modal img {
+      max-width: min(92vw, 1100px);
+      max-height: 82vh;
+      object-fit: contain;
+      border: 1px solid rgba(213, 173, 98, .35);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .feedback-modal-counter {
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 2px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .feedback-modal-counter strong {
+      color: var(--gold2);
+    }
+
+    .feedback-modal-close {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(213, 173, 98, .4);
+      border-radius: 50%;
+      background: var(--panel2);
+      color: var(--gold2);
+      font-size: 24px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease;
+    }
+
+    .feedback-modal-close:hover {
+      background: var(--gold);
+      color: var(--bg);
+    }
+
+    .feedback-modal-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(213, 173, 98, .35);
+      border-radius: 50%;
+      background: var(--panel2);
+      color: var(--gold2);
+      font-size: 20px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease;
+    }
+
+    .feedback-modal-nav:hover {
+      background: var(--gold);
+      color: var(--bg);
+    }
+
+    .feedback-modal-nav.prev {
+      left: 24px;
+    }
+
+    .feedback-modal-nav.next {
+      right: 24px;
+    }
+
+    @media (max-width: 850px) {
+      .feedback-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: repeat(4, 185px);
+      }
+    }
+
+    @media (max-width: 620px) {
+      .feedback-head {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+
+      .feedback-controls {
+        align-self: flex-end;
+      }
+
+      .feedback-gallery {
+        padding: 12px;
+      }
+
+      .feedback-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: repeat(4, 145px);
+        gap: 8px;
+      }
+
+      .feedback-arrow {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+      }
+
+      .feedback-footer {
+        margin-top: 12px;
+        padding-top: 12px;
+        flex-wrap: wrap;
+      }
+
+      .feedback-modal {
+        padding: 16px;
+      }
+
+      .feedback-modal-close {
+        top: 14px;
+        right: 14px;
+        width: 38px;
+        height: 38px;
+      }
+
+      .feedback-modal-nav {
+        width: 36px;
+        height: 36px;
+        font-size: 17px;
+      }
+
+      .feedback-modal-nav.prev {
+        left: 10px;
+      }
+
+      .feedback-modal-nav.next {
+        right: 10px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .feedback-fade-enter-active,
+      .feedback-fade-leave-active,
+      .feedback-modal-fade-enter-active,
+      .feedback-modal-fade-leave-active,
+      .feedback-item img {
+        transition: none;
+      }
+    }
+
+    /* ========================= */
   </style>
 </head>
 
@@ -801,8 +1262,7 @@
               <div class="course-group" v-for="group in courseGroups" :key="group.title">
                 <h4>{{ group.title }}</h4>
                 <ul class="course-list" role="list">
-                  <li v-for="item in group.items" :key="item.text"
-                      :class="{unavailable: (group.unavailableFor || []).includes(course.code) ||
+                  <li v-for="item in group.items" :key="item.text" :class="{unavailable: (group.unavailableFor || []).includes(course.code) ||
                                             (item.unavailableFor || []).includes(course.code)}">
                     <span class="course-status" aria-hidden="true"></span>
                     <span class="course-status-label">Không bao gồm.</span>
@@ -968,12 +1428,12 @@
             </div>
           </div>
           <div class="offer">
-              Trading không chỉ là quá trình học thêm kiến thức, mà còn là quá trình liên tục nhận ra những gì mình chưa
-              biết,
-              sửa chữa những gì mình làm chưa tốt và hoàn thiện chính mình qua từng giao dịch. Đừng chỉ cố gắng trở thành
-              người biết nhiều kiến thức hơn. Hãy trở thành người biết cách sử dụng, đặt câu hỏi và sửa sai từ những
-              kiến thức mình đã học.
-            
+            Trading không chỉ là quá trình học thêm kiến thức, mà còn là quá trình liên tục nhận ra những gì mình chưa
+            biết,
+            sửa chữa những gì mình làm chưa tốt và hoàn thiện chính mình qua từng giao dịch. Đừng chỉ cố gắng trở thành
+            người biết nhiều kiến thức hơn. Hãy trở thành người biết cách sử dụng, đặt câu hỏi và sửa sai từ những
+            kiến thức mình đã học.
+
           </div>
 
         </div>
@@ -990,23 +1450,90 @@
           </div>
         </div>
       </section>
+      <!-- ============================================== -->
+      <section id="feedback" class="feedback-section">
+        <div class="wrap">
+          <div class="feedback-head">
+            <div class="section-head">
+              <div class="eyebrow">Student feedback & results</div>
+              <h2>Feedback & Trading Results 2025 -2026</h2>
+              <p>
+                Những phản hồi, kết quả và trải nghiệm được chia sẻ
+                trong quá trình học tập và giao dịch.
+              </p>
+            </div>
+            <div class="feedback-controls">
+              <button type="button" class="feedback-arrow" @click="prevFeedback" :disabled="feedbackTotalPages <= 1"
+                aria-label="Trang trước">
+                &#8592;
+              </button>
+              <button type="button" class="feedback-arrow" @click="nextFeedback" :disabled="feedbackTotalPages <= 1"
+                aria-label="Trang tiếp theo">
+                &#8594;
+              </button>
+            </div>
+          </div>
 
-    <div class="wrap bottrading">
-      <div class="notice-card">
-        <div class="notice-top">
-          <h2 class="notice-title">BOT TRADING SẮP RA MẮT</h2>
-        </div>
-        <span class="notice-status">Coming Soon</span>
+          <div class="feedback-gallery" @mouseenter="onFeedbackMouseEnter" @mouseleave="onFeedbackMouseLeave">
+            <div class="feedback-progress" v-if="feedbackTotalPages > 1" aria-hidden="true">
+              <span class="feedback-progress-bar" :key="feedbackProgressKey"
+                :class="{'is-paused': feedbackIsPaused}"></span>
+            </div>
 
-        <p class="notice-desc">S | InterCandle Bot lệnh đơn hướng tới winrate 60% - 70%, tỷ lệ lợi nhuận trên rủi ro trên 2R (R/R>1/2).</p>
+            <transition name="feedback-fade" mode="out-in">
+              <div class="feedback-grid" :key="feedbackPage" v-if="visibleFeedbackImages.length">
+                <button type="button" class="feedback-item" v-for="(src, index) in visibleFeedbackImages"
+                  :key="feedbackStartIndex + index" @click="openFeedbackModal(feedbackStartIndex + index)"
+                  :aria-label="'Xem ảnh feedback ' + (feedbackStartIndex + index + 1)">
+                  <img :src="src" :alt="'MDUCSM feedback ' + (feedbackStartIndex + index + 1)" loading="lazy" />
+                </button>
+              </div>
+              <div class="feedback-grid" key="empty" v-else>
+                <div class="feedback-empty">Chưa có hình ảnh feedback để hiển thị.</div>
+              </div>
+            </transition>
+
+            <div class="feedback-footer" v-if="feedbackImages.length">
+              <div class="feedback-meta">
+                <div class="feedback-page">
+                  <strong>{{ padPage(feedbackPage + 1) }}</strong> / {{ padPage(feedbackTotalPages) }}
+                </div>
+                <div class="feedback-auto" v-if="feedbackTotalPages > 1" :class="{'is-paused': feedbackIsPaused}">
+                  <span class="feedback-auto-dot" aria-hidden="true"></span>
+                  <span>{{ feedbackIsPaused ? 'Tạm dừng' : 'Tự động chuyển · 10s' }}</span>
+                </div>
+              </div>
+              <div class="feedback-tabs" v-if="feedbackTotalPages > 1" role="tablist" aria-label="Trang feedback">
+                <button type="button" class="feedback-tab" v-for="n in feedbackTotalPages" :key="n" role="tab"
+                  :class="{active: feedbackPage === n - 1}" :aria-selected="feedbackPage === n - 1 ? 'true' : 'false'"
+                  @click="goToFeedbackPage(n - 1)">
+                  {{ padPage(n) }}
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
+      </section>
+      <!-- ================================================== -->
+      <div class="wrap bottrading">
+        <div class="notice-card">
+          <div class="notice-top">
+            <h2 class="notice-title">BOT TRADING SẮP RA MẮT</h2>
+          </div>
+          <span class="notice-status">Coming Soon</span>
+
+          <p class="notice-desc">S | InterCandle Bot lệnh đơn hướng tới winrate 60% - 70%, tỷ lệ lợi nhuận trên rủi ro
+            trên 2R (R/R>1/2).</p>
+        </div>
+      </div>
+
+
     </main>
 
     <footer>
-      
+
       <div class="wrap footer-inner">
-        
+
         <div>
           <p>
             <strong style="color:var(--gold2)">MDUCSM</strong> · KDcs
@@ -1024,18 +1551,18 @@
       </div>
     </footer>
     <!-- Floating Contact -->
-<div class="floating-contact">
+    <div class="floating-contact">
 
-  <!-- Facebook -->
-  <a href="https://www.facebook.com/phminhduc2933" target="_blank"
-     class="float-btn facebook" title="Facebook">
-    <svg viewBox="0 0 24 24" fill="currentColor">
-      <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.49 0-1.955.93-1.955 1.887v2.264h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
-    </svg>
-  </a>
+      <!-- Facebook -->
+      <a href="https://www.facebook.com/phminhduc2933" target="_blank" class="float-btn facebook" title="Facebook">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.49 0-1.955.93-1.955 1.887v2.264h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z" />
+        </svg>
+      </a>
 
-  <!-- Zalo -->
-<!-- 
+      <!-- Zalo -->
+      <!-- 
 <a href="https://zalo.me/0123456789"
    target="_blank"
    class="float-btn zalo"
@@ -1050,23 +1577,36 @@
     <circle cx="32" cy="26" r="2" fill="#ffffff"/>
   </svg>
 </a> -->
-<a href="https://zalo.me/0923115709"
-   target="_blank"
-   class="float-btn zalo"
-   title="Zalo">
-  <span class="zalo-logo">Zalo</span>
-</a>
+      <a href="https://zalo.me/0923115709" target="_blank" class="float-btn zalo" title="Zalo">
+        <span class="zalo-logo">Zalo</span>
+      </a>
 
 
-  <!-- Discord -->
-  <a href="https://discord.com/users/1453787779929608422" target="_blank"
-     class="float-btn discord" title="Discord">
-    <svg viewBox="0 0 24 24" fill="currentColor">
-      <path d="M19.73 5.33A18.2 18.2 0 0 0 15.23 4l-.56 1.14a16.7 16.7 0 0 0-5.34 0L8.77 4a18.2 18.2 0 0 0-4.5 1.33C1.42 9.52.65 13.6 1.04 17.63a18.2 18.2 0 0 0 5.52 2.8l1.19-1.94a11.8 11.8 0 0 1-1.87-.9l.46-.36a13 13 0 0 0 11.32 0l.46.36c-.6.36-1.23.66-1.87.9l1.19 1.94a18.2 18.2 0 0 0 5.52-2.8c.47-4.67-.8-8.71-3.23-12.3ZM8.9 14.85c-1.1 0-2-.99-2-2.2s.88-2.2 2-2.2 2.02.99 2 2.2c0 1.21-.88 2.2-2 2.2Zm6.2 0c-1.1 0-2-.99-2-2.2s.88-2.2 2-2.2 2.02.99 2 2.2c0 1.21-.88 2.2-2 2.2Z"/>
-    </svg>
-  </a>
+      <!-- Discord -->
+      <a href="https://discord.com/users/1453787779929608422" target="_blank" class="float-btn discord" title="Discord">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M19.73 5.33A18.2 18.2 0 0 0 15.23 4l-.56 1.14a16.7 16.7 0 0 0-5.34 0L8.77 4a18.2 18.2 0 0 0-4.5 1.33C1.42 9.52.65 13.6 1.04 17.63a18.2 18.2 0 0 0 5.52 2.8l1.19-1.94a11.8 11.8 0 0 1-1.87-.9l.46-.36a13 13 0 0 0 11.32 0l.46.36c-.6.36-1.23.66-1.87.9l1.19 1.94a18.2 18.2 0 0 0 5.52-2.8c.47-4.67-.8-8.71-3.23-12.3ZM8.9 14.85c-1.1 0-2-.99-2-2.2s.88-2.2 2-2.2 2.02.99 2 2.2c0 1.21-.88 2.2-2 2.2Zm6.2 0c-1.1 0-2-.99-2-2.2s.88-2.2 2-2.2 2.02.99 2 2.2c0 1.21-.88 2.2-2 2.2Z" />
+        </svg>
+      </a>
 
-</div>
+    </div>
+
+    <!-- Feedback Lightbox Modal -->
+    <transition name="feedback-modal-fade">
+      <div class="feedback-modal" v-if="activeFeedbackIndex !== null" @click.self="closeFeedbackModal" role="dialog"
+        aria-modal="true" aria-label="Xem ảnh feedback">
+        <button type="button" class="feedback-modal-close" @click="closeFeedbackModal" aria-label="Đóng">&times;</button>
+        <button type="button" class="feedback-modal-nav prev" v-if="feedbackImages.length > 1" @click="prevModalImage"
+          aria-label="Ảnh trước">&#8592;</button>
+        <img :src="activeFeedbackSrc" :alt="'Xem ảnh feedback ' + (activeFeedbackIndex + 1)" />
+        <button type="button" class="feedback-modal-nav next" v-if="feedbackImages.length > 1" @click="nextModalImage"
+          aria-label="Ảnh tiếp theo">&#8594;</button>
+        <div class="feedback-modal-counter">
+          <strong>{{ padPage(activeFeedbackIndex + 1) }}</strong> / {{ padPage(feedbackImages.length) }}
+        </div>
+      </div>
+    </transition>
   </div>
 
   <script>
@@ -1170,7 +1710,82 @@
           {period: '1 tháng', message: '$19', stream: '$4 / 2 giờ'},
           {period: '3 tháng', message: '$45', stream: '$7 / 4 giờ'},
           {period: '6 tháng', message: '$80', stream: '$10 / 6 giờ'}
+        ],
+        feedbackPerPage: 8,
+        feedbackPage: 0,
+        feedbackAutoDelay: 10000,
+        feedbackRemaining: 10000,
+        feedbackStartedAt: 0,
+        feedbackTimer: null,
+        feedbackProgressKey: 0,
+        feedbackHoverPaused: false,
+        feedbackHiddenPaused: false,
+        activeFeedbackIndex: null,
+        feedbackImages: [
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995126.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995127.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995128.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995129.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995130.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995124.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995125.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995131.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671144/6071298609681995095.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671304/6071298609681995096.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671305/6071298609681995097.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671305/6071298609681995098.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671305/6071298609681995099.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671306/6071298609681995100.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671306/6071298609681995101.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671304/6071298609681995102.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671304/6071298609681995103.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671304/6071298609681995104.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671304/6071298609681995105.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671304/6071298609681995106.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671305/6071298609681995107.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671305/6071298609681995108.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671305/6071298609681995109.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671305/6071298609681995110.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671305/6071298609681995111.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671305/6071298609681995112.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671306/6071298609681995113.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671306/6071298609681995114.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671306/6071298609681995115.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671306/6071298609681995116.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671306/6071298609681995117.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671306/6071298609681995118.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671306/6071298609681995119.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995120.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995121.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995123.jpg'
+
+      
         ]
+      },
+      computed: {
+        feedbackTotalPages: function () {
+          return Math.max(1, Math.ceil(this.feedbackImages.length / this.feedbackPerPage));
+        },
+        feedbackStartIndex: function () {
+          return this.feedbackPage * this.feedbackPerPage;
+        },
+        visibleFeedbackImages: function () {
+          return this.feedbackImages.slice(
+            this.feedbackStartIndex,
+            this.feedbackStartIndex + this.feedbackPerPage
+          );
+        },
+        activeFeedbackSrc: function () {
+          return this.activeFeedbackIndex !== null ? this.feedbackImages[this.activeFeedbackIndex] : '';
+        },
+        feedbackIsPaused: function () {
+          return (
+            this.feedbackHoverPaused ||
+            this.feedbackHiddenPaused ||
+            this.activeFeedbackIndex !== null ||
+            this.feedbackTotalPages <= 1
+          );
+        }
       },
       methods: {
         courseDiscount: function (course) {
@@ -1178,7 +1793,108 @@
         },
         registerUrl: function (code) {
           return this.registrationBase + '?course=' + encodeURIComponent(code);
+        },
+        padPage: function (num) {
+          return num < 10 ? '0' + num : String(num);
+        },
+        goToFeedbackPage: function (page) {
+          if (this.feedbackTotalPages <= 1) return;
+          this.feedbackPage = ((page % this.feedbackTotalPages) + this.feedbackTotalPages) % this.feedbackTotalPages;
+          this.resetFeedbackTimer();
+        },
+        prevFeedback: function () {
+          this.goToFeedbackPage(this.feedbackPage - 1);
+        },
+        nextFeedback: function () {
+          this.goToFeedbackPage(this.feedbackPage + 1);
+        },
+        clearFeedbackTimer: function () {
+          if (this.feedbackTimer) {
+            clearTimeout(this.feedbackTimer);
+            this.feedbackTimer = null;
+          }
+        },
+        startFeedbackTimer: function () {
+          this.clearFeedbackTimer();
+          if (this.feedbackIsPaused) return;
+          var self = this;
+          this.feedbackStartedAt = Date.now();
+          this.feedbackTimer = setTimeout(function () {
+            self.feedbackTimer = null;
+            self.nextFeedback();
+          }, this.feedbackRemaining);
+        },
+        pauseFeedbackTimer: function () {
+          if (!this.feedbackTimer) return;
+          this.clearFeedbackTimer();
+          this.feedbackRemaining = Math.max(0, this.feedbackRemaining - (Date.now() - this.feedbackStartedAt));
+        },
+        resetFeedbackTimer: function () {
+          this.clearFeedbackTimer();
+          this.feedbackRemaining = this.feedbackAutoDelay;
+          this.feedbackProgressKey += 1;
+          this.startFeedbackTimer();
+        },
+        onFeedbackMouseEnter: function () {
+          this.feedbackHoverPaused = true;
+          this.pauseFeedbackTimer();
+        },
+        onFeedbackMouseLeave: function () {
+          this.feedbackHoverPaused = false;
+          if (!this.feedbackIsPaused) {
+            this.startFeedbackTimer();
+          }
+        },
+        openFeedbackModal: function (index) {
+          this.activeFeedbackIndex = index;
+          this.pauseFeedbackTimer();
+        },
+        closeFeedbackModal: function () {
+          this.activeFeedbackIndex = null;
+          if (!this.feedbackIsPaused) {
+            this.startFeedbackTimer();
+          }
+        },
+        prevModalImage: function () {
+          if (this.activeFeedbackIndex === null || this.feedbackImages.length <= 1) return;
+          this.activeFeedbackIndex =
+            (this.activeFeedbackIndex - 1 + this.feedbackImages.length) % this.feedbackImages.length;
+        },
+        nextModalImage: function () {
+          if (this.activeFeedbackIndex === null || this.feedbackImages.length <= 1) return;
+          this.activeFeedbackIndex = (this.activeFeedbackIndex + 1) % this.feedbackImages.length;
+        },
+        handleFeedbackKeydown: function (e) {
+          if (this.activeFeedbackIndex === null) return;
+          if (e.key === 'Escape') {
+            this.closeFeedbackModal();
+          } else if (e.key === 'ArrowLeft') {
+            this.prevModalImage();
+          } else if (e.key === 'ArrowRight') {
+            this.nextModalImage();
+          }
+        },
+        handleVisibilityChange: function () {
+          if (document.hidden) {
+            this.feedbackHiddenPaused = true;
+            this.pauseFeedbackTimer();
+          } else {
+            this.feedbackHiddenPaused = false;
+            if (!this.feedbackIsPaused) {
+              this.startFeedbackTimer();
+            }
+          }
         }
+      },
+      mounted: function () {
+        this.startFeedbackTimer();
+        document.addEventListener('keydown', this.handleFeedbackKeydown);
+        document.addEventListener('visibilitychange', this.handleVisibilityChange);
+      },
+      beforeDestroy: function () {
+        this.clearFeedbackTimer();
+        document.removeEventListener('keydown', this.handleFeedbackKeydown);
+        document.removeEventListener('visibilitychange', this.handleVisibilityChange);
       }
     });
   </script>
