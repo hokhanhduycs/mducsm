@@ -12,6 +12,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MDUCSM | KDcs</title>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+  <link rel="icon" type="image/png"
+    href="https://cdn.discordapp.com/attachments/1415966643288412200/1575465451327062036/Elegant_Gold_Hourglass_Trading_Logo.png?ex=6b09620a&is=6b08108a&hm=0d8d0f8477bcdb9782d54ef4c571111628ea3ed0e9bb54ed4c3708c3c0afa2b1&">
+  <link rel="apple-touch-icon"
+    href="https://cdn.discordapp.com/attachments/1415966643288412200/1575465451327062036/Elegant_Gold_Hourglass_Trading_Logo.png?ex=6b09620a&is=6b08108a&hm=0d8d0f8477bcdb9782d54ef4c571111628ea3ed0e9bb54ed4c3708c3c0afa2b1&">
   <style>
     :root {
       --bg: #090a0c;
@@ -27,10 +31,12 @@
 
     * {
       box-sizing: border-box;
+      font-family: 'Inter', Arial, sans-serif;
     }
 
     html {
       scroll-behavior: smooth;
+      font-family: 'Inter', Arial, sans-serif;
     }
 
     body {
@@ -72,6 +78,24 @@
       letter-spacing: 2px;
       color: var(--gold2);
       font-size: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      height: 48px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      flex-shrink: 0;
+      display: block;
+
+      /* Phóng biểu tượng vì ảnh gốc có nhiều khoảng trống */
+      transform: scale(1.45);
+      transform-origin: center;
     }
 
     .brand span {
@@ -120,6 +144,21 @@
       margin: 0 auto;
       color: var(--muted);
       font-size: 16px;
+    }
+
+    .profile-team-list.hero-team-list {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      gap: 10px;
+      max-width: 100%;
+      margin: 16px auto 20px;
+      text-align: left;
+    }
+
+    .profile-team-list.hero-team-list li {
+      white-space: nowrap;
+      padding: 8px 14px;
     }
 
     .hero-actions {
@@ -1185,12 +1224,791 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
+
       .feedback-fade-enter-active,
       .feedback-fade-leave-active,
       .feedback-modal-fade-enter-active,
       .feedback-modal-fade-leave-active,
       .feedback-item img {
         transition: none;
+      }
+    }
+
+    /* ================= PROFILE & 6 STEPS ROADMAP SECTION ================= */
+
+    .story-section {
+      padding-top: 44px;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(213, 173, 98, .07), transparent 62%),
+        #0d0f12;
+      border-top: 1px solid rgba(255, 255, 255, .04);
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
+    }
+
+    .story-stage {
+      position: relative;
+      max-height: 360px;
+      overflow: hidden;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: max-height .7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .story-stage.is-expanded {
+      max-height: 1050px;
+      cursor: default;
+    }
+
+    .story-stage.is-instant,
+    .story-stage.is-instant .story-curtain {
+      transition: none !important;
+    }
+
+    .story-curtain {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 220px;
+      z-index: 10;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 18px;
+      background: linear-gradient(to bottom,
+          rgba(13, 15, 18, 0) 0%,
+          rgba(13, 15, 18, .66) 42%,
+          rgba(13, 15, 18, .94) 78%,
+          #0d0f12 100%);
+      opacity: 1;
+      transition: opacity .45s ease, transform .45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .story-stage.is-expanded .story-curtain {
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+    }
+
+    .story-expand-cue {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 99px;
+      border: 1px solid rgba(213, 173, 98, .55);
+      background: rgba(17, 19, 23, .92);
+      color: var(--gold2);
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, .45), 0 0 18px rgba(213, 173, 98, .15);
+      transition: transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease;
+    }
+
+    .story-stage:not(.is-expanded):hover .story-expand-cue {
+      transform: translateY(-2px);
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #101114;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 445px) minmax(0, 1fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .story-card {
+      background: linear-gradient(160deg, #15181d, #0e1013);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .story-card.is-profile {
+      border-color: rgba(213, 173, 98, .35);
+      box-shadow: 0 0 35px rgba(213, 173, 98, .05);
+    }
+
+    .story-card.is-roadmap {
+      position: relative;
+      padding: 24px 22px;
+      overflow: hidden;
+    }
+
+    .story-section-head {
+      margin-bottom: 20px;
+    }
+
+    .story-section-head .eyebrow {
+      margin-bottom: 6px;
+    }
+
+    .profile-head {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .profile-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 30% 30%, rgba(240, 213, 154, .22), rgba(213, 173, 98, .06));
+      border: 1px solid rgba(213, 173, 98, .55);
+      color: var(--gold2);
+      font-weight: 900;
+      font-size: 18px;
+      letter-spacing: 1.5px;
+    }
+
+    .profile-identity h2 {
+      margin: 0 0 4px;
+      font-size: clamp(28px, 4vw, 38px);
+      line-height: 1.12;
+      letter-spacing: -1px;
+    }
+
+    .profile-role {
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+
+    .profile-story {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      color: #d5d7dc;
+      font-size: 13.5px;
+      line-height: 1.68;
+    }
+
+    .profile-story p {
+      margin: 0;
+    }
+
+    .profile-lead {
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.65;
+    }
+
+    .profile-turn {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .profile-highlight {
+      margin: 4px 0;
+      padding: 13px 15px;
+      border: 1px solid rgba(213, 173, 98, .35);
+      border-left: 3px solid var(--gold);
+      background: rgba(213, 173, 98, .06);
+      border-radius: 7px;
+      color: #e6d5b3;
+      font-size: 13.5px;
+      line-height: 1.62;
+    }
+
+    .profile-highlight-label {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .profile-highlight strong {
+      color: var(--gold2);
+      font-weight: 700;
+    }
+
+    .profile-team {
+      margin: 18px 0;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    .profile-team-intro {
+      margin: 0 0 12px;
+      color: #d5d7dc;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .profile-team-intro strong {
+      color: var(--white);
+    }
+
+    .profile-team-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .profile-team-list li {
+      padding: 8px 11px;
+      border: 1px solid rgba(255, 255, 255, .07);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, .025);
+      font-size: 12px;
+      color: #d5d7dc;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .profile-team-list li::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .profile-team-list strong {
+      color: var(--gold2);
+      font-weight: 700;
+    }
+
+    .profile-sign {
+      margin-top: auto;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    .profile-motto {
+      color: var(--gold);
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .profile-sign-note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.55;
+    }
+
+    .roadmap-head {
+      margin-bottom: 18px;
+    }
+
+    .roadmap-head h3 {
+      margin: 8px 0 6px;
+      font-size: 21px;
+      line-height: 1.25;
+      letter-spacing: -.3px;
+    }
+
+    .roadmap-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .roadmap-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: rgba(255, 255, 255, .05);
+      pointer-events: none;
+    }
+
+    .roadmap-progress-bar {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(213, 173, 98, .45), var(--gold2));
+      transform-origin: left center;
+      animation: roadmapProgress 6s linear forwards;
+      will-change: transform;
+    }
+
+    .roadmap-progress-bar.is-paused {
+      animation-play-state: paused;
+    }
+
+    @keyframes roadmapProgress {
+      from {
+        transform: scaleX(0);
+      }
+
+      to {
+        transform: scaleX(1);
+      }
+    }
+
+    .roadmap-timeline {
+      position: relative;
+      margin: auto 0;
+      padding: 10px 4px;
+      display: flex;
+      flex-direction: column;
+      isolation: isolate;
+    }
+
+    .roadmap-timeline::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 48%, rgba(213, 173, 98, .14), rgba(213, 173, 98, .03) 45%, transparent 72%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .roadmap-timeline::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, transparent, rgba(213, 173, 98, .5) 8%, rgba(213, 173, 98, .5) 92%, transparent);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .roadmap-step {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 44px minmax(0, 1fr);
+      align-items: center;
+    }
+
+    .roadmap-step+.roadmap-step {
+      margin-top: -36px;
+    }
+
+    .roadmap-step.active {
+      z-index: 4;
+    }
+
+    .roadmap-node {
+      position: relative;
+      grid-column: 2;
+      grid-row: 1;
+      justify-self: center;
+      width: 11px;
+      height: 11px;
+      padding: 0;
+      border-radius: 50%;
+      background: var(--white);
+      border: 2px solid var(--gold2);
+      box-shadow: 0 0 0 4px rgba(213, 173, 98, .15), 0 0 16px rgba(240, 213, 154, .75);
+      cursor: pointer;
+      transition:
+        transform .45s cubic-bezier(0.22, 1, 0.36, 1),
+        background .35s ease,
+        box-shadow .45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .roadmap-node::before {
+      content: "";
+      position: absolute;
+      inset: -7px;
+      border-radius: 50%;
+      border: 1px solid rgba(240, 213, 154, .55);
+      opacity: 0;
+      transform: scale(.65);
+      pointer-events: none;
+      transition: opacity .4s ease, transform .45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .roadmap-step.active .roadmap-node {
+      background: var(--gold2);
+      transform: scale(1.22);
+      box-shadow: 0 0 0 5px rgba(213, 173, 98, .26), 0 0 26px rgba(240, 213, 154, 1);
+    }
+
+    .roadmap-step.active .roadmap-node::before {
+      opacity: 1;
+      transform: scale(1);
+      animation: roadmapPulse 2.4s ease-in-out infinite;
+    }
+
+    @keyframes roadmapPulse {
+
+      0%,
+      100% {
+        opacity: .65;
+        transform: scale(.95);
+      }
+
+      50% {
+        opacity: .15;
+        transform: scale(1.38);
+      }
+    }
+
+    .roadmap-node::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 14px;
+      height: 1px;
+      right: calc(100% + 3px);
+      background: linear-gradient(90deg, rgba(240, 213, 154, .95), rgba(213, 173, 98, .2));
+      transform: translateY(-50%) scaleX(0);
+      transform-origin: right center;
+      opacity: 0;
+      pointer-events: none;
+      transition:
+        transform .45s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity .35s ease;
+    }
+
+    .roadmap-step.is-right .roadmap-node::after {
+      right: auto;
+      left: calc(100% + 3px);
+      background: linear-gradient(90deg, rgba(213, 173, 98, .2), rgba(240, 213, 154, .95));
+      transform-origin: left center;
+    }
+
+    .roadmap-step.active .roadmap-node::after {
+      transform: translateY(-50%) scaleX(1);
+      opacity: 1;
+    }
+
+    .roadmap-card {
+      position: relative;
+      grid-column: 1;
+      grid-row: 1;
+      display: block;
+      min-height: 108px;
+      padding: 13px 48px 13px 15px;
+      border: 1px solid rgba(255, 255, 255, .09);
+      border-radius: 12px;
+      background-color: #111317;
+      background-image:
+        radial-gradient(rgba(213, 173, 98, .08) 1px, transparent 1px),
+        linear-gradient(155deg, rgba(24, 28, 35, .92), rgba(13, 15, 19, .97));
+      background-size: 10px 10px, 100% 100%;
+      cursor: pointer;
+      will-change: transform;
+      transition:
+        transform .5s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color .4s ease,
+        box-shadow .5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .roadmap-step.is-right .roadmap-card {
+      grid-column: 3;
+    }
+
+    .roadmap-card:hover {
+      border-color: rgba(213, 173, 98, .5);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, .34), 0 0 20px rgba(213, 173, 98, .09);
+    }
+
+    .roadmap-step.active .roadmap-card {
+      border-color: rgba(213, 173, 98, .85);
+      transform: translateX(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, .4), 0 0 28px rgba(213, 173, 98, .15), inset 0 0 24px rgba(213, 173, 98, .06);
+    }
+
+    .roadmap-step.active.is-right .roadmap-card {
+      transform: translateX(4px);
+    }
+
+    .roadmap-radio {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .roadmap-card:has(.roadmap-radio:focus-visible),
+    .roadmap-node:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+    }
+
+    .roadmap-card-body {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .roadmap-title-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .roadmap-step-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 28px;
+      height: 23px;
+      padding: 0 7px;
+      border-radius: 5px;
+      background: rgba(213, 173, 98, .12);
+      border: 1px solid rgba(213, 173, 98, .35);
+      color: var(--gold2);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .6px;
+      flex-shrink: 0;
+      transition: background .35s ease, border-color .35s ease, color .35s ease;
+    }
+
+    .roadmap-step.active .roadmap-step-badge {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #101114;
+    }
+
+    .roadmap-title {
+      margin: 0;
+      color: #dfe2e8;
+      font-size: 13.5px;
+      font-weight: 700;
+      line-height: 1.35;
+      transition: color .35s ease;
+    }
+
+    .roadmap-card:hover .roadmap-title,
+    .roadmap-step.active .roadmap-title {
+      color: var(--white);
+    }
+
+    .roadmap-subtitle {
+      margin: 7px 0 6px;
+      color: rgba(240, 213, 154, .78);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.4;
+      transition: color .35s ease;
+    }
+
+    .roadmap-step.active .roadmap-subtitle {
+      color: var(--gold2);
+    }
+
+    .roadmap-desc-wrap {
+      position: relative;
+      max-height: 20px;
+      overflow: hidden;
+      opacity: .55;
+      transition:
+        max-height .55s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity .4s ease;
+    }
+
+    .roadmap-desc-wrap::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(16, 18, 23, 0) 45%, rgba(15, 17, 22, .94) 100%);
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity .38s ease;
+    }
+
+    .roadmap-step.active .roadmap-desc-wrap {
+      max-height: 260px;
+      opacity: 1;
+    }
+
+    .roadmap-step.active .roadmap-desc-wrap::after {
+      opacity: 0;
+    }
+
+    .roadmap-desc {
+      margin: 0;
+      color: #a9afb9;
+      font-size: 12px;
+      line-height: 1.56;
+      transition: color .35s ease;
+    }
+
+    .roadmap-step.active .roadmap-desc {
+      color: #d2d6de;
+    }
+
+    .roadmap-desc+.roadmap-desc {
+      margin-top: 6px;
+    }
+
+    .roadmap-num {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      writing-mode: vertical-rl;
+      transform: translateY(-50%) rotate(180deg) scale(.92);
+      font-size: 40px;
+      font-weight: 800;
+      line-height: .88;
+      letter-spacing: -1px;
+      color: rgba(240, 213, 154, .34);
+      pointer-events: none;
+      user-select: none;
+      transition:
+        color .4s ease,
+        text-shadow .45s ease,
+        transform .5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .roadmap-card:hover .roadmap-num {
+      color: rgba(240, 213, 154, .62);
+    }
+
+    .roadmap-step.active .roadmap-num {
+      color: var(--gold2);
+      text-shadow: 0 0 20px rgba(213, 173, 98, .5);
+      transform: translateY(-50%) rotate(180deg) scale(1);
+    }
+
+    .roadmap-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, .07);
+    }
+
+    .roadmap-bar-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .roadmap-counter {
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .roadmap-counter strong {
+      color: var(--gold2);
+    }
+
+    @media (max-width: 1024px) {
+      .story-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .story-stage.is-expanded {
+        max-height: 2200px;
+      }
+    }
+
+    @media (max-width: 640px) {
+
+      .story-card,
+      .story-card.is-roadmap {
+        padding: 22px 16px;
+      }
+
+      .profile-avatar {
+        width: 46px;
+        height: 46px;
+        font-size: 14px;
+      }
+
+      .profile-team-list {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-team-list.hero-team-list {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .roadmap-timeline {
+        padding: 6px 0;
+      }
+
+      .roadmap-timeline::before {
+        left: 11px;
+        transform: none;
+      }
+
+      .roadmap-timeline::after {
+        background: radial-gradient(ellipse at 12% 50%, rgba(213, 173, 98, .14), transparent 65%);
+      }
+
+      .roadmap-step {
+        grid-template-columns: 24px minmax(0, 1fr);
+        gap: 12px;
+      }
+
+      .roadmap-step+.roadmap-step {
+        margin-top: 12px;
+      }
+
+      .roadmap-node {
+        grid-column: 1;
+      }
+
+      .roadmap-node::after,
+      .roadmap-step.is-right .roadmap-node::after {
+        right: auto;
+        left: calc(100% + 3px);
+        width: 12px;
+        background: linear-gradient(90deg, rgba(213, 173, 98, .2), rgba(240, 213, 154, .95));
+        transform-origin: left center;
+      }
+
+      .roadmap-card,
+      .roadmap-step.is-right .roadmap-card {
+        grid-column: 2;
+        min-height: 0;
+        padding: 14px 44px 14px 14px;
+      }
+
+      .roadmap-step.active .roadmap-card,
+      .roadmap-step.active.is-right .roadmap-card {
+        transform: translateX(0);
+      }
+
+      .roadmap-num {
+        right: 9px;
+        font-size: 36px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .roadmap-card,
+      .roadmap-desc-wrap,
+      .roadmap-desc-wrap::after,
+      .roadmap-node,
+      .roadmap-node::before,
+      .roadmap-node::after,
+      .roadmap-num {
+        transition: none;
+        animation: none;
       }
     }
 
@@ -1202,8 +2020,13 @@
   <div id="app">
     <header class="nav">
       <div class="wrap nav-inner">
-        <a class="brand" href="#">MDUCSM<span> / KDcs</span></a>
+        <a class="brand" href="#">
+          <img
+            src="https://cdn.discordapp.com/attachments/1415966643288412200/1575465451327062036/Elegant_Gold_Hourglass_Trading_Logo.png?ex=6b09620a&is=6b08108a&hm=0d8d0f8477bcdb9782d54ef4c571111628ea3ed0e9bb54ed4c3708c3c0afa2b1&"
+            alt="MDucSM Logo" class="brand-icon">
+          MDUCSM<span> / KDcs</span></a>
         <nav class="nav-links">
+          <a href="#about">Giới thiệu</a>
           <a href="#courses">Khóa học</a>
           <a href="#privileges">Quyền lợi</a>
           <a href="#services">Dịch vụ</a>
@@ -1218,7 +2041,12 @@
         <div class="wrap">
           <div class="eyebrow">Strategy • Memory • Key Decisions</div>
           <h1>Inter. Candle Profile<br><span>KDcs • MDucSM</span></h1>
-          <p class="hero-white">Founder: MDucSM • Co-Founder: KDcs • Co- Founder: buu</p>
+          <ul class="profile-team-list hero-team-list">
+            <li><span>Founder – <strong>MDucSM</strong></span></li>
+            <li><span>Co-Founder – <strong>KDcs</strong></span></li>
+            <li><span>Co-Founder – <strong>Buu</strong></span></li>
+            <li><span>Co-Founder – <strong>K I N G</strong></span></li>
+          </ul>
           <p>
             MDucSM - Đúc kết từ kinh nghiệm thực chiến, tập trung phát triển tư duy đọc hiểu thị trường,
             khả năng phân tích hành vi giá và xây dựng phương pháp giao dịch có hệ thống và tính ứng dụng cao.
@@ -1228,6 +2056,124 @@
             <a class="btn" href="#courses">KHÁM PHÁ KHÓA HỌC</a>
             <a class="btn ghost" href="#services">DỊCH VỤ HỖ TRỢ</a>
             <a class="btn ghost" :href="contactUrl" target="_blank" rel="noopener">ĐĂNG KÝ NGAY</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="story-section">
+        <div class="wrap">
+          <div class="story-section-head">
+            <div class="eyebrow">About MDucSM</div>
+            <div class="profile-head">
+              <!-- <div class="profile-avatar" aria-hidden="true">MD</div> -->
+              <div class="profile-identity">
+                <h2>Tôi là ai?</h2>
+                <div class="profile-role">MDucSM • Trader • 4 năm kinh nghiệm</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="story-stage" ref="storyStage"
+            :class="{'is-expanded': storyExpanded, 'is-instant': storyInstantCollapse}" @click="expandStory">
+            <div class="story-grid">
+              <!-- Phần 1: Profile & Câu chuyện -->
+              <article class="story-card is-profile">
+                <div class="profile-story">
+                  <p class="profile-lead">Tôi là MDucSM, một Trader với 4 năm kinh nghiệm giao dịch. Cũng giống như
+                    bạn, tôi từng dành rất nhiều thời gian học hỏi các phương pháp khác nhau, tìm kiếm con đường dẫn đến
+                    lợi
+                    nhuận. Tôi từng trải qua những giai đoạn mất phương hướng, những sai lầm và không ít lần phải nhìn
+                    nhận lại chính mình.</p>
+
+
+                  <div class="profile-highlight">
+                    <span class="profile-highlight-label">Qua những trải nghiệm đó:</span>
+                    <strong> Tôi nhận ra rằng Lợi nhuận không đến từ việc bạn biết bao nhiêu kiến thức, mà nó đến từ
+                      cách bạn hiểu, tư
+                      duy và vận dụng những gì đã học.</strong>
+                  </div>
+                  <p>Tôi may mắn có cơ hội học hỏi từ những Trader giàu kinh nghiệm, tiếp cận những góc nhìn mới và thay
+                    đổi cách mình nhìn nhận thị trường. Từ đó, tôi nhận ra giá trị lớn nhất của việc học không phải là
+                    tìm kiếm một phương pháp hoàn hảo, mà là xây dựng khả năng tự phân tích và đưa ra quyết định.</p>
+
+                  <p class="profile-turn">Đó cũng chính là lý do Inter. Candle Profile ra đời vào năm 2026.</p>
+                  <p>Được xây dựng bởi những người có chung định hướng với Trading, chúng tôi mong muốn mang đến một
+                    chương trình đào tạo có hệ thống, logic và tính ứng dụng thực tế.
+                  </p>
+                  <p>Chúng tôi không mong bạn chỉ học được cách giao dịch, mà muốn bạn hiểu vì sao mình giao dịch, biết
+                    cách nhìn nhận sai lầm và không ngừng hoàn thiện bản thân.</p>
+                </div>
+
+                <div class="profile-team">
+                  <p class="profile-team-intro"><strong>Bởi hành trình Trading không kết thúc khi bạn tìm được một
+                      phương pháp, mà bắt đầu khi bạn thực sự hiểu thị trường và làm chủ quyết định của chính
+                      mình.</strong></p>
+                </div>
+
+                <div class="profile-sign">
+                  <div class="profile-motto">STRATEGY • MEMORY • KEY DECISIONS</div>
+                  <p class="profile-sign-note">Một hành trình được xây dựng từ kinh nghiệm, sự đúc kết và những quyết
+                    định có cơ sở.</p>
+                </div>
+              </article>
+
+              <!-- Phần 2: 6 Steps Roadmap -->
+              <article class="story-card is-roadmap" @mouseenter="onRoadmapMouseEnter"
+                @mouseleave="onRoadmapMouseLeave">
+                <div class="roadmap-progress" v-if="basicRoadmap.length > 1" aria-hidden="true">
+                  <span class="roadmap-progress-bar" :key="roadmapProgressKey"
+                    :class="{'is-paused': roadmapIsPaused}"></span>
+                </div>
+
+                <div class="roadmap-head">
+                  <div class="course-code">THE TRADING FRAMEWORK</div>
+                  <h3>LỘ TRÌNH XÂY DỰNG TƯ DUY GIAO DỊCH.</h3>
+                  <p>Không đơn thuần là học cách đọc biểu đồ, mà là hành trình xây dựng tư duy phân tích, hiểu logic thị
+                    trường và làm chủ quyết định giao dịch.</p>
+
+                  <p><strong>6 giai đoạn phát triển tư duy – 9 buổi học có hệ thống.</strong></p>
+                </div>
+
+                <div class="roadmap-timeline" role="radiogroup" aria-label="LỘ TRÌNH XÂY DỰNG TƯ DUY GIAO DỊCH.">
+                  <div class="roadmap-step" v-for="(step, idx) in basicRoadmap" :key="step.code"
+                    :class="{'is-right': idx % 2 === 1, active: selectedRoadmap === step.code}">
+                    <button type="button" class="roadmap-node" @click="selectRoadmap(step.code)"
+                      :aria-label="'Chọn bước ' + step.code + ': ' + step.title"></button>
+                    <label class="roadmap-card" @click="selectRoadmap(step.code)">
+                      <input class="roadmap-radio" type="radio" name="basic-roadmap" :value="step.code"
+                        :checked="selectedRoadmap === step.code" @change="selectRoadmap(step.code)" />
+                      <div class="roadmap-card-body">
+                        <div class="roadmap-title-row">
+                          <span class="roadmap-step-badge">{{ step.code }}</span>
+                          <h4 class="roadmap-title">{{ step.title }}</h4>
+                        </div>
+                        <p class="roadmap-subtitle">{{ step.subtitle }}</p>
+                        <div class="roadmap-desc-wrap">
+                          <p class="roadmap-desc" v-for="(para, pIdx) in step.paragraphs" :key="pIdx">{{ para }}</p>
+                        </div>
+                      </div>
+                      <span class="roadmap-num" aria-hidden="true">{{ step.code }}</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="roadmap-bar">
+                  <div class="roadmap-bar-meta">
+                    <div class="roadmap-counter">
+                      <strong>{{ selectedRoadmap }}</strong> / {{ padPage(basicRoadmap.length) }}
+                    </div>
+                    <div class="feedback-auto" v-if="basicRoadmap.length > 1" :class="{'is-paused': roadmapIsPaused}">
+                      <span class="feedback-auto-dot" aria-hidden="true"></span>
+                      <span>{{ roadmapIsPaused ? 'Tạm dừng' : 'Tự động chuyển · 6s' }}</span>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div class="story-curtain" :aria-hidden="storyExpanded ? 'true' : 'false'">
+              <span class="story-expand-cue">Nhấn để xem đầy đủ &#8595;</span>
+            </div>
           </div>
         </div>
       </section>
@@ -1457,7 +2403,7 @@
           <div class="feedback-head">
             <div class="section-head">
               <div class="eyebrow">Student feedback & results</div>
-              <h2>Feedback & Trading Results 2025 -2026</h2>
+              <h2>Feedback & Trading Results</h2>
               <p>
                 Những phản hồi, kết quả và trải nghiệm được chia sẻ
                 trong quá trình học tập và giao dịch.
@@ -1597,7 +2543,8 @@
     <transition name="feedback-modal-fade">
       <div class="feedback-modal" v-if="activeFeedbackIndex !== null" @click.self="closeFeedbackModal" role="dialog"
         aria-modal="true" aria-label="Xem ảnh feedback">
-        <button type="button" class="feedback-modal-close" @click="closeFeedbackModal" aria-label="Đóng">&times;</button>
+        <button type="button" class="feedback-modal-close" @click="closeFeedbackModal"
+          aria-label="Đóng">&times;</button>
         <button type="button" class="feedback-modal-nav prev" v-if="feedbackImages.length > 1" @click="prevModalImage"
           aria-label="Ảnh trước">&#8592;</button>
         <img :src="activeFeedbackSrc" :alt="'Xem ảnh feedback ' + (activeFeedbackIndex + 1)" />
@@ -1618,6 +2565,69 @@
         // Thay link đăng ký/liên hệ tại đây
         registrationBase: 'https://discord.com/users/1453787779929608422',
         contactUrl: 'https://discord.com/users/1453787779929608422',
+        storyExpanded: false,
+        storyInstantCollapse: false,
+        selectedRoadmap: '01',
+        roadmapAutoDelay: 6000,
+        roadmapRemaining: 6000,
+        roadmapStartedAt: 0,
+        roadmapTimer: null,
+        roadmapProgressKey: 0,
+        roadmapHoverPaused: false,
+        roadmapHiddenPaused: false,
+        basicRoadmap: 
+[
+  {
+    code: '01',
+    title: 'Xây dựng nền tảng',
+    subtitle: 'Nắm vững nguyên lý, xây dựng nền móng tư duy.',
+    paragraphs: [
+      'Tiếp cận QML, FVG, iFVG, RB và BPR thông qua cơ chế hình thành, đặc điểm và mối liên hệ. Xây dựng nền tảng kiến thức vững chắc để đọc hiểu những gì đang thực sự diễn ra trên biểu đồ.'
+    ]
+  },
+  {
+    code: '02',
+    title: 'Giải mã thị trường (cốt lõi)',
+    subtitle: 'Đọc vị bối cảnh, thấu hiểu logic vận động của giá.',
+    paragraphs: [
+      'IRL/ERL, SMT, PO3 và MMXM giúp bạn kết nối các dữ kiện để đọc bối cảnh, nhận diện mục tiêu và giải mã logic đằng sau những chuyển động của giá.'
+    ]
+  },
+  {
+    code: '03',
+    title: 'Đọc hiểu cấu trúc giá',
+    subtitle: 'Nhận diện cấu trúc, giải mã hành vi thị trường.',
+    paragraphs: [
+      'Từ cấu trúc sóng, SDP đến Advanced Market Structure, bạn sẽ phát triển khả năng nhận diện sự thay đổi cấu trúc, đánh giá trạng thái và hiểu hướng vận động của thị trường.'
+    ]
+  },
+  {
+    code: '04',
+    title: 'Xây dựng chiến lược Entry',
+    subtitle: 'Chuyển hóa phân tích thành chiến lược giao dịch.',
+    paragraphs: [
+      'Tiếp cận Concept Trade LTF, học cách kết nối bối cảnh HTF với tín hiệu LTF, xác định điều kiện giao dịch và xây dựng quy trình Entry rõ ràng, logic và nhất quán.'
+    ]
+  },
+  {
+    code: '05',
+    title: 'Phát triển tư duy Profile Candle',
+    subtitle: 'Kết nối dữ kiện, phát triển tư duy độc lập.',
+    paragraphs: [
+      'Thông qua QT – Profile Candle, Topdown Analysis, Value Block và Momentum, bạn sẽ học cách tổng hợp dữ kiện, đánh giá thị trường và xây dựng nhận định thay vì phân tích từng yếu tố riêng lẻ.',
+      'Từng bước hình thành tư duy phân tích có hệ thống và góc nhìn nhất quán trên thị trường.'
+    ]
+  },
+  {
+    code: '06',
+    title: 'Backtest & hoàn thiện',
+    subtitle: 'Kiểm chứng phương pháp, hoàn thiện năng lực giao dịch.',
+    paragraphs: [
+      'Hệ thống hóa kiến thức, thực hành Backtest và đánh giá kết quả giao dịch. Qua đó nhận diện điểm mạnh, hạn chế và từng bước hoàn thiện phương pháp phù hợp với bản thân.'
+    ]
+  }
+]
+,
         courses: [
           {
             code: 'K2', level: 'FOUNDATION', name: 'Kiến thức', price: 139,
@@ -1723,14 +2733,6 @@
         feedbackHiddenPaused: false,
         activeFeedbackIndex: null,
         feedbackImages: [
-          'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995126.jpg',
-          'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995127.jpg',
-          'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995128.jpg',
-          'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995129.jpg',
-          'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995130.jpg',
-          'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995124.jpg',
-          'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995125.jpg',
-          'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995131.jpg',
           'https://res.cloudinary.com/om18ctje/image/upload/v1795671144/6071298609681995095.jpg',
           'https://res.cloudinary.com/om18ctje/image/upload/v1795671304/6071298609681995096.jpg',
           'https://res.cloudinary.com/om18ctje/image/upload/v1795671305/6071298609681995097.jpg',
@@ -1758,9 +2760,15 @@
           'https://res.cloudinary.com/om18ctje/image/upload/v1795671306/6071298609681995119.jpg',
           'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995120.jpg',
           'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995121.jpg',
-          'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995123.jpg'
-
-      
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995123.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995124.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995125.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995126.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995127.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995128.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995129.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995130.jpg',
+          'https://res.cloudinary.com/om18ctje/image/upload/v1795671307/6071298609681995131.jpg'
         ]
       },
       computed: {
@@ -1786,6 +2794,14 @@
             this.activeFeedbackIndex !== null ||
             this.feedbackTotalPages <= 1
           );
+        },
+        roadmapIsPaused: function () {
+          return (
+            !this.storyExpanded ||
+            this.roadmapHoverPaused ||
+            this.roadmapHiddenPaused ||
+            this.basicRoadmap.length <= 1
+          );
         }
       },
       methods: {
@@ -1794,6 +2810,94 @@
         },
         registerUrl: function (code) {
           return this.registrationBase + '?course=' + encodeURIComponent(code);
+        },
+        expandStory: function () {
+          if (this.storyExpanded) return;
+          this.storyExpanded = true;
+          var self = this;
+          this.$nextTick(function () {
+            self.resetRoadmapTimer();
+          });
+        },
+        handleStoryScroll: function () {
+          if (!this.storyExpanded || !this.$refs.storyStage) return;
+          var el = this.$refs.storyStage;
+          var rect = el.getBoundingClientRect();
+          if (rect.bottom < -40) {
+            var beforeHeight = el.offsetHeight;
+            this.storyInstantCollapse = true;
+            this.storyExpanded = false;
+            this.clearRoadmapTimer();
+            this.selectedRoadmap = '01';
+            var self = this;
+            this.$nextTick(function () {
+              var afterHeight = el.offsetHeight;
+              var diff = beforeHeight - afterHeight;
+              if (diff > 0) {
+                window.scrollTo({
+                  top: Math.max(0, window.scrollY - diff),
+                  behavior: 'instant'
+                });
+              }
+              requestAnimationFrame(function () {
+                self.storyInstantCollapse = false;
+              });
+            });
+          }
+        },
+        selectRoadmap: function (code) {
+          if (!this.storyExpanded) {
+            this.expandStory();
+          }
+          if (this.selectedRoadmap === code) return;
+          this.selectedRoadmap = code;
+          this.resetRoadmapTimer();
+        },
+        nextRoadmap: function () {
+          if (this.basicRoadmap.length <= 1) return;
+          var idx = this.basicRoadmap.findIndex(function (item) {
+            return item.code === this.selectedRoadmap;
+          }, this);
+          var nextIdx = (idx + 1) % this.basicRoadmap.length;
+          this.selectedRoadmap = this.basicRoadmap[nextIdx].code;
+          this.resetRoadmapTimer();
+        },
+        clearRoadmapTimer: function () {
+          if (this.roadmapTimer) {
+            clearTimeout(this.roadmapTimer);
+            this.roadmapTimer = null;
+          }
+        },
+        startRoadmapTimer: function () {
+          this.clearRoadmapTimer();
+          if (this.roadmapIsPaused) return;
+          var self = this;
+          this.roadmapStartedAt = Date.now();
+          this.roadmapTimer = setTimeout(function () {
+            self.roadmapTimer = null;
+            self.nextRoadmap();
+          }, this.roadmapRemaining);
+        },
+        pauseRoadmapTimer: function () {
+          if (!this.roadmapTimer) return;
+          this.clearRoadmapTimer();
+          this.roadmapRemaining = Math.max(0, this.roadmapRemaining - (Date.now() - this.roadmapStartedAt));
+        },
+        resetRoadmapTimer: function () {
+          this.clearRoadmapTimer();
+          this.roadmapRemaining = this.roadmapAutoDelay;
+          this.roadmapProgressKey += 1;
+          this.startRoadmapTimer();
+        },
+        onRoadmapMouseEnter: function () {
+          this.roadmapHoverPaused = true;
+          this.pauseRoadmapTimer();
+        },
+        onRoadmapMouseLeave: function () {
+          this.roadmapHoverPaused = false;
+          if (!this.roadmapIsPaused) {
+            this.startRoadmapTimer();
+          }
         },
         padPage: function (num) {
           return num < 10 ? '0' + num : String(num);
@@ -1879,23 +2983,33 @@
           if (document.hidden) {
             this.feedbackHiddenPaused = true;
             this.pauseFeedbackTimer();
+            this.roadmapHiddenPaused = true;
+            this.pauseRoadmapTimer();
           } else {
             this.feedbackHiddenPaused = false;
             if (!this.feedbackIsPaused) {
               this.startFeedbackTimer();
+            }
+            this.roadmapHiddenPaused = false;
+            if (!this.roadmapIsPaused) {
+              this.startRoadmapTimer();
             }
           }
         }
       },
       mounted: function () {
         this.startFeedbackTimer();
+        this.startRoadmapTimer();
         document.addEventListener('keydown', this.handleFeedbackKeydown);
         document.addEventListener('visibilitychange', this.handleVisibilityChange);
+        window.addEventListener('scroll', this.handleStoryScroll, {passive: true});
       },
       beforeDestroy: function () {
         this.clearFeedbackTimer();
+        this.clearRoadmapTimer();
         document.removeEventListener('keydown', this.handleFeedbackKeydown);
         document.removeEventListener('visibilitychange', this.handleVisibilityChange);
+        window.removeEventListener('scroll', this.handleStoryScroll);
       }
     });
   </script>
