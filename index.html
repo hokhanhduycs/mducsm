@@ -58,12 +58,14 @@
     }
 
     .nav {
-      border-bottom: 1px solid var(--line);
-      background: rgba(9, 10, 12, .92);
       position: sticky;
       top: 0;
-      z-index: 10;
-      backdrop-filter: blur(12px);
+      z-index: 1000;
+      background: linear-gradient(180deg, rgba(16, 18, 24, 0.45) 0%, rgba(9, 10, 12, 0.25) 100%);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border-bottom: 1px solid rgba(213, 173, 98, 0.15);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
     }
 
     .nav-inner {
@@ -114,6 +116,200 @@
       color: var(--gold2);
     }
 
+    /* --- MOBILE NAV TOGGLE (HAMBURGER) --- */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border: 1px solid rgba(213, 173, 98, 0.35);
+      border-radius: 9px;
+      background: rgba(17, 19, 25, 0.85);
+      cursor: pointer;
+      z-index: 1002;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .nav-toggle:hover {
+      border-color: var(--gold);
+      box-shadow: 0 0 15px rgba(213, 173, 98, 0.3);
+    }
+
+    .nav-toggle-bar {
+      width: 20px;
+      height: 2px;
+      background: var(--gold2);
+      border-radius: 2px;
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s ease;
+      transform-origin: center;
+    }
+
+    .nav-toggle.is-active .nav-toggle-bar:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav-toggle.is-active .nav-toggle-bar:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    .nav-toggle.is-active .nav-toggle-bar:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* --- MOBILE MENU OVERLAY & DROPDOWN --- */
+    .mobile-menu-backdrop {
+      display: none;
+    }
+
+    .mobile-menu {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none !important;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .nav-inner {
+        height: 60px;
+      }
+
+      .brand {
+        font-size: 15px;
+        gap: 8px;
+        letter-spacing: 1.2px;
+      }
+
+      .brand-icon {
+        width: 28px;
+        height: 28px;
+      }
+
+      .mobile-menu-backdrop {
+        display: block;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.65);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        z-index: 998;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+
+      .mobile-menu-backdrop.is-open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .mobile-menu {
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: linear-gradient(180deg, rgba(14, 16, 22, 0.98) 0%, rgba(9, 10, 13, 0.98) 100%);
+        backdrop-filter: blur(24px) saturate(180%);
+        -webkit-backdrop-filter: blur(24px) saturate(180%);
+        border-bottom: 1px solid rgba(213, 173, 98, 0.25);
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.9), 0 0 30px rgba(213, 173, 98, 0.08);
+        padding: 16px 20px 22px;
+        z-index: 999;
+        transform: translateY(-10px);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
+      }
+
+      .mobile-menu.is-open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .mobile-nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .mobile-nav-link {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 14px;
+        border-radius: 8px;
+        color: #e2e4e9;
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        text-decoration: none;
+        transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+      }
+
+      .mobile-nav-link:hover,
+      .mobile-nav-link:active {
+        background: rgba(213, 173, 98, 0.12);
+        color: var(--gold2);
+        transform: translateX(4px);
+      }
+
+      .mobile-nav-link .nav-arrow {
+        color: var(--gold);
+        font-size: 12px;
+        opacity: 0.6;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+      }
+
+      .mobile-nav-link:hover .nav-arrow {
+        opacity: 1;
+        transform: translateX(3px);
+      }
+
+      .mobile-nav-divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(213, 173, 98, 0.25), transparent);
+        margin: 12px 0 16px;
+      }
+
+      .mobile-nav-cta {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        padding: 13px;
+        border-radius: 99px;
+        background: linear-gradient(135deg, #f5dfac 0%, #d5ad62 50%, #be903b 100%);
+        color: #0c0e12;
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: 1.2px;
+        text-decoration: none;
+        text-transform: uppercase;
+        box-shadow: 0 6px 20px rgba(213, 173, 98, 0.35);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .mobile-nav-cta:active {
+        transform: scale(0.98);
+      }
+    }
+
     .hero {
       padding: 94px 0 76px;
       text-align: center;
@@ -144,6 +340,185 @@
       margin: 0 auto;
       color: var(--muted);
       font-size: 16px;
+    }
+
+    /* --- HERO 3D TEAM ORBIT --- */
+    .hero-team-orbit-container {
+      position: relative;
+      width: 100%;
+      max-width: 820px;
+      height: 220px;
+      margin: 18px auto 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1000px;
+      user-select: none;
+      touch-action: pan-y;
+      cursor: grab;
+    }
+
+    .hero-team-orbit-container:active {
+      cursor: grabbing;
+    }
+
+    .orbit-bg-grid {
+      position: absolute;
+      inset: -10px -20px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: 26px 26px;
+      mask-image: radial-gradient(ellipse 65% 55% at 50% 50%, black 20%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 65% 55% at 50% 50%, black 20%, transparent 80%);
+      pointer-events: none;
+      border-radius: 20px;
+    }
+
+    .orbit-center-glow {
+      position: absolute;
+      width: 320px;
+      height: 100px;
+      background: radial-gradient(ellipse at center, rgba(213, 173, 98, 0.14), transparent 70%);
+      filter: blur(25px);
+      pointer-events: none;
+    }
+
+    .orbit-stage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform-style: preserve-3d;
+      transition: transform 0.15s ease-out;
+    }
+
+    .orbit-card {
+      position: absolute;
+      width: 220px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: rgba(16, 18, 24, 0.86);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 0.28s ease, box-shadow 0.28s ease, background 0.28s ease;
+      will-change: transform, opacity;
+    }
+
+    .orbit-card:hover {
+      border-color: rgba(213, 173, 98, 0.65);
+      background: rgba(24, 27, 35, 0.96);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.75), 0 0 25px rgba(213, 173, 98, 0.3), inset 0 1px 0 rgba(240, 213, 154, 0.35);
+    }
+
+    .orbit-card.is-founder {
+      border-color: rgba(213, 173, 98, 0.28);
+    }
+
+    .orbit-card-inner {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .orbit-card-avatar {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1e222a, #0c0e12);
+      border: 1.5px solid rgba(213, 173, 98, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    .orbit-card-avatar .avatar-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: 50% 18%;
+      display: block;
+    }
+
+    .avatar-badge {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: var(--gold2);
+      font-family: 'Inter', Arial, sans-serif;
+    }
+
+    .avatar-status-dot {
+      position: absolute;
+      right: 0px;
+      bottom: 0px;
+      width: 8px;
+      height: 8px;
+      background: #4ade80;
+      border-radius: 50%;
+      border: 1.5px solid #111317;
+      box-shadow: 0 0 6px #4ade80;
+    }
+
+    .orbit-card-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .orbit-card-role {
+      font-size: 9.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      color: var(--gold);
+      line-height: 1.2;
+    }
+
+    .orbit-card-name {
+      font-size: 14px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.3;
+      margin: 1px 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .orbit-card-tag {
+      font-size: 10.5px;
+      color: var(--muted);
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .orbit-hint {
+      position: absolute;
+      bottom: 0px;
+      font-size: 10.5px;
+      color: rgba(255, 255, 255, 0.35);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      pointer-events: none;
+      letter-spacing: 0.5px;
+    }
+
+    .orbit-hint-icon {
+      color: var(--gold);
+      font-size: 11px;
     }
 
     .profile-team-list.hero-team-list {
@@ -218,7 +593,8 @@
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 18px;
-      align-items: stretch;
+      align-items: start;
+      overflow-anchor: none;
     }
 
     .course {
@@ -230,10 +606,134 @@
       flex-direction: column;
     }
 
+    /* --- ULTRA LUXURY VIP FEATURED CARD (M1) --- */
     .course.featured {
-      border-color: rgba(213, 173, 98, .8);
-      box-shadow: 0 0 35px rgba(213, 173, 98, .08);
+      position: relative;
+      background: radial-gradient(ellipse at 50% 0%, rgba(213, 173, 98, 0.22) 0%, rgba(18, 20, 27, 0.98) 60%), #0f1117;
+      border: 1.5px solid rgba(213, 173, 98, 0.95);
+      border-radius: 14px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85), 0 0 45px rgba(213, 173, 98, 0.22), inset 0 1px 0 rgba(240, 213, 154, 0.5);
+      z-index: 2;
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
     }
+
+    .course.featured:hover {
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.9), 0 0 55px rgba(213, 173, 98, 0.35), inset 0 1px 0 rgba(240, 213, 154, 0.7);
+    }
+
+    /* Top golden neon beam */
+    .course.featured::before {
+      content: "";
+      position: absolute;
+      top: -1px;
+      left: 18%;
+      right: 18%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #f5dfac, #d5ad62, transparent);
+      box-shadow: 0 0 16px #f5dfac;
+      z-index: 3;
+    }
+
+    .course.featured .ribbon {
+      background: linear-gradient(135deg, #f5dfac 0%, #d5ad62 100%);
+      color: #0b0c10;
+      font-size: 10.5px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      box-shadow: 0 0 16px rgba(213, 173, 98, 0.65);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      animation: ribbonPulse 2.4s infinite ease-in-out;
+    }
+
+    @keyframes ribbonPulse {
+      0%, 100% {
+        box-shadow: 0 0 12px rgba(213, 173, 98, 0.5);
+        transform: scale(1);
+      }
+      50% {
+        box-shadow: 0 0 22px rgba(240, 213, 154, 0.85);
+        transform: scale(1.04);
+      }
+    }
+
+    .course.featured .course-code {
+      color: var(--gold2);
+      text-shadow: 0 0 10px rgba(213, 173, 98, 0.5);
+    }
+
+    .course.featured h3 {
+      color: #fff;
+      font-size: 26px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .course.featured .price {
+      color: #fff;
+      text-shadow: 0 0 25px rgba(213, 173, 98, 0.45);
+    }
+
+    .course.featured .price small {
+      color: var(--gold2);
+    }
+
+    .course.featured .course-desc {
+      color: #e2e4e9;
+      font-weight: 500;
+    }
+
+    /* Shimmering CTA Button on M1 */
+    .course.featured .btn {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #f5dfac 0%, #d5ad62 50%, #be903b 100%);
+      color: #0c0e12;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      font-size: 13px;
+      padding: 12px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 7px;
+      box-shadow: 0 8px 24px rgba(213, 173, 98, 0.45);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .course.featured .btn::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 40%;
+      height: 200%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+      transform: rotate(25deg);
+      animation: btnShimmer 3.2s infinite ease-in-out;
+      pointer-events: none;
+    }
+
+    @keyframes btnShimmer {
+      0% {
+        left: -60%;
+      }
+      30%, 100% {
+        left: 140%;
+      }
+    }
+
+    .course.featured .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(213, 173, 98, 0.65), 0 0 20px rgba(240, 213, 154, 0.5);
+    }
+
+
 
     .ribbon {
       font-size: 10px;
@@ -318,6 +818,23 @@
 
     .course-header .btn {
       margin-top: auto;
+      width: 100%;
+      justify-content: center;
+      padding: 12px 18px;
+      font-size: 13px;
+      border-radius: 7px;
+      gap: 8px;
+    }
+
+    .course-header .btn .cta-btn-arrow {
+      width: 15px;
+      height: 15px;
+      transition: transform 0.25s ease;
+      flex-shrink: 0;
+    }
+
+    .course-header .btn:hover .cta-btn-arrow {
+      transform: translateX(4px);
     }
 
     .course-group {
@@ -385,14 +902,94 @@
       clip-path: inset(50%);
     }
 
-    @media (min-width: 621px) {
-      @supports (grid-template-rows: subgrid) {
-        .course {
-          display: grid;
-          grid-row: span var(--course-rows);
-          grid-template-rows: subgrid;
-          row-gap: 0;
-        }
+    @media (min-width: 1025px) {
+      .course-header {
+        min-height: 278px;
+      }
+    }
+
+    .course-expand-btn {
+      width: 100%;
+      margin-top: 2px;
+      padding: 10px 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 8px;
+      border: 1px dashed rgba(213, 173, 98, 0.38);
+      background: rgba(213, 173, 98, 0.05);
+      color: var(--gold2);
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.9px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+    }
+
+    .course-expand-btn:hover {
+      background: rgba(213, 173, 98, 0.14);
+      border-color: rgba(213, 173, 98, 0.78);
+      color: #fff;
+    }
+
+    .course-expand-icon {
+      display: inline-block;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .course.is-expanded .course-expand-icon {
+      transform: rotate(180deg);
+    }
+
+    html.is-toggling-course,
+    html.is-toggling-course body {
+      overflow-anchor: none !important;
+    }
+
+    .course-details-wrap {
+      display: grid;
+      grid-template-rows: 0fr;
+      opacity: 0;
+      transition: grid-template-rows 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+      will-change: grid-template-rows, opacity;
+    }
+
+    .course.is-expanded .course-details-wrap {
+      grid-template-rows: 1fr;
+      opacity: 1;
+    }
+
+    .course.is-instant .course-details-wrap,
+    .course.is-instant .course-details-inner,
+    .course.is-instant .course-expand-icon {
+      transition: none !important;
+    }
+
+    .course-details-inner {
+      overflow: hidden;
+      min-height: 0;
+      transform: translateY(-6px);
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .course.is-expanded .course-details-inner {
+      transform: translateY(0);
+    }
+
+    .course-details-inner .course-group:first-child {
+      margin-top: 6px;
+      border-top: 1px solid var(--line);
+    }
+
+    .course.is-expanded .course-expand-btn {
+      margin-top: 16px;
+    }
+
+    @media (min-width: 1025px) {
+      .course.is-expanded .course-expand-btn {
+        display: none;
       }
     }
 
@@ -549,23 +1146,139 @@
       font-size: 13px;
     }
 
+    /* --- CYBERPUNK TRADING CARD CTA --- */
     .cta {
+      position: relative;
       text-align: center;
-      padding: 55px 25px;
-      border: 1px solid rgba(213, 173, 98, .35);
-      border-radius: 12px;
-      background: radial-gradient(ellipse at center, rgba(213, 173, 98, .1), transparent 70%), var(--panel);
+      padding: 50px 25px;
+      border: 1px solid rgba(213, 173, 98, 0.35);
+      border-radius: 14px;
+      background: radial-gradient(circle at 50% 50%, rgba(213, 173, 98, 0.14) 0%, rgba(17, 19, 25, 0.98) 72%), var(--panel);
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7), 0 0 40px rgba(213, 173, 98, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+      margin: 16px 0;
+    }
+
+    .cta-grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(213, 173, 98, 0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(213, 173, 98, 0.06) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: radial-gradient(ellipse 75% 65% at 50% 50%, black 20%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 50%, black 20%, transparent 80%);
+      pointer-events: none;
+    }
+
+    .cta-core-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 400px;
+      height: 180px;
+      background: radial-gradient(ellipse at center, rgba(213, 173, 98, 0.18), transparent 70%);
+      filter: blur(30px);
+      pointer-events: none;
+    }
+
+    .cta-corner {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-color: var(--gold);
+      border-style: solid;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .cta-corner-tl { top: 8px; left: 8px; border-width: 2px 0 0 2px; }
+    .cta-corner-tr { top: 8px; right: 8px; border-width: 2px 2px 0 0; }
+    .cta-corner-bl { bottom: 8px; left: 8px; border-width: 0 0 2px 2px; }
+    .cta-corner-br { bottom: 8px; right: 8px; border-width: 0 2px 2px 0; }
+
+    .cta-content {
+      position: relative;
+      z-index: 2;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .cta-eyebrow {
+      display: inline-block;
+      padding: 3px 12px;
+      background: rgba(213, 173, 98, 0.1);
+      border: 1px solid rgba(213, 173, 98, 0.25);
+      border-radius: 16px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
     }
 
     .cta h2 {
       font-size: 32px;
-      margin: 8px 0;
+      letter-spacing: -0.5px;
+      margin: 8px 0 10px;
+      color: #fff;
     }
 
     .cta p {
+      font-size: 15px;
+      line-height: 1.6;
       color: var(--muted);
       margin: 0 auto 22px;
       max-width: 600px;
+    }
+
+    .cta-action-wrap {
+      margin-top: 6px;
+    }
+
+    .btn.cta-btn-pulse {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 34px;
+      font-size: 13.5px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: #0c0e12;
+      background: linear-gradient(135deg, #f5dfac 0%, #d5ad62 50%, #be903b 100%);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 7px;
+      text-transform: uppercase;
+      cursor: pointer;
+      animation: pulseGlow 2.4s infinite ease-in-out;
+      transition: transform 0.25s ease, filter 0.25s ease;
+    }
+
+    .btn.cta-btn-pulse:hover {
+      transform: translateY(-2px) scale(1.03);
+      filter: brightness(1.1);
+      animation-play-state: paused;
+      box-shadow: 0 10px 30px rgba(213, 173, 98, 0.6), 0 0 20px rgba(240, 213, 154, 0.45);
+    }
+
+    .cta-btn-arrow {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.25s ease;
+    }
+
+    .btn.cta-btn-pulse:hover .cta-btn-arrow {
+      transform: translateX(4px);
+    }
+
+    @keyframes pulseGlow {
+      0% {
+        box-shadow: 0 0 0 0 rgba(213, 173, 98, 0.6), 0 6px 20px rgba(213, 173, 98, 0.35);
+      }
+      50% {
+        box-shadow: 0 0 0 12px rgba(213, 173, 98, 0), 0 10px 28px rgba(213, 173, 98, 0.55);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(213, 173, 98, 0), 0 6px 20px rgba(213, 173, 98, 0.35);
+      }
     }
 
     footer {
@@ -582,32 +1295,20 @@
       flex-wrap: wrap;
     }
 
-    @media (max-width: 850px) {
+    @media (max-width: 1024px) {
       .course-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .course:last-child {
+      .course.featured {
+        order: -1;
         grid-column: 1 / -1;
       }
     }
 
-    @media (max-width: 620px) {
+    @media (max-width: 640px) {
       .wrap {
         width: min(100% - 28px, 1160px);
-      }
-
-      .nav-inner {
-        height: 62px;
-      }
-
-      .nav-links {
-        gap: 12px;
-        font-size: 11px;
-      }
-
-      .nav-links a:nth-child(2) {
-        display: none;
       }
 
       .hero {
@@ -624,7 +1325,8 @@
         grid-template-columns: 1fr;
       }
 
-      .course:last-child {
+      .course.featured {
+        order: 0;
         grid-column: auto;
       }
 
@@ -867,7 +1569,7 @@
       height: 100%;
       background: linear-gradient(90deg, rgba(213, 173, 98, .45), var(--gold2));
       transform-origin: left center;
-      animation: feedbackProgress 6s linear forwards;
+      animation: feedbackProgress 10s linear forwards;
     }
 
     .feedback-progress-bar.is-paused {
@@ -965,6 +1667,242 @@
       margin-top: 18px;
       padding-top: 14px;
       border-top: 1px solid rgba(255, 255, 255, .07);
+    }
+
+    /* --- 3D FEEDBACK COVERFLOW GALLERY --- */
+    .feedback-3d-container {
+      position: relative;
+      width: 100%;
+      height: 520px;
+      margin: 22px auto 16px;
+      perspective: 1200px;
+      overflow: hidden;
+      border-radius: 20px;
+      background: radial-gradient(ellipse at 50% 65%, rgba(213, 173, 98, 0.14), transparent 70%), #0b0d12;
+      border: 1px solid rgba(213, 173, 98, 0.3);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      touch-action: pan-y;
+      cursor: grab;
+      user-select: none;
+    }
+
+    .feedback-3d-container:active {
+      cursor: grabbing;
+    }
+
+    .feedback-3d-grid {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(213, 173, 98, 0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(213, 173, 98, 0.06) 1px, transparent 1px);
+      background-size: 32px 32px;
+      mask-image: radial-gradient(ellipse 75% 65% at 50% 50%, black 20%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 50%, black 20%, transparent 80%);
+      pointer-events: none;
+    }
+
+    .feedback-3d-glow {
+      position: absolute;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 450px;
+      height: 220px;
+      background: radial-gradient(ellipse at center, rgba(213, 173, 98, 0.22), transparent 70%);
+      filter: blur(40px);
+      pointer-events: none;
+    }
+
+    .feedback-3d-stage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.18s ease-out;
+    }
+
+    .feedback-3d-card {
+      position: absolute;
+      top: 48%;
+      left: 50%;
+      width: 300px;
+      height: 395px;
+      margin-left: -150px;
+      margin-top: -198px;
+      transform-style: preserve-3d;
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
+      will-change: transform, opacity;
+      cursor: pointer;
+    }
+
+    .card-3d-glass {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 14px;
+      background: rgba(16, 18, 25, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feedback-3d-card:hover .card-3d-glass {
+      border-color: rgba(213, 173, 98, 0.6);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.8), 0 0 25px rgba(213, 173, 98, 0.25);
+    }
+
+    .feedback-3d-card.is-active .card-3d-glass {
+      border-color: rgba(213, 173, 98, 0.85);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9), 0 0 35px rgba(213, 173, 98, 0.35), inset 0 1px 0 rgba(240, 213, 154, 0.4);
+    }
+
+    .card-3d-header {
+      height: 36px;
+      padding: 0 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.035);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      flex-shrink: 0;
+    }
+
+    .card-3d-tag {
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: var(--gold);
+      text-transform: uppercase;
+      font-family: 'Inter', Arial, sans-serif;
+    }
+
+    .card-3d-zoom-hint {
+      font-size: 13px;
+      color: var(--gold2);
+      opacity: 0.7;
+    }
+
+    .card-3d-img-wrap {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      background: #090a0e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+    }
+
+    /* Ambient blur background matches screenshot colors */
+    .card-3d-blur-bg {
+      position: absolute;
+      inset: -15px;
+      background-size: cover;
+      background-position: center;
+      filter: blur(18px) brightness(0.35);
+      opacity: 0.75;
+      transform: scale(1.15);
+      pointer-events: none;
+    }
+
+    .card-3d-img-wrap img.card-img-main {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      border-radius: 8px;
+      pointer-events: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.45);
+    }
+
+    /* 3D Floor Mirror Reflection */
+    .card-3d-reflection {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      height: 85px;
+      overflow: hidden;
+      transform: scaleY(-1);
+      opacity: 0.22;
+      filter: blur(2px);
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent 85%);
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent 85%);
+      pointer-events: none;
+      display: flex;
+      justify-content: center;
+    }
+
+    .card-3d-reflection img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .feedback-3d-hint {
+      position: absolute;
+      bottom: 12px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      pointer-events: none;
+      letter-spacing: 0.5px;
+      z-index: 10;
+    }
+
+    /* Bottom navigation dots / indicator */
+    .feedback-3d-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      flex-wrap: wrap;
+    }
+
+    .feedback-3d-dots {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap;
+      max-width: 60%;
+      justify-content: flex-end;
+    }
+
+    .feedback-3d-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.18);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .feedback-3d-dot.active {
+      width: 22px;
+      border-radius: 4px;
+      background: var(--gold);
+      box-shadow: 0 0 8px rgba(213, 173, 98, 0.6);
     }
 
     .feedback-meta {
@@ -1185,6 +2123,27 @@
         gap: 8px;
       }
 
+      .feedback-3d-container {
+        height: 420px;
+        border-radius: 14px;
+      }
+      .feedback-3d-card {
+        width: 220px;
+        height: 300px;
+        margin-left: -110px;
+        margin-top: -150px;
+      }
+      .card-3d-reflection {
+        height: 55px;
+      }
+      .card-3d-reflection img {
+        height: 300px;
+      }
+      .feedback-3d-dots {
+        max-width: 100%;
+        justify-content: center;
+      }
+
       .feedback-arrow {
         width: 36px;
         height: 36px;
@@ -1249,13 +2208,18 @@
       position: relative;
       max-height: 360px;
       overflow: hidden;
+      overflow-anchor: none;
       border-radius: 10px;
       cursor: pointer;
       transition: max-height .7s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
+    .story-stage .story-card {
+      min-height: 100%;
+    }
+
     .story-stage.is-expanded {
-      max-height: 1050px;
+      max-height: 1400px;
       cursor: default;
     }
 
@@ -1276,10 +2240,10 @@
       justify-content: center;
       padding-bottom: 18px;
       background: linear-gradient(to bottom,
-          rgba(13, 15, 18, 0) 0%,
-          rgba(13, 15, 18, .66) 42%,
-          rgba(13, 15, 18, .94) 78%,
-          #0d0f12 100%);
+          rgba(14, 16, 19, 0) 0%,
+          rgba(14, 16, 19, .68) 42%,
+          rgba(14, 16, 19, .95) 78%,
+          #0e1013 100%);
       opacity: 1;
       transition: opacity .45s ease, transform .45s cubic-bezier(0.22, 1, 0.36, 1);
     }
@@ -1308,6 +2272,77 @@
     }
 
     .story-stage:not(.is-expanded):hover .story-expand-cue {
+      transform: translateY(-2px);
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #101114;
+    }
+
+    /* --- COURSES ACCORDION STAGE --- */
+    .courses-stage {
+      position: relative;
+      max-height: 480px;
+      overflow: hidden;
+      overflow-anchor: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: max-height .7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .courses-stage.is-expanded {
+      max-height: 2500px;
+      cursor: default;
+    }
+
+    .courses-stage.is-instant,
+    .courses-stage.is-instant .courses-curtain {
+      transition: none !important;
+    }
+
+    .courses-curtain {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 220px;
+      z-index: 10;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 22px;
+      background: linear-gradient(to bottom,
+          rgba(9, 10, 12, 0) 0%,
+          rgba(9, 10, 12, .68) 45%,
+          rgba(9, 10, 12, .96) 80%,
+          #090a0c 100%);
+      opacity: 1;
+      transition: opacity .45s ease, transform .45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .courses-stage.is-expanded .courses-curtain {
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+    }
+
+    .courses-expand-cue {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 99px;
+      border: 1px solid rgba(213, 173, 98, .6);
+      background: rgba(17, 19, 23, .94);
+      color: var(--gold2);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, .55), 0 0 20px rgba(213, 173, 98, .2);
+      transition: transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease;
+    }
+
+    .courses-stage:not(.is-expanded):hover .courses-expand-cue {
       transform: translateY(-2px);
       background: var(--gold);
       border-color: var(--gold);
@@ -1913,13 +2948,69 @@
       color: var(--gold2);
     }
 
+    .profile-mobile-curtain {
+      display: none;
+    }
+
     @media (max-width: 1024px) {
       .story-grid {
         grid-template-columns: 1fr;
       }
 
+      .story-stage,
       .story-stage.is-expanded {
-        max-height: 2200px;
+        max-height: none;
+        overflow: visible;
+        cursor: default;
+      }
+
+      .story-stage > .story-curtain {
+        display: none;
+      }
+
+      .story-card.is-profile {
+        position: relative;
+        max-height: 230px;
+        overflow: hidden;
+        overflow-anchor: none;
+        cursor: pointer;
+        transition: max-height .7s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .story-card.is-profile.is-mobile-expanded {
+        max-height: 1800px;
+        cursor: default;
+      }
+
+      .story-card.is-profile.is-instant,
+      .story-card.is-profile.is-instant .profile-mobile-curtain {
+        transition: none !important;
+      }
+
+      .profile-mobile-curtain {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 150px;
+        z-index: 10;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding-bottom: 16px;
+        background: linear-gradient(to bottom,
+            rgba(14, 16, 19, 0) 0%,
+            rgba(14, 16, 19, .72) 45%,
+            rgba(14, 16, 19, .96) 80%,
+            #0e1013 100%);
+        opacity: 1;
+        transition: opacity .45s ease, transform .45s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .story-card.is-profile.is-mobile-expanded .profile-mobile-curtain {
+        opacity: 0;
+        transform: translateY(12px);
+        pointer-events: none;
       }
     }
 
@@ -1940,6 +3031,24 @@
         grid-template-columns: 1fr;
       }
 
+      .hero-team-orbit-container {
+        height: 195px;
+        margin: 14px auto 18px;
+      }
+      .orbit-card {
+        width: 185px;
+        padding: 8px 11px;
+      }
+      .orbit-card-name {
+        font-size: 13px;
+      }
+      .orbit-card-avatar {
+        width: 34px;
+        height: 34px;
+      }
+      .avatar-badge {
+        font-size: 11px;
+      }
       .profile-team-list.hero-team-list {
         flex-wrap: wrap;
         gap: 8px;
@@ -2020,11 +3129,13 @@
   <div id="app">
     <header class="nav">
       <div class="wrap nav-inner">
-        <a class="brand" href="#">
+        <a class="brand" href="#" @click="closeMobileMenu">
           <img
             src="https://cdn.discordapp.com/attachments/1415966643288412200/1575465451327062036/Elegant_Gold_Hourglass_Trading_Logo.png?ex=6b09620a&is=6b08108a&hm=0d8d0f8477bcdb9782d54ef4c571111628ea3ed0e9bb54ed4c3708c3c0afa2b1&"
             alt="MDucSM Logo" class="brand-icon">
           MDUCSM<span> / KDcs</span></a>
+
+        <!-- Desktop Navigation -->
         <nav class="nav-links">
           <a href="#about">Giới thiệu</a>
           <a href="#courses">Khóa học</a>
@@ -2033,7 +3144,49 @@
           <a href="#contact">Đăng ký</a>
           <a href="#feedback">Feedback</a>
         </nav>
+
+        <!-- Mobile Hamburger Toggle -->
+        <button type="button" class="nav-toggle" :class="{'is-active': mobileMenuOpen}"
+                @click="toggleMobileMenu" aria-label="Menu" :aria-expanded="mobileMenuOpen">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
       </div>
+
+      <!-- Mobile Dropdown Menu -->
+      <div class="mobile-menu" :class="{'is-open': mobileMenuOpen}">
+        <nav class="mobile-nav-links">
+          <a href="#about" class="mobile-nav-link" @click="closeMobileMenu">
+            <span>Giới thiệu</span>
+            <span class="nav-arrow">&#10022;</span>
+          </a>
+          <a href="#courses" class="mobile-nav-link" @click="closeMobileMenu">
+            <span>Khóa học</span>
+            <span class="nav-arrow">&#10022;</span>
+          </a>
+          <a href="#privileges" class="mobile-nav-link" @click="closeMobileMenu">
+            <span>Quyền lợi</span>
+            <span class="nav-arrow">&#10022;</span>
+          </a>
+          <a href="#services" class="mobile-nav-link" @click="closeMobileMenu">
+            <span>Dịch vụ</span>
+            <span class="nav-arrow">&#10022;</span>
+          </a>
+          <a href="#feedback" class="mobile-nav-link" @click="closeMobileMenu">
+            <span>Feedback & Kết quả</span>
+            <span class="nav-arrow">&#10022;</span>
+          </a>
+        </nav>
+        <div class="mobile-nav-divider"></div>
+        <a :href="contactUrl" target="_blank" rel="noopener" class="mobile-nav-cta" @click="closeMobileMenu">
+          <span>ĐĂNG KÝ NGAY</span>
+          <span>&#8594;</span>
+        </a>
+      </div>
+
+      <!-- Backdrop overlay when menu is open -->
+      <div class="mobile-menu-backdrop" :class="{'is-open': mobileMenuOpen}" @click="closeMobileMenu"></div>
     </header>
 
     <main>
@@ -2042,10 +3195,10 @@
           <div class="eyebrow">Strategy • Memory • Key Decisions</div>
           <h1>Inter. Candle Profile<br><span>KDcs • MDucSM</span></h1>
           <ul class="profile-team-list hero-team-list">
-            <li><span>Founder – <strong>MDucSM</strong></span></li>
-            <li><span>Co-Founder – <strong>KDcs</strong></span></li>
-            <li><span>Co-Founder – <strong>Buu</strong></span></li>
-            <li><span>Co-Founder – <strong>K I N G</strong></span></li>
+            <li><span>Founder – <strong>MDucSM - KDcs</strong></span></li>
+            <!-- <li><span>Co-Founder – <strong>KDcs</strong></span></li> -->
+            <li><span>Co-Founder: <strong>buu - K I N G</strong></span></li>
+            <!-- <li><span>Co-Founder – <strong>K I N G</strong></span></li> -->
           </ul>
           <p>
             MDucSM - Đúc kết từ kinh nghiệm thực chiến, tập trung phát triển tư duy đọc hiểu thị trường,
@@ -2077,7 +3230,9 @@
             :class="{'is-expanded': storyExpanded, 'is-instant': storyInstantCollapse}" @click="expandStory">
             <div class="story-grid">
               <!-- Phần 1: Profile & Câu chuyện -->
-              <article class="story-card is-profile">
+              <article class="story-card is-profile" ref="profileCard"
+                :class="{'is-mobile-expanded': profileMobileExpanded, 'is-instant': profileInstantCollapse}"
+                @click="expandProfileMobile">
                 <div class="profile-story">
                   <p class="profile-lead">Tôi là MDucSM, một Trader với 4 năm kinh nghiệm giao dịch. Cũng giống như
                     bạn, tôi từng dành rất nhiều thời gian học hỏi các phương pháp khác nhau, tìm kiếm con đường dẫn đến
@@ -2114,6 +3269,9 @@
                   <div class="profile-motto">STRATEGY • MEMORY • KEY DECISIONS</div>
                   <p class="profile-sign-note">Một hành trình được xây dựng từ kinh nghiệm, sự đúc kết và những quyết
                     định có cơ sở.</p>
+                </div>
+                <div class="profile-mobile-curtain" :aria-hidden="profileMobileExpanded ? 'true' : 'false'">
+                  <span class="story-expand-cue">Nhấn để xem đầy đủ &#8595;</span>
                 </div>
               </article>
 
@@ -2186,8 +3344,9 @@
             <p>Ba cấp độ đào tạo tương ứng với ba nhu cầu: học kiến thức, thực hành có phản hồi và đồng hành chuyên sâu
               cùng Mentor.</p>
           </div>
-          <div class="course-grid" :style="{'--course-rows': courseGroups.length + 1}">
-            <article class="course" v-for="course in courses" :key="course.code" :class="{featured: course.featured}">
+          <div class="course-grid" ref="coursesStage">
+            <article class="course" v-for="course in courses" :key="course.code"
+              :class="{featured: course.featured, 'is-expanded': isCourseExpanded(course.code), 'is-instant': coursesInstantCollapse}">
               <header class="course-header">
                 <div class="course-meta">
                   <div class="course-code">{{ course.code }} — {{ course.level }}</div>
@@ -2204,19 +3363,36 @@
                   <div class="price">${{ course.price }} <small>USD</small></div>
                 </div>
                 <div class="course-desc">{{ course.subtitle }}</div>
-                <a class="btn" :class="{ghost: !course.featured}" :href="registerUrl(course.code)">ĐĂNG KÝ NGAY</a>
+                <a class="btn" :class="course.featured ? 'course-vip-btn' : 'cta-btn-pulse'" :href="registerUrl(course.code)" target="_blank" rel="noopener">
+                  <span>ĐĂNG KÝ NGAY</span>
+                  <svg class="cta-btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </a>
               </header>
-              <div class="course-group" v-for="group in courseGroups" :key="group.title">
-                <h4>{{ group.title }}</h4>
-                <ul class="course-list" role="list">
-                  <li v-for="item in group.items" :key="item.text" :class="{unavailable: (group.unavailableFor || []).includes(course.code) ||
-                                            (item.unavailableFor || []).includes(course.code)}">
-                    <span class="course-status" aria-hidden="true"></span>
-                    <span class="course-status-label">Không bao gồm.</span>
-                    {{ (item.textByCourse && item.textByCourse[course.code]) || item.text }}
-                  </li>
-                </ul>
+
+              <div class="course-details-wrap">
+                <div class="course-details-inner">
+                  <div class="course-group" v-for="group in courseGroups" :key="group.title">
+                    <h4>{{ group.title }}</h4>
+                    <ul class="course-list" role="list">
+                      <li v-for="item in group.items" :key="item.text" :class="{unavailable: (group.unavailableFor || []).includes(course.code) ||
+                                                (item.unavailableFor || []).includes(course.code)}">
+                        <span class="course-status" aria-hidden="true"></span>
+                        <span class="course-status-label">Không bao gồm.</span>
+                        {{ (item.textByCourse && item.textByCourse[course.code]) || item.text }}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
+
+              <button type="button" class="course-expand-btn" @click="toggleCourse(course.code)"
+                :aria-expanded="isCourseExpanded(course.code) ? 'true' : 'false'">
+                <span>{{ isCourseExpanded(course.code) ? 'Thu gọn nội dung' : 'Nhấn để xem nội dung đầy đủ' }}</span>
+                <span class="course-expand-icon" aria-hidden="true">&#8595;</span>
+              </button>
             </article>
           </div>
           <p class="note">* Lịch học, hình thức ghi hình và thời hạn truy cập tài liệu được thông báo cụ thể khi đăng
@@ -2251,7 +3427,7 @@
             </table>
           </div>
           <p class="note">* Quyền lợi “Mentor riêng” của K2/K3 là dịch vụ thuê thêm, không nằm trong học phí khóa học.
-            Quyền lợi M1 thực hiện theo chương trình 16 buổi.</p>
+            Quyền lợi M1 thực hiện theo chương trình hơn 18 buổi.</p>
         </div>
       </section>
 
@@ -2265,7 +3441,7 @@
           <div class="service-grid">
             <div class="service">
               <div class="course-code">01 / PERSONAL SUPPORT</div>
-              <h3>Thuê Support — Khánh Duy</h3>
+              <h3>Thuê Support — KDcs</h3>
               <div class="sub">TIN NHẮN & STREAM 1-1</div>
               <div class="table-wrap price-table">
                 <table>
@@ -2389,11 +3565,31 @@
       <section id="contact">
         <div class="wrap">
           <div class="cta">
-            <div class="eyebrow">Your next step starts here</div>
-            <h2>Sẵn sàng nâng cấp tư duy Trading?</h2>
-            <p>Chọn chương trình phù hợp và liên hệ MDUCSM để nhận thông tin lịch học, nội dung chi tiết và quy trình
-              đăng ký.</p>
-            <a class="btn" :href="contactUrl" target="_blank" rel="noopener">ĐĂNG KÝ NGAY</a>
+            <!-- 4 Cyberpunk Metal Corner Accents -->
+            <span class="cta-corner cta-corner-tl" aria-hidden="true"></span>
+            <span class="cta-corner cta-corner-tr" aria-hidden="true"></span>
+            <span class="cta-corner cta-corner-bl" aria-hidden="true"></span>
+            <span class="cta-corner cta-corner-br" aria-hidden="true"></span>
+
+            <!-- 3D Perspective Grid & Center Core Aura Glow -->
+            <div class="cta-grid-bg" aria-hidden="true"></div>
+            <div class="cta-core-glow" aria-hidden="true"></div>
+
+            <div class="cta-content">
+              <div class="eyebrow cta-eyebrow">Your next step starts here</div>
+              <h2>Sẵn sàng nâng cấp tư duy Trading?</h2>
+              <p>Chọn chương trình phù hợp và liên hệ MDUCSM để nhận thông tin lịch học, nội dung chi tiết và quy trình đăng ký.</p>
+              
+              <div class="cta-action-wrap">
+                <a class="btn cta-btn-pulse" :href="contactUrl" target="_blank" rel="noopener">
+                  <span>ĐĂNG KÝ NGAY</span>
+                  <svg class="cta-btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -2421,6 +3617,7 @@
             </div>
           </div>
 
+          <!-- FEEDBACK GALLERY (TỪ WEB1) -->
           <div class="feedback-gallery" @mouseenter="onFeedbackMouseEnter" @mouseleave="onFeedbackMouseLeave">
             <div class="feedback-progress" v-if="feedbackTotalPages > 1" aria-hidden="true">
               <span class="feedback-progress-bar" :key="feedbackProgressKey"
@@ -2459,6 +3656,68 @@
               </div>
             </div>
           </div>
+
+          <!-- [3D COVERFLOW GALLERY - TẠM COMMENT]
+          <div class="feedback-3d-container" id="feedback3dContainer" 
+               @mouseenter="onFeedbackMouseEnter" @mouseleave="onFeedbackMouseLeave">
+            <div class="feedback-3d-grid" aria-hidden="true"></div>
+            <div class="feedback-3d-glow" aria-hidden="true"></div>
+
+            <div class="feedback-3d-stage">
+              <div 
+                v-for="(src, index) in feedbackImages" 
+                :key="index"
+                class="feedback-3d-card"
+                :class="{ 
+                  'is-active': index === feedback3dIndex,
+                  'is-prev': index === getRelativeIndex(-1),
+                  'is-next': index === getRelativeIndex(1)
+                }"
+                :style="getCard3dStyle(index)"
+                @click="handleCard3dClick(index)"
+              >
+                <div class="card-3d-glass">
+                  <div class="card-3d-header">
+                    <span class="card-3d-tag">RESULT #{{ padPage(index + 1) }}</span>
+                    <span class="card-3d-zoom-hint" title="Bấm để phóng to">⤢</span>
+                  </div>
+                  <div class="card-3d-img-wrap">
+                    <div class="card-3d-blur-bg" :style="{ backgroundImage: 'url(' + src + ')' }" aria-hidden="true"></div>
+                    <img :src="src" :alt="'MDUCSM feedback ' + (index + 1)" class="card-img-main" loading="lazy" />
+                  </div>
+                </div>
+                <div class="card-3d-reflection" aria-hidden="true">
+                  <img :src="src" alt="" loading="lazy" />
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="feedback-3d-footer" v-if="feedbackImages.length">
+            <div class="feedback-meta">
+              <div class="feedback-page">
+                <strong>{{ padPage(feedback3dIndex + 1) }}</strong> / {{ padPage(feedbackImages.length) }}
+              </div>
+              <div class="feedback-auto" :class="{'is-paused': feedbackIsPaused}">
+                <span class="feedback-auto-dot" aria-hidden="true"></span>
+                <span>{{ feedbackIsPaused ? 'Tạm dừng' : 'Tự động duyệt · 4.5s' }}</span>
+              </div>
+            </div>
+
+            <div class="feedback-3d-dots" role="tablist" aria-label="Danh sách kết quả">
+              <button 
+                type="button" 
+                v-for="(src, idx) in feedbackImages" 
+                :key="idx" 
+                class="feedback-3d-dot"
+                :class="{ active: idx === feedback3dIndex }"
+                @click="goToFeedbackPage(idx)"
+                :aria-label="'Đến ảnh ' + (idx + 1)"
+              ></button>
+            </div>
+          </div>
+          -->
         </div>
       </section>
       <!-- ================================================== -->
@@ -2565,8 +3824,13 @@
         // Thay link đăng ký/liên hệ tại đây
         registrationBase: 'https://discord.com/users/1453787779929608422',
         contactUrl: 'https://discord.com/users/1453787779929608422',
-        storyExpanded: false,
+        mobileMenuOpen: false,
+        storyExpanded: typeof window !== 'undefined' && window.innerWidth <= 1024,
         storyInstantCollapse: false,
+        profileMobileExpanded: false,
+        profileInstantCollapse: false,
+        expandedCourses: {},
+        coursesInstantCollapse: false,
         selectedRoadmap: '01',
         roadmapAutoDelay: 6000,
         roadmapRemaining: 6000,
@@ -2630,26 +3894,26 @@
 ,
         courses: [
           {
-            code: 'K2', level: 'FOUNDATION', name: 'Kiến thức', price: 139,
+            code: 'K2', level: 'BEGINNER – Khởi đầu', name: 'Kiến thức', price: 139,
             subtitle: '09 buổi học kiến thức — hoàn thành toàn bộ chương trình.',
             featured: false
           },
           {
-            code: 'K3', level: 'PRACTICE', name: 'Kiến thức & Thực hành', price: 189, originalPrice: 222,
+            code: 'K3', level: 'ADVANCED – Nâng cao', name: 'Kiến thức & Thực hành', price: 189, originalPrice: 222,
             subtitle: '18 buổi học — kết hợp kiến thức, bài tập và sửa bài.',
             featured: false, tag: 'ĐƯỢC QUAN TÂM'
           },
           {
-            code: 'M1', level: 'MENTORSHIP', name: 'Đào tạo chuyên sâu', price: 379, originalPrice: 444,
-            subtitle: '> 18 buổi đào tạo — Mentor đồng hành và hướng dẫn riêng..',
-            featured: true, tag: 'PREMIUM'
+            code: 'M1', level: 'MASTERY – Làm chủ kiến thức.', name: 'Đào tạo chuyên sâu', price: 379, originalPrice: 444,
+            subtitle: '> 18 buổi đào tạo — Mentor đồng hành',
+            featured: true, tag: 'BEST CHOICE • VIP'
           }
         ],
         courseGroups: [
           {
             title: 'Chương trình đào tạo',
             items: [
-              {text: 'Có 9 buổi bài học.'},
+              {text: 'Có 9 buổi live.'},
               {text: 'Có 9 buổi thực hành & sửa bài.', unavailableFor: ['K2']},
               {text: 'Hơn 3 buổi hổ trợ bổ sung.'},
               {text: 'Được đặt câu hỏi và trao đổi trong quá trình học.'},
@@ -2724,6 +3988,7 @@
         ],
         feedbackPerPage: 8,
         feedbackPage: 0,
+        feedback3dIndex: 0,
         feedbackAutoDelay: 10000,
         feedbackRemaining: 10000,
         feedbackStartedAt: 0,
@@ -2804,6 +4069,12 @@
         }
       },
       methods: {
+        toggleMobileMenu: function () {
+          this.mobileMenuOpen = !this.mobileMenuOpen;
+        },
+        closeMobileMenu: function () {
+          this.mobileMenuOpen = false;
+        },
         courseDiscount: function (course) {
           return Math.round((1 - course.price / course.originalPrice) * 100);
         },
@@ -2819,30 +4090,90 @@
           });
         },
         handleStoryScroll: function () {
+          if (typeof window !== 'undefined' && window.innerWidth <= 1024) return;
           if (!this.storyExpanded || !this.$refs.storyStage) return;
           var el = this.$refs.storyStage;
           var rect = el.getBoundingClientRect();
-          if (rect.bottom < -40) {
-            var beforeHeight = el.offsetHeight;
+          if (rect.bottom < -120 || rect.top > window.innerHeight + 120) {
             this.storyInstantCollapse = true;
             this.storyExpanded = false;
             this.clearRoadmapTimer();
             this.selectedRoadmap = '01';
             var self = this;
             this.$nextTick(function () {
-              var afterHeight = el.offsetHeight;
-              var diff = beforeHeight - afterHeight;
-              if (diff > 0) {
-                window.scrollTo({
-                  top: Math.max(0, window.scrollY - diff),
-                  behavior: 'instant'
-                });
-              }
               requestAnimationFrame(function () {
                 self.storyInstantCollapse = false;
               });
             });
           }
+        },
+        isCourseExpanded: function (code) {
+          return !!this.expandedCourses[code];
+        },
+        toggleCourse: function (code) {
+          var nextState = !this.expandedCourses[code];
+          if (typeof document !== 'undefined') {
+            document.documentElement.classList.add('is-toggling-course');
+            if (this._courseToggleTimer) clearTimeout(this._courseToggleTimer);
+            this._courseToggleTimer = setTimeout(function () {
+              document.documentElement.classList.remove('is-toggling-course');
+            }, 650);
+          }
+          if (typeof window !== 'undefined' && window.innerWidth > 1024) {
+            var self = this;
+            this.courses.forEach(function (c) {
+              self.$set(self.expandedCourses, c.code, nextState);
+            });
+          } else {
+            this.$set(this.expandedCourses, code, nextState);
+          }
+        },
+        handleCoursesScroll: function () {
+          var hasExpanded = Object.keys(this.expandedCourses).some(function (k) {
+            return this.expandedCourses[k];
+          }, this);
+          if (!hasExpanded || !this.$refs.coursesStage) return;
+          var el = this.$refs.coursesStage;
+          var rect = el.getBoundingClientRect();
+          if (rect.bottom < -120 || rect.top > window.innerHeight + 120) {
+            this.coursesInstantCollapse = true;
+            this.expandedCourses = {};
+            var self = this;
+            this.$nextTick(function () {
+              requestAnimationFrame(function () {
+                self.coursesInstantCollapse = false;
+              });
+            });
+          }
+        },
+        expandProfileMobile: function () {
+          if (typeof window !== 'undefined' && window.innerWidth > 1024) return;
+          if (this.profileMobileExpanded) return;
+          this.profileMobileExpanded = true;
+        },
+        handleProfileMobileScroll: function () {
+          if (typeof window !== 'undefined' && window.innerWidth > 1024) return;
+          if (!this.profileMobileExpanded || !this.$refs.profileCard) return;
+          var el = this.$refs.profileCard;
+          var rect = el.getBoundingClientRect();
+          if (rect.bottom < -120 || rect.top > window.innerHeight + 120) {
+            this.profileInstantCollapse = true;
+            this.profileMobileExpanded = false;
+            var self = this;
+            this.$nextTick(function () {
+              requestAnimationFrame(function () {
+                self.profileInstantCollapse = false;
+              });
+            });
+          }
+        },
+        handleSectionsScroll: function () {
+          if (this.mobileMenuOpen) {
+            this.closeMobileMenu();
+          }
+          this.handleStoryScroll();
+          this.handleProfileMobileScroll();
+          this.handleCoursesScroll();
         },
         selectRoadmap: function (code) {
           if (!this.storyExpanded) {
@@ -2912,6 +4243,84 @@
         nextFeedback: function () {
           this.goToFeedbackPage(this.feedbackPage + 1);
         },
+        /* [3D FEEDBACK NAVIGATION - TẠM COMMENT]
+        goToFeedbackPage3d: function (page) {
+          var total = this.feedbackImages.length;
+          if (total <= 1) return;
+          this.feedback3dIndex = ((page % total) + total) % total;
+          this.feedbackPage = this.feedback3dIndex;
+          this.resetFeedbackTimer();
+        },
+        */
+        getRelativeIndex: function (offset) {
+          var total = this.feedbackImages.length;
+          return ((this.feedback3dIndex + offset) % total + total) % total;
+        },
+        handleCard3dClick: function (index) {
+          if (index === this.feedback3dIndex) {
+            this.openFeedbackModal(index);
+          } else {
+            this.goToFeedbackPage(index);
+          }
+        },
+        getCard3dStyle: function (index) {
+          var total = this.feedbackImages.length;
+          var diff = index - this.feedback3dIndex;
+          while (diff > total / 2) diff -= total;
+          while (diff < -total / 2) diff += total;
+
+          var isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+          var maxVisible = isMobile ? 2 : 3;
+
+          if (Math.abs(diff) > maxVisible) {
+            return {
+              opacity: 0,
+              pointerEvents: 'none',
+              transform: 'translate3d(' + (diff > 0 ? 320 : -320) + 'px, 0, -350px) scale(0.5)',
+              zIndex: 0,
+              visibility: 'hidden'
+            };
+          }
+
+          var stepX = isMobile ? 90 : 165;
+          var stepZ = isMobile ? 75 : 105;
+          var rotateAngle = isMobile ? 32 : 36;
+
+          var x = 0;
+          var z = 0;
+          var rotY = 0;
+          var scale = 1;
+          var opacity = 1;
+          var zIndex = 50 - Math.abs(diff);
+
+          if (diff === 0) {
+            x = 0;
+            z = 70;
+            rotY = 0;
+            scale = isMobile ? 1.05 : 1.12;
+            opacity = 1;
+            zIndex = 100;
+          } else if (diff > 0) {
+            x = diff * stepX + (isMobile ? 20 : 55);
+            z = -diff * stepZ;
+            rotY = -rotateAngle;
+            scale = Math.max(0.7, 1 - diff * 0.11);
+            opacity = Math.max(0.28, 1 - diff * 0.25);
+          } else {
+            x = diff * stepX - (isMobile ? 20 : 55);
+            z = diff * stepZ;
+            rotY = rotateAngle;
+            scale = Math.max(0.7, 1 - Math.abs(diff) * 0.11);
+            opacity = Math.max(0.28, 1 - Math.abs(diff) * 0.25);
+          }
+
+          return {
+            transform: 'translate3d(' + x + 'px, 0, ' + z + 'px) rotateY(' + rotY + 'deg) scale(' + scale + ')',
+            opacity: opacity,
+            zIndex: zIndex,
+            cursor: diff === 0 ? 'zoom-in' : 'pointer'
+          };
+        },
         clearFeedbackTimer: function () {
           if (this.feedbackTimer) {
             clearTimeout(this.feedbackTimer);
@@ -2969,10 +4378,17 @@
           this.activeFeedbackIndex = (this.activeFeedbackIndex + 1) % this.feedbackImages.length;
         },
         handleFeedbackKeydown: function (e) {
-          if (this.activeFeedbackIndex === null) return;
           if (e.key === 'Escape') {
-            this.closeFeedbackModal();
-          } else if (e.key === 'ArrowLeft') {
+            if (this.mobileMenuOpen) {
+              this.closeMobileMenu();
+            }
+            if (this.activeFeedbackIndex !== null) {
+              this.closeFeedbackModal();
+            }
+            return;
+          }
+          if (this.activeFeedbackIndex === null) return;
+          if (e.key === 'ArrowLeft') {
             this.prevModalImage();
           } else if (e.key === 'ArrowRight') {
             this.nextModalImage();
@@ -2994,21 +4410,289 @@
               this.startRoadmapTimer();
             }
           }
+        },
+        initFeedback3d: function () {
+          var container = document.getElementById('feedback3dContainer');
+          if (!container) return;
+          var stage = container.querySelector('.feedback-3d-stage');
+          var self = this;
+
+          var tiltX = 0, targetTiltX = 0;
+          var tiltY = 0, targetTiltY = 0;
+          var isDragging = false;
+          var startX = 0;
+          var dragThreshold = 38;
+
+          container.addEventListener('mousemove', function (e) {
+            var rect = container.getBoundingClientRect();
+            var cx = rect.left + rect.width / 2;
+            var cy = rect.top + rect.height / 2;
+            var dx = (e.clientX - cx) / (rect.width / 2);
+            var dy = (e.clientY - cy) / (rect.height / 2);
+
+            targetTiltX = -dy * 9;
+            targetTiltY = dx * 12;
+          });
+
+          container.addEventListener('mouseleave', function () {
+            targetTiltX = 0;
+            targetTiltY = 0;
+          });
+
+          // Mouse dragging support
+          container.addEventListener('mousedown', function (e) {
+            isDragging = true;
+            startX = e.clientX;
+          });
+
+          var handleWindowMouseMove = function (e) {
+            if (!isDragging) return;
+            var delta = e.clientX - startX;
+            if (Math.abs(delta) > dragThreshold) {
+              if (delta < 0) {
+                self.nextFeedback();
+              } else {
+                self.prevFeedback();
+              }
+              isDragging = false;
+            }
+          };
+          window.addEventListener('mousemove', handleWindowMouseMove);
+          this._feedbackMouseMove = handleWindowMouseMove;
+
+          var handleWindowMouseUp = function () {
+            isDragging = false;
+          };
+          window.addEventListener('mouseup', handleWindowMouseUp);
+          this._feedbackMouseUp = handleWindowMouseUp;
+
+          // Touch swipe support for mobile
+          container.addEventListener('touchstart', function (e) {
+            if (!e.touches.length) return;
+            startX = e.touches[0].clientX;
+            isDragging = true;
+          }, { passive: true });
+
+          container.addEventListener('touchmove', function (e) {
+            if (!isDragging || !e.touches.length) return;
+            var delta = e.touches[0].clientX - startX;
+            if (Math.abs(delta) > dragThreshold) {
+              if (delta < 0) {
+                self.nextFeedback();
+              } else {
+                self.prevFeedback();
+              }
+              isDragging = false;
+            }
+          }, { passive: true });
+
+          container.addEventListener('touchend', function () {
+            isDragging = false;
+          });
+
+          function renderTilt() {
+            if (!document.hidden && stage) {
+              tiltX += (targetTiltX - tiltX) * 0.08;
+              tiltY += (targetTiltY - tiltY) * 0.08;
+              stage.style.transform = 'rotateX(' + tiltX.toFixed(2) + 'deg) rotateY(' + tiltY.toFixed(2) + 'deg)';
+            }
+            self._feedbackTiltAnim = requestAnimationFrame(renderTilt);
+          }
+          self._feedbackTiltAnim = requestAnimationFrame(renderTilt);
+        },
+        initHeroOrbit: function () {
+          const container = document.getElementById('heroTeamOrbit');
+          if (!container) return;
+          const stage = container.querySelector('.orbit-stage');
+          const cards = container.querySelectorAll('.orbit-card');
+          if (!cards.length) return;
+
+          let angle = 0;
+          let targetSpeed = 0.0035;
+          let currentSpeed = 0.0035;
+          let tiltX = 0, targetTiltX = 0;
+          let tiltY = 0, targetTiltY = 0;
+          let isHovered = false;
+          let isDragging = false;
+          let startX = 0;
+          let lastX = 0;
+          let hoveredCard = null;
+          let animFrame = null;
+
+          function getRadius() {
+            const w = container.offsetWidth;
+            if (w < 480) return { rx: Math.min(w * 0.38, 145), ry: 30, rz: 85 };
+            if (w < 768) return { rx: Math.min(w * 0.40, 205), ry: 38, rz: 110 };
+            return { rx: Math.min(w * 0.42, 280), ry: 42, rz: 130 };
+          }
+
+          let radii = getRadius();
+          const handleResize = function () {
+            radii = getRadius();
+          };
+          window.addEventListener('resize', handleResize);
+          this._heroOrbitResize = handleResize;
+
+          cards.forEach(function (card) {
+            card.addEventListener('mouseenter', function () {
+              hoveredCard = card;
+            });
+            card.addEventListener('mouseleave', function () {
+              if (hoveredCard === card) hoveredCard = null;
+            });
+          });
+
+          container.addEventListener('mouseenter', function () {
+            isHovered = true;
+          });
+
+          container.addEventListener('mousemove', function (e) {
+            const rect = container.getBoundingClientRect();
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
+            const dx = (e.clientX - cx) / (rect.width / 2);
+            const dy = (e.clientY - cy) / (rect.height / 2);
+
+            targetTiltX = -dy * 13;
+            targetTiltY = dx * 15;
+
+            if (hoveredCard) {
+              targetSpeed = 0;
+            } else {
+              targetSpeed = dx * 0.012;
+            }
+          });
+
+          container.addEventListener('mouseleave', function () {
+            isHovered = false;
+            hoveredCard = null;
+            targetSpeed = 0.0035;
+            targetTiltX = 0;
+            targetTiltY = 0;
+          });
+
+          // Mouse dragging support
+          container.addEventListener('mousedown', function (e) {
+            if (e.target.closest('.orbit-card')) return;
+            isDragging = true;
+            startX = e.clientX;
+            lastX = e.clientX;
+          });
+
+          const handleMouseMove = function (e) {
+            if (!isDragging) return;
+            const delta = e.clientX - lastX;
+            lastX = e.clientX;
+            angle += delta * 0.006;
+          };
+          window.addEventListener('mousemove', handleMouseMove);
+          this._heroOrbitMouseMove = handleMouseMove;
+
+          const handleMouseUp = function () {
+            isDragging = false;
+          };
+          window.addEventListener('mouseup', handleMouseUp);
+          this._heroOrbitMouseUp = handleMouseUp;
+
+          // Touch events for mobile
+          container.addEventListener('touchstart', function (e) {
+            if (!e.touches.length) return;
+            startX = e.touches[0].clientX;
+            lastX = startX;
+            isDragging = true;
+          }, { passive: true });
+
+          container.addEventListener('touchmove', function (e) {
+            if (!isDragging || !e.touches.length) return;
+            const curX = e.touches[0].clientX;
+            const delta = curX - lastX;
+            lastX = curX;
+            angle += delta * 0.008;
+          }, { passive: true });
+
+          container.addEventListener('touchend', function () {
+            isDragging = false;
+          });
+
+          const total = cards.length;
+          function render() {
+            if (!document.hidden) {
+              if (!isDragging) {
+                currentSpeed += (targetSpeed - currentSpeed) * 0.08;
+                angle += currentSpeed;
+              }
+              tiltX += (targetTiltX - tiltX) * 0.08;
+              tiltY += (targetTiltY - tiltY) * 0.08;
+
+              if (stage) {
+                stage.style.transform = 'rotateX(' + tiltX.toFixed(2) + 'deg) rotateY(' + tiltY.toFixed(2) + 'deg)';
+              }
+
+              cards.forEach(function (card, i) {
+                const theta = angle + i * ((2 * Math.PI) / total);
+                const x = radii.rx * Math.sin(theta);
+                const y = radii.ry * Math.cos(theta);
+                const z = radii.rz * Math.cos(theta);
+
+                const normZ = (z + radii.rz) / (2 * radii.rz); // 0 (back) -> 1 (front)
+                let scale = 0.82 + normZ * 0.28;
+                let opacity = 0.48 + normZ * 0.52;
+                let zIndex = Math.round(normZ * 100);
+
+                if (hoveredCard === card) {
+                  scale = Math.max(scale, 1.14);
+                  opacity = 1;
+                  zIndex = 999;
+                }
+
+                card.style.transform = 'translate3d(' + x.toFixed(1) + 'px, ' + y.toFixed(1) + 'px, ' + z.toFixed(1) + 'px) scale(' + scale.toFixed(3) + ')';
+                card.style.opacity = opacity.toFixed(3);
+                card.style.zIndex = zIndex;
+              });
+            }
+            animFrame = requestAnimationFrame(render);
+          }
+
+          animFrame = requestAnimationFrame(render);
+          this._heroOrbitAnim = animFrame;
         }
       },
       mounted: function () {
         this.startFeedbackTimer();
         this.startRoadmapTimer();
+        this.initHeroOrbit();
+        this.initFeedback3d();
         document.addEventListener('keydown', this.handleFeedbackKeydown);
         document.addEventListener('visibilitychange', this.handleVisibilityChange);
-        window.addEventListener('scroll', this.handleStoryScroll, {passive: true});
+        window.addEventListener('scroll', this.handleSectionsScroll, {passive: true});
       },
       beforeDestroy: function () {
         this.clearFeedbackTimer();
         this.clearRoadmapTimer();
+        if (this._heroOrbitAnim) {
+          cancelAnimationFrame(this._heroOrbitAnim);
+        }
+        if (this._heroOrbitResize) {
+          window.removeEventListener('resize', this._heroOrbitResize);
+        }
+        if (this._heroOrbitMouseMove) {
+          window.removeEventListener('mousemove', this._heroOrbitMouseMove);
+        }
+        if (this._heroOrbitMouseUp) {
+          window.removeEventListener('mouseup', this._heroOrbitMouseUp);
+        }
+        if (this._feedbackTiltAnim) {
+          cancelAnimationFrame(this._feedbackTiltAnim);
+        }
+        if (this._feedbackMouseMove) {
+          window.removeEventListener('mousemove', this._feedbackMouseMove);
+        }
+        if (this._feedbackMouseUp) {
+          window.removeEventListener('mouseup', this._feedbackMouseUp);
+        }
         document.removeEventListener('keydown', this.handleFeedbackKeydown);
         document.removeEventListener('visibilitychange', this.handleVisibilityChange);
-        window.removeEventListener('scroll', this.handleStoryScroll);
+        window.removeEventListener('scroll', this.handleSectionsScroll);
       }
     });
   </script>
